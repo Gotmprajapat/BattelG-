@@ -1,10 +1,8 @@
-// BattelG App
+import { app, auth, db } from "../firebase/firebase.js";
 
 console.log("BattelG Started");
+console.log("Firebase Connected");
 
-// Loading Animation
 window.addEventListener("load", () => {
     document.body.style.opacity = "1";
 });
-
-// Future Firebase Initialization Here
