@@ -1,0 +1,138 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0b0b0b;
+color:#fff;
+padding:20px;
+padding-bottom:90px;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+header h2{
+color:gold;
+font-size:28px;
+}
+
+header i{
+font-size:24px;
+color:gold;
+}
+
+.wallet{
+background:linear-gradient(135deg,#FFD700,#B8860B);
+padding:20px;
+border-radius:20px;
+color:#000;
+margin-bottom:25px;
+box-shadow:0 0 25px rgba(255,215,0,.4);
+animation:fadeIn .8s ease;
+}
+
+.wallet h1{
+font-size:36px;
+margin:10px 0;
+}
+
+.wallet-btn{
+display:flex;
+gap:12px;
+margin-top:15px;
+}
+
+.wallet-btn button{
+flex:1;
+padding:12px;
+border:none;
+border-radius:12px;
+font-weight:700;
+background:#000;
+color:gold;
+cursor:pointer;
+transition:.3s;
+}
+
+.wallet-btn button:hover{
+transform:scale(1.05);
+}
+
+.title{
+margin-bottom:15px;
+color:gold;
+}
+
+.card{
+background:#171717;
+border:1px solid rgba(255,215,0,.25);
+border-radius:18px;
+padding:18px;
+margin-bottom:18px;
+box-shadow:0 0 15px rgba(255,215,0,.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 20px rgba(255,215,0,.25);
+}
+
+.card h2{
+color:gold;
+margin-bottom:8px;
+}
+
+.card p{
+color:#ddd;
+margin:5px 0;
+}
+
+.card button{
+margin-top:12px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+background:gold;
+color:#000;
+font-weight:700;
+cursor:pointer;
+}
+
+nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+background:#111;
+display:flex;
+justify-content:space-around;
+padding:16px 0;
+border-top:1px solid rgba(255,215,0,.2);
+}
+
+nav a{
+color:gold;
+font-size:22px;
+text-decoration:none;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(25px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+  }
