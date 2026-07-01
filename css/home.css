@@ -14,98 +14,86 @@ padding-bottom:90px;
 
 header{
 display:flex;
-justify-content:space-between;
 align-items:center;
-margin-bottom:25px;
+justify-content:space-between;
+margin-bottom:20px;
+}
+
+.logo{
+width:70px;
+height:70px;
+object-fit:contain;
 }
 
 header h2{
-color:gold;
-font-size:28px;
-}
-
-header i{
-font-size:24px;
+font-size:22px;
 color:gold;
 }
 
-.wallet{
-background:linear-gradient(135deg,#FFD700,#B8860B);
-padding:20px;
-border-radius:20px;
-color:#000;
-margin-bottom:25px;
-box-shadow:0 0 25px rgba(255,215,0,.4);
-animation:fadeIn .8s ease;
-}
-
-.wallet h1{
-font-size:36px;
-margin:10px 0;
-}
-
-.wallet-btn{
-display:flex;
-gap:12px;
-margin-top:15px;
-}
-
-.wallet-btn button{
-flex:1;
-padding:12px;
-border:none;
-border-radius:12px;
-font-weight:700;
-background:#000;
+#logoutBtn{
+background:#222;
 color:gold;
+border:1px solid gold;
+padding:10px 15px;
+border-radius:10px;
 cursor:pointer;
-transition:.3s;
 }
 
-.wallet-btn button:hover{
-transform:scale(1.05);
+.wallet-card{
+background:linear-gradient(135deg,#FFD700,#B8860B);
+color:#000;
+padding:25px;
+border-radius:20px;
+text-align:center;
+margin-bottom:25px;
+box-shadow:0 0 20px rgba(255,215,0,.3);
 }
 
-.title{
-margin-bottom:15px;
-color:gold;
+.wallet-card h1{
+font-size:40px;
+margin-top:10px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-bottom:25px;
 }
 
 .card{
 background:#171717;
-border:1px solid rgba(255,215,0,.25);
+border:1px solid rgba(255,215,0,.2);
 border-radius:18px;
-padding:18px;
-margin-bottom:18px;
-box-shadow:0 0 15px rgba(255,215,0,.08);
+padding:20px;
+text-decoration:none;
+color:white;
+text-align:center;
 transition:.3s;
 }
 
 .card:hover{
 transform:translateY(-5px);
-box-shadow:0 0 20px rgba(255,215,0,.25);
+border-color:gold;
 }
 
-.card h2{
+.card i{
+font-size:30px;
 color:gold;
-margin-bottom:8px;
+margin-bottom:10px;
+display:block;
 }
 
-.card p{
-color:#ddd;
-margin:5px 0;
+.title{
+margin:20px 0;
+color:gold;
 }
 
-.card button{
-margin-top:12px;
-width:100%;
-padding:12px;
-border:none;
-border-radius:12px;
-background:gold;
-color:#000;
-font-weight:700;
-cursor:pointer;
+.tournament{
+background:#171717;
+padding:20px;
+border-radius:15px;
+border:1px solid rgba(255,215,0,.2);
 }
 
 nav{
@@ -116,23 +104,12 @@ bottom:0;
 background:#111;
 display:flex;
 justify-content:space-around;
-padding:16px 0;
+padding:15px;
 border-top:1px solid rgba(255,215,0,.2);
 }
 
 nav a{
 color:gold;
-font-size:22px;
+font-size:24px;
 text-decoration:none;
 }
-
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(25px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-  }
