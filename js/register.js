@@ -1,47 +1,58 @@
 import { auth, db } from "../firebase/firebase.js";
 
 import {
-  createUserWithEmailAndPassword
+createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
-  doc,
-  setDoc
+doc,
+setDoc,
+serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const registerBtn = document.getElementById("registerBtn");
+const btn = document.getElementById("registerBtn");
 
-registerBtn.addEventListener("click", async () => {
+btn.addEventListener("click", async () => {
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-    const referral = document.getElementById("referral").value.trim();
+const name = document.getElementById("name").value.trim();
+const email = document.getElementById("email").value.trim();
+const password = document.getElementById("password").value;
+const referral = document.getElementById("referral").value.trim();
 
-    if (!name || !email || !password) {
-        alert("Please fill all required fields");
-        return;
-    }
+if(name==="" || email==="" || password===""){
+alert("Please fill all required fields.");
+return;
+}
 
-    try {
+try{
 
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+const userCredential = await createUserWithEmailAndPassword(auth,email,password);
 
-        await setDoc(doc(db, "users", userCredential.user.uid), {
-            uid: userCredential.user.uid,
-            name: name,
-            email: email,
-            referral: referral,
-            wallet: 0,
-            createdAt: new Date().toISOString()
-        });
+const user = userCredential.user;
 
-        alert("Account Created Successfully!");
+await setDoc(doc(db,"users",user.uid),{
 
-        window.location.href = "home.html";
+name:name,
+email:email,
+wallet:0,
+totalDeposit:0,
+totalWithdraw:0,
+totalWinning:0,
+referralCode:"BG"+Math.floor(Math.random()*999999),
+referredBy:referral,
+firstPaidMatch:false,
+createdAt:serverTimestamp()
 
-    } catch (error) {
-        alert(error.message);
-    }
+});
+
+alert("Account Created Successfully");
+
+window.location.href="home.html";
+
+}catch(error){
+
+alert(error.message);
+
+}
 
 });
