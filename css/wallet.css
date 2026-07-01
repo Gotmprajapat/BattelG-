@@ -1,0 +1,105 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0b0b0b;
+color:#fff;
+padding:20px;
+padding-bottom:100px;
+}
+
+header{
+text-align:center;
+margin-bottom:25px;
+}
+
+header h2{
+color:gold;
+font-size:30px;
+}
+
+.wallet-card{
+background:linear-gradient(135deg,#FFD700,#B8860B);
+border-radius:20px;
+padding:25px;
+color:#000;
+text-align:center;
+box-shadow:0 0 25px rgba(255,215,0,.35);
+margin-bottom:25px;
+}
+
+.wallet-card p{
+font-size:16px;
+}
+
+.wallet-card h1{
+font-size:38px;
+margin-top:10px;
+}
+
+.action-buttons{
+display:flex;
+gap:15px;
+margin-bottom:25px;
+}
+
+.action-buttons a{
+flex:1;
+text-decoration:none;
+text-align:center;
+padding:15px;
+border-radius:15px;
+font-weight:bold;
+}
+
+.deposit{
+background:gold;
+color:#000;
+}
+
+.withdraw{
+background:#222;
+color:gold;
+border:1px solid gold;
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.menu a{
+background:#171717;
+padding:18px;
+border-radius:15px;
+text-decoration:none;
+color:white;
+border:1px solid rgba(255,215,0,.15);
+}
+
+.menu a:hover{
+border-color:gold;
+}
+
+nav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+background:#111;
+display:flex;
+justify-content:space-around;
+padding:15px;
+border-top:1px solid rgba(255,215,0,.2);
+}
+
+nav a{
+text-decoration:none;
+color:gold;
+font-size:24px;
+}
