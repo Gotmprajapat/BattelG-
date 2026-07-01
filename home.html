@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BattelG - Home</title>
+
+<title>BattleG Home</title>
 
 <link rel="stylesheet" href="css/home.css">
 
@@ -17,75 +20,98 @@
 
 <header>
 
-<h2>👑 BattelG</h2>
+<img src="assets/logo.png" class="logo">
 
-<i class="fa-solid fa-bell"></i>
+<h2>Welcome,
+<span id="userName">Player</span>
+</h2>
+
+<button id="logoutBtn">
+Logout
+</button>
 
 </header>
 
-<div class="wallet">
+<div class="wallet-card">
 
-<h3>Wallet Balance</h3>
+<p>Wallet Balance</p>
 
-<h1>₹0</h1>
-
-<div class="wallet-btn">
-
-<button>Deposit</button>
-
-<button>Withdraw</button>
+<h1>₹<span id="walletBalance">0</span></h1>
 
 </div>
 
+<div class="grid">
+
+<a href="wallet.html" class="card">
+<i class="fa-solid fa-wallet"></i>
+<span>Wallet</span>
+</a>
+
+<a href="deposit.html" class="card">
+<i class="fa-solid fa-money-bill-transfer"></i>
+<span>Deposit</span>
+</a>
+
+<a href="withdraw.html" class="card">
+<i class="fa-solid fa-hand-holding-dollar"></i>
+<span>Withdraw</span>
+</a>
+
+<a href="#" class="card">
+<i class="fa-solid fa-trophy"></i>
+<span>Tournaments</span>
+</a>
+
+<a href="#" class="card">
+<i class="fa-solid fa-gift"></i>
+<span>Promo Code</span>
+</a>
+
+<a href="#" class="card">
+<i class="fa-solid fa-user-group"></i>
+<span>Referral</span>
+</a>
+
 </div>
 
-<h3 class="title">Live Tournaments</h3>
+<h3 class="title">
+Live Tournaments
+</h3>
 
-<div class="card">
+<div id="tournamentList">
 
-<h2>Aim Challenge</h2>
+<div class="tournament">
 
-<p>Entry ₹10</p>
+<h4>Coming Soon...</h4>
 
-<p>Prize ₹100</p>
-
-<button>Join Now</button>
+<p>Admin tournaments yaha automatically dikhenge.</p>
 
 </div>
-
-<div class="card">
-
-<h2>Runner Challenge</h2>
-
-<p>Entry ₹20</p>
-
-<p>Prize ₹250</p>
-
-<button>Join Now</button>
 
 </div>
 
 <nav>
 
 <a href="home.html">
-<i class="fa-solid fa-house"></i>
+🏠
 </a>
 
 <a href="#">
-<i class="fa-solid fa-trophy"></i>
+🏆
+</a>
+
+<a href="wallet.html">
+💰
 </a>
 
 <a href="#">
-<i class="fa-solid fa-wallet"></i>
-</a>
-
-<a href="#">
-<i class="fa-solid fa-user"></i>
+👤
 </a>
 
 </nav>
 
-<script src="js/home.js"></script>
+<script type="module" src="js/home.js"></script>
 
 </body>
+
 </html>
