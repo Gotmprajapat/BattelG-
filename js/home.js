@@ -1,40 +1,51 @@
 import { auth, db } from "../firebase/firebase.js";
 
-import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-onAuthStateChanged(auth, async (user)=>{
+const userName = document.getElementById("userName");
+const walletBalance = document.getElementById("walletBalance");
+const logoutBtn = document.getElementById("logoutBtn");
 
-if(!user){
-window.location.href="login.html";
-return;
-}
+onAuthStateChanged(auth, async (user) => {
 
-const snap = await getDoc(doc(db,"users",user.uid));
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
 
-if(snap.exists()){
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const snap = await getDoc(userRef);
 
-const data = snap.data();
+    if (snap.exists()) {
+      const data = snap.data();
 
-document.getElementById("userName").innerText = data.name;
+      userName.textContent = data.name || "Player";
+      walletBalance.textContent = data.wallet || 0;
+    } else {
+      userName.textContent = "Player";
+      walletBalance.textContent = "0";
+    }
 
-document.getElementById("walletBalance").innerText = data.wallet;
-
-}
+  } catch (e) {
+    console.log(e);
+    alert("Failed to load user data.");
+  }
 
 });
 
-const logoutBtn=document.getElementById("logoutBtn");
+logoutBtn.addEventListener("click", async () => {
 
-if(logoutBtn){
+  await signOut(auth);
 
-logoutBtn.onclick=async()=>{
+  window.location.href = "login.html";
 
-await signOut(auth);
-
-window.location.href="login.html";
-
-}
-
-}
+});
