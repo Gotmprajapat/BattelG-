@@ -1,29 +1,40 @@
-// BattelG Home
+import { auth, db } from "../firebase/firebase.js";
 
-console.log("Home Loaded");
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-// Welcome Animation
-window.addEventListener("load", () => {
-    document.body.style.opacity = "1";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+onAuthStateChanged(auth, async (user)=>{
+
+if(!user){
+window.location.href="login.html";
+return;
+}
+
+const snap = await getDoc(doc(db,"users",user.uid));
+
+if(snap.exists()){
+
+const data = snap.data();
+
+document.getElementById("userName").innerText = data.name;
+
+document.getElementById("walletBalance").innerText = data.wallet;
+
+}
+
 });
 
-// Tournament Join Buttons
-const joinButtons = document.querySelectorAll(".card button");
+const logoutBtn=document.getElementById("logoutBtn");
 
-joinButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        alert("Tournament System Coming Soon 🚀");
-    });
-});
+if(logoutBtn){
 
-// Deposit Button
-document.querySelector(".wallet-btn button:first-child")
-.addEventListener("click", () => {
-    alert("Deposit Page Coming Soon 💰");
-});
+logoutBtn.onclick=async()=>{
 
-// Withdraw Button
-document.querySelector(".wallet-btn button:last-child")
-.addEventListener("click", () => {
-    alert("Withdraw Page Coming Soon 💸");
-});
+await signOut(auth);
+
+window.location.href="login.html";
+
+}
+
+}
