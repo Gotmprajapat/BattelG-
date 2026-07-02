@@ -7,62 +7,84 @@ font-family:'Poppins',sans-serif;
 
 body{
 background:#0b0b0b;
+color:#fff;
 display:flex;
 justify-content:center;
 align-items:center;
 min-height:100vh;
 padding:20px;
-color:white;
 }
 
 .container{
 width:100%;
 max-width:420px;
 background:#171717;
-border:1px solid rgba(255,215,0,.25);
-border-radius:20px;
 padding:25px;
-text-align:center;
+border-radius:20px;
+border:1px solid rgba(255,215,0,.25);
 box-shadow:0 0 20px rgba(255,215,0,.15);
+text-align:center;
 }
 
-h1{
+.logo{
+width:90px;
+margin-bottom:15px;
+}
+
+h2{
 color:gold;
 margin-bottom:20px;
 }
 
-.qr{
-width:220px;
-height:220px;
-border-radius:15px;
-border:3px solid gold;
-margin-bottom:10px;
+label{
+display:block;
+text-align:left;
+margin:15px 0 8px;
 }
 
 input{
 width:100%;
 padding:14px;
-margin:10px 0;
-background:#111;
-color:white;
-border:1px solid #333;
+border:none;
 border-radius:10px;
-outline:none;
-}
-
-input:focus{
-border-color:gold;
+background:#222;
+color:#fff;
+margin-bottom:15px;
 }
 
 button{
 width:100%;
-padding:15px;
-margin-top:15px;
+padding:14px;
+background:gold;
+color:#000;
+font-weight:bold;
 border:none;
 border-radius:10px;
-background:gold;
-color:black;
-font-weight:bold;
-font-size:16px;
 cursor:pointer;
+font-size:16px;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.03);
+}
+
+.qr{
+width:220px;
+height:220px;
+margin:20px auto;
+display:block;
+background:#fff;
+padding:10px;
+border-radius:15px;
+}
+
+.name{
+margin:10px 0;
+font-size:18px;
+}
+
+#paid{
+width:auto;
+margin-right:8px;
 }
