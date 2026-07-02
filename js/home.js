@@ -1,8 +1,7 @@
 import { auth, db } from "../firebase/firebase.js";
 
 import {
-  onAuthStateChanged,
-  signOut
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
@@ -12,7 +11,6 @@ import {
 
 const userName = document.getElementById("userName");
 const walletBalance = document.getElementById("walletBalance");
-const logoutBtn = document.getElementById("logoutBtn");
 
 onAuthStateChanged(auth, async (user) => {
 
@@ -22,30 +20,30 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   try {
-    const userRef = doc(db, "users", user.uid);
-    const snap = await getDoc(userRef);
 
-    if (snap.exists()) {
-      const data = snap.data();
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+
+      const data = userSnap.data();
 
       userName.textContent = data.name || "Player";
       walletBalance.textContent = data.wallet || 0;
+
     } else {
+
       userName.textContent = "Player";
       walletBalance.textContent = "0";
+
     }
 
-  } catch (e) {
-    console.log(e);
-    alert("Failed to load user data.");
+  } catch (error) {
+
+    console.error("Home Error:", error);
+
+    alert("Unable to load user data.");
+
   }
-
-});
-
-logoutBtn.addEventListener("click", async () => {
-
-  await signOut(auth);
-
-  window.location.href = "login.html";
 
 });
