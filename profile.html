@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Profile | BattleG</title>
+
+<link rel="stylesheet" href="css/profile.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="assets/logo.png" class="logo">
+
+<h2>My Profile</h2>
+
+<div class="card">
+
+<p><b>Name</b></p>
+<h3 id="userName">Loading...</h3>
+
+<p><b>Email</b></p>
+<h3 id="userEmail">Loading...</h3>
+
+<p><b>Wallet</b></p>
+<h3>₹<span id="walletBalance">0</span></h3>
+
+<p><b>Referral Code</b></p>
+<h3 id="referralCode">------</h3>
+
+<p><b>UPI ID</b></p>
+
+<input
+type="text"
+id="upi"
+placeholder="Enter UPI ID">
+
+<button id="saveBtn">
+Save UPI
+</button>
+
+<button id="logoutBtn">
+Logout
+</button>
+
+</div>
+
+</div>
+
+<script type="module" src="js/profile.js"></script>
+
+</body>
+
+</html>
