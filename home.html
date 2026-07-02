@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BattleG Home</title>
+<title>BattleG</title>
 
 <link rel="stylesheet" href="css/home.css">
 
@@ -17,9 +18,9 @@
 
 <body>
 
-<header class="topbar">
+<header class="topHeader">
 
-<div class="left">
+<div class="leftSide">
 
 <img src="assets/logo.png" class="logo">
 
@@ -28,17 +29,14 @@
 <h2>BattleG</h2>
 
 <p>Welcome,
-<span id="userName">Player</span>
-
+<b id="userName">Player</b>
 </p>
 
 </div>
 
 </div>
 
-<div class="right">
-
-<div class="walletBox">
+<div class="wallet">
 
 <i class="fa-solid fa-wallet"></i>
 
@@ -46,88 +44,87 @@
 
 </div>
 
-</div>
-
 </header>
 
 
-<section class="banner">
+<section class="hero">
 
-<h1>Play. Win. Earn.</h1>
+<h1>Play • Compete • Win</h1>
 
-<p>India's Best Esports Tournament Platform</p>
+<p>Join tournaments and win rewards.</p>
 
 </section>
 
 
-<section class="menu">
+<section class="quickMenu">
 
-<a href="tournaments.html" class="card">
-
-<i class="fa-solid fa-trophy"></i>
-
-<span>Tournaments</span>
-
-</a>
-
-<a href="wallet.html" class="card">
-
-<i class="fa-solid fa-wallet"></i>
-
-<span>Wallet</span>
-
-</a>
-
-<a href="deposit.html" class="card">
-
-<i class="fa-solid fa-money-bill-transfer"></i>
-
-<span>Deposit</span>
-
-</a>
-
-<a href="withdraw.html" class="card">
-
-<i class="fa-solid fa-hand-holding-dollar"></i>
-
-<span>Withdraw</span>
-
-</a>
-
-<a href="profile.html" class="card">
-
-<i class="fa-solid fa-user"></i>
-
-<span>Profile</span>
-
-</a>
-
-<a href="referral.html" class="card">
+<a href="referral.html" class="menuCard">
 
 <i class="fa-solid fa-user-group"></i>
 
-<span>Referral</span>
+<h3>Referral</h3>
+
+<p>Invite friends & earn rewards</p>
+
+</a>
+
+<a href="my-tournaments.html" class="menuCard">
+
+<i class="fa-solid fa-trophy"></i>
+
+<h3>My Tournaments</h3>
+
+<p>Your joined tournaments</p>
 
 </a>
 
 </section>
 
 
-<section class="live">
+<section class="games">
 
-<h2>
+<div class="title">
 
-🔥 Live Tournaments
+<h2>🎮 Games</h2>
 
-</h2>
-
-<div id="tournamentList">
-
-<div class="coming">
-
-Coming Soon...
+<a href="#">View All</a>
 
 </div>
+
+
+<div class="gameGrid">
+
+<a href="tournaments.html?game=aim" class="gameCard">
+
+<img src="assets/games/aim.png">
+
+<span>Aim</span>
+
+</a>
+
+<a href="tournaments.html?game=runner" class="gameCard">
+
+<img src="assets/games/runner.png">
+
+<span>Runner</span>
+
+</a>
+
+<a href="tournaments.html?game=quiz" class="gameCard">
+
+<img src="assets/games/quiz.png">
+
+<span>Quiz</span>
+
+</a>
+
+<a href="tournaments.html?game=racing" class="gameCard">
+
+<img src="assets/games/racing.png">
+
+<span>Racing</span>
+
+</a>
 
 </div>
 
@@ -136,7 +133,7 @@ Coming Soon...
 
 <nav class="bottomNav">
 
-<a href="home.html">
+<a class="active">
 
 <i class="fa-solid fa-house"></i>
 
