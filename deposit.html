@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deposit | BattelG</title>
+<title>Deposit | BattleG</title>
 
 <link rel="stylesheet" href="css/deposit.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -17,35 +18,66 @@
 
 <div class="container">
 
-<h1>💳 Deposit</h1>
+<img src="assets/logo.png" class="logo">
 
-<div class="qr-box">
+<h2>Deposit Funds</h2>
 
-<img src="assets/qr.png" alt="QR Code" class="qr">
+<div id="step1">
 
-<p>Scan QR and Pay</p>
-
-</div>
+<label>Enter Amount</label>
 
 <input
 type="number"
 id="amount"
-placeholder="Enter Amount (₹10 - ₹1000)"
->
+placeholder="₹10 - ₹1000"
+min="10"
+max="1000">
+
+<button id="continueBtn">
+Continue
+</button>
+
+</div>
+
+<div id="step2" style="display:none;">
+
+<h3>Scan QR & Pay</h3>
+
+<img src="assets/qr.png" class="qr">
+
+<p class="name">
+Receiver :
+<b>Gautam Prajapat</b>
+</p>
+
+<p>
+Amount :
+₹<span id="showAmount"></span>
+</p>
+
+<label>
+
+<input type="checkbox" id="paid">
+
+I have completed the payment
+
+</label>
 
 <input
 type="text"
 id="utr"
-placeholder="Enter UTR Number"
->
+placeholder="Enter UTR Number">
 
-<button id="submitDeposit">
-Submit Deposit Request
+<button id="submitBtn">
+Submit Request
 </button>
+
+</div>
 
 </div>
 
 <script type="module" src="js/deposit.js"></script>
 
 </body>
+
 </html>
