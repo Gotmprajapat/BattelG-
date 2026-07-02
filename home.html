@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,7 +9,7 @@
 
 <link rel="stylesheet" href="css/home.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
@@ -18,94 +17,155 @@
 
 <body>
 
-<header>
+<header class="topbar">
+
+<div class="left">
 
 <img src="assets/logo.png" class="logo">
 
-<h2>Welcome,
-<span id="userName">Player</span>
-</h2>
+<div>
 
-<button id="logoutBtn">
-Logout
-</button>
+<h2>BattleG</h2>
+
+<p>Welcome,
+<span id="userName">Player</span>
+
+</p>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="walletBox">
+
+<i class="fa-solid fa-wallet"></i>
+
+₹<span id="walletBalance">0</span>
+
+</div>
+
+</div>
 
 </header>
 
-<div class="wallet-card">
 
-<p>Wallet Balance</p>
+<section class="banner">
 
-<h1>₹<span id="walletBalance">0</span></h1>
+<h1>Play. Win. Earn.</h1>
 
-</div>
+<p>India's Best Esports Tournament Platform</p>
 
-<div class="grid">
+</section>
+
+
+<section class="menu">
+
+<a href="tournaments.html" class="card">
+
+<i class="fa-solid fa-trophy"></i>
+
+<span>Tournaments</span>
+
+</a>
 
 <a href="wallet.html" class="card">
+
 <i class="fa-solid fa-wallet"></i>
+
 <span>Wallet</span>
+
 </a>
 
 <a href="deposit.html" class="card">
+
 <i class="fa-solid fa-money-bill-transfer"></i>
+
 <span>Deposit</span>
+
 </a>
 
 <a href="withdraw.html" class="card">
+
 <i class="fa-solid fa-hand-holding-dollar"></i>
+
 <span>Withdraw</span>
+
 </a>
 
-<a href="#" class="card">
-<i class="fa-solid fa-trophy"></i>
-<span>Tournaments</span>
+<a href="profile.html" class="card">
+
+<i class="fa-solid fa-user"></i>
+
+<span>Profile</span>
+
 </a>
 
-<a href="#" class="card">
-<i class="fa-solid fa-gift"></i>
-<span>Promo Code</span>
-</a>
+<a href="referral.html" class="card">
 
-<a href="#" class="card">
 <i class="fa-solid fa-user-group"></i>
+
 <span>Referral</span>
+
 </a>
 
-</div>
+</section>
 
-<h3 class="title">
-Live Tournaments
-</h3>
+
+<section class="live">
+
+<h2>
+
+🔥 Live Tournaments
+
+</h2>
 
 <div id="tournamentList">
 
-<div class="tournament">
+<div class="coming">
 
-<h4>Coming Soon...</h4>
-
-<p>Admin tournaments yaha automatically dikhenge.</p>
+Coming Soon...
 
 </div>
 
 </div>
 
-<nav>
+</section>
+
+
+<nav class="bottomNav">
 
 <a href="home.html">
-🏠
-</a>
 
-<a href="#">
-🏆
+<i class="fa-solid fa-house"></i>
+
+<p>Home</p>
+
 </a>
 
 <a href="wallet.html">
-💰
+
+<i class="fa-solid fa-wallet"></i>
+
+<p>Wallet</p>
+
 </a>
 
-<a href="#">
-👤
+<a href="deposit.html">
+
+<i class="fa-solid fa-money-bill-transfer"></i>
+
+<p>Deposit</p>
+
+</a>
+
+<a href="profile.html">
+
+<i class="fa-solid fa-user"></i>
+
+<p>Profile</p>
+
 </a>
 
 </nav>
