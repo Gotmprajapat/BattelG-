@@ -1,118 +1,114 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-background:linear-gradient(135deg,#050505,#151515);
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-overflow:hidden;
+body {
+    background: #0a0a0a;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.login-box{
-width:100%;
-max-width:420px;
-background:rgba(20,20,20,.92);
-backdrop-filter:blur(18px);
-border:1px solid rgba(255,215,0,.35);
-border-radius:22px;
-padding:35px 25px;
-text-align:center;
-box-shadow:0 0 30px rgba(255,215,0,.25);
-animation:fadeUp .8s ease;
+.auth-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
 }
 
-.logo{
-width:90px;
-height:90px;
-border-radius:50%;
-border:3px solid gold;
-margin-bottom:18px;
-animation:float 3s ease-in-out infinite;
+.auth-card {
+    background: #111111;
+    border: 1px solid #222;
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 60px rgba(212, 175, 55, 0.1);
 }
 
-h2{
-color:gold;
-font-size:28px;
-margin-bottom:8px;
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-p{
-color:#c7c7c7;
-margin-bottom:25px;
-font-size:15px;
+.auth-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
 }
 
-input{
-width:100%;
-padding:15px;
-margin:10px 0;
-border:none;
-outline:none;
-border-radius:12px;
-background:#0d0d0d;
-color:#fff;
-border:1px solid #333;
-font-size:15px;
-transition:.3s;
+.auth-header h1 {
+    color: #D4AF37;
+    font-size: 28px;
+    font-weight: 700;
 }
 
-input:focus{
-border-color:gold;
-box-shadow:0 0 12px rgba(255,215,0,.35);
+.auth-header p {
+    color: #888;
+    font-size: 14px;
+    margin-top: 5px;
 }
 
-button{
-width:100%;
-padding:15px;
-margin-top:18px;
-border:none;
-border-radius:12px;
-background:linear-gradient(90deg,#FFD700,#FFB800);
-color:#000;
-font-size:17px;
-font-weight:700;
-cursor:pointer;
-transition:.3s;
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
 }
 
-button:hover{
-transform:translateY(-2px);
-box-shadow:0 0 20px rgba(255,215,0,.45);
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #D4AF37;
+    font-size: 16px;
 }
 
-a{
-display:block;
-margin-top:20px;
-text-decoration:none;
-color:gold;
-font-size:14px;
-transition:.3s;
+.input-group input {
+    width: 100%;
+    padding: 15px 45px 15px 45px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s;
 }
 
-a:hover{
-color:#fff;
+.input-group input:focus {
+    border-color: #D4AF37;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
 }
 
-@keyframes float{
-0%{transform:translateY(0);}
-50%{transform:translateY(-8px);}
-100%{transform:translateY(0);}
+.btn-golden {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #D4AF37, #B8860B);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
 }
 
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(40px);
+.btn-golden:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
 }
-to{
-opacity:1;
-transform:translateY(0);
+
+.auth-links {
+    text-align: center;
+    margin-top: 20px;
 }
+
+.auth-links a {
+    color: #D4AF37;
+    text-decoration: none;
+    font-size: 14px;
 }
