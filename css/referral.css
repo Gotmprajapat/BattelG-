@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    min-height: 100vh;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background: #111;
+    border-bottom: 1px solid #222;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #D4AF37;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.page-header h2 { color: #D4AF37; }
+
+.referral-banner {
+    margin: 20px;
+    padding: 25px;
+    background: linear-gradient(135deg, #1a1a1a, #111);
+    border: 1px solid #D4AF37;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.reward-box {
+    margin-bottom: 15px;
+}
+
+.reward-amount {
+    font-size: 48px;
+    font-weight: 800;
+    color: #D4AF37;
+    display: block;
+}
+
+.reward-text {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.referral-banner p {
+    color: #888;
+    font-size: 13px;
+}
+
+.code-section {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.code-section label {
+    color: #aaa;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.code-display {
+    display: flex;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.code-display span {
+    flex: 1;
+    padding: 15px;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: #D4AF37;
+    font-weight: 700;
+    text-align: center;
+}
+
+.code-display button {
+    padding: 15px 20px;
+    background: #D4AF37;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.share-btn {
+    width: 100%;
+    padding: 15px;
+    background: #2e7d32;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.stats-section {
+    display: flex;
+    gap: 12px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    flex: 1;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: #D4AF37;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #888;
+}
+
+.referrals-list {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.referrals-list h3 {
+    color: #D4AF37;
+    margin-bottom: 15px;
+}
+
+.ref-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: #111;
+    border: 1px solid #1a1a1a;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.ref-name {
+    font-weight: 500;
+}
+
+.ref-status {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.status-joined { background: #222; color: #aaa; }
+.status-paid { background: #2e7d32; color: #fff; }
+
+.rules-box {
+    margin: 20px;
+    padding: 20px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 16px;
+}
+
+.rules-box h4 {
+    color: #D4AF37;
+    margin-bottom: 10px;
+}
+
+.rules-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.rules-box li {
+    padding: 6px 0;
+    color: #888;
+    font-size: 13px;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.rules-box li::before {
+    content: '✓ ';
+    color: #4caf50;
+}
