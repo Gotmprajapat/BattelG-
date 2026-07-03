@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tournaments - BattleG</title>
+    <link rel="stylesheet" href="my-tournaments.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="page-header">
+            <button onclick="history.back()" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2>My Tournaments</h2>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('upcoming')">Upcoming</button>
+            <button class="tab" onclick="switchTab('live')">Live</button>
+            <button class="tab" onclick="switchTab('completed')">Completed</button>
+        </div>
+
+        <div id="tournamentsContainer" class="tournaments-container">
+            <!-- Filled via JS -->
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-chart-bar"></i>
+            <span>Leaderboard</span>
+        </a>
+        <a href="wallet.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>Wallet</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="my-tournaments.js"></script>
+</body>
+</html>
