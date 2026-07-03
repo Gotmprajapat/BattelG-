@@ -1,73 +1,41 @@
-import { auth, db } from "../firebase/firebase.js";
-
-import {
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-import {
-  doc,
-  getDoc,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-onAuthStateChanged(auth, async (user) => {
-
-  if (!user) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  try {
-
-    const userRef = doc(db, "users", user.uid);
-    const snap = await getDoc(userRef);
-
-    if (snap.exists()) {
-
-      const data = snap.data();
-
-      document.getElementById("userName").textContent = data.name || "Player";
-
-      document.getElementById("userEmail").textContent = data.email || user.email;
-
-      document.getElementById("walletBalance").textContent = data.wallet || 0;
-
-      document.getElementById("referralCode").textContent = data.referralCode || "Not Available";
-
-      document.getElementById("upi").value = data.upi || "";
-
+firebase.auth().onAuthStateChanged(async (user) => {
+    if (!user) { window.location.href = 'login.html'; return; }
+    
+    const userDoc = await db.collection("users").doc(user.uid).get();
+    if (userDoc.exists) {
+        const data = userDoc.data();
+        document.getElementById('profileName').textContent = data.name || 'Player';
+        document.getElementById('profileEmail').textContent = data.email || '';
+        document.getElementById('profileWallet').textContent = '₹' + (data.wallet || 0);
+        document.getElementById('profileRefCode').textContent = data.referralCode || '------';
+        document.getElementById('profileUpi').textContent = data.upi || 'Not Set';
+        document.getElementById('avatarInitial').textContent = (data.name || 'P').charAt(0).toUpperCase();
     }
-
-  } catch (e) {
-
-    console.log(e);
-
-  }
-
-  document.getElementById("saveBtn").onclick = async () => {
-
-    const upi = document.getElementById("upi").value.trim();
-
-    if (upi == "") {
-      alert("Enter UPI ID");
-      return;
-    }
-
-    await updateDoc(doc(db, "users", user.uid), {
-      upi: upi
-    });
-
-    alert("UPI Saved Successfully");
-
-  };
-
-  document.getElementById("logoutBtn").onclick = async () => {
-
-    await signOut(auth);
-
-    window.location.href = "login.html";
-
-  };
-
 });
+
+function editProfile() {
+    const user = firebase.auth().currentUser;
+    if (!user) return;
+    
+    const newName = prompt('Enter new name:');
+    if (newName) {
+        db.collection("users").doc(user.uid).update({ name: newName }).then(() => {
+            document.getElementById('profileName').textContent = newName;
+            document.getElementById('avatarInitial').textContent = newName.charAt(0).toUpperCase();
+        });
+    }
+    
+    const newUpi = prompt('Enter UPI ID:');
+    if (newUpi) {
+        db.collection("users").doc(user.uid).update({ upi: newUpi }).then(() => {
+            document.getElementById('profileUpi').textContent = newUpi;
+        });
+    }
+}
+
+function logout() {
+    firebase.auth().signOut().then(() => {
+        localStorage.removeItem('userData');
+        window.location.href = 'login.html';
+    });
+}
