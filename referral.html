@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral - BattleG</title>
+    <link rel="stylesheet" href="referral.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="page-header">
+            <button onclick="history.back()" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2>Refer & Earn</h2>
+        </header>
+
+        <div class="referral-banner">
+            <div class="reward-box">
+                <span class="reward-amount">₹5</span>
+                <span class="reward-text">Per Referral</span>
+            </div>
+            <p>Share your code. Earn when friends join their first paid tournament!</p>
+        </div>
+
+        <div class="code-section">
+            <label>Your Referral Code</label>
+            <div class="code-display">
+                <span id="referralCode">LOADING...</span>
+                <button onclick="copyCode()"><i class="fas fa-copy"></i></button>
+            </div>
+            <button class="share-btn" onclick="shareCode()">
+                <i class="fas fa-share-alt"></i> Share
+            </button>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <span class="stat-number" id="totalReferrals">0</span>
+                <span class="stat-label">Total Referrals</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="referralEarnings">₹0</span>
+                <span class="stat-label">Total Earnings</span>
+            </div>
+        </div>
+
+        <section class="referrals-list">
+            <h3>Referral History</h3>
+            <div id="referralHistory">
+                <div style="text-align:center;padding:30px;color:#666;">Loading...</div>
+            </div>
+        </section>
+
+        <div class="rules-box">
+            <h4><i class="fas fa-scroll"></i> Rules</h4>
+            <ul>
+                <li>Share your referral code with friends</li>
+                <li>You earn ₹5 when they join their first paid tournament</li>
+                <li>New user also gets ₹5 bonus</li>
+                <li>No limit on referrals</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="referral.js"></script>
+</body>
+</html>
