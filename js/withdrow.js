@@ -1,87 +1,57 @@
-import { auth, db } from "../firebase/firebase.js";
-
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-import {
-doc,
-getDoc,
-collection,
-addDoc,
-serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-let currentUser = null;
-let wallet = 0;
-
-onAuthStateChanged(auth, async (user) => {
-
-    if (!user) {
-        window.location.href = "login.html";
-        return;
+firebase.auth().onAuthStateChanged(async (user) => {
+    if (!user) { window.location.href = 'login.html'; return; }
+    
+    const userDoc = await db.collection("users").doc(user.uid).get();
+    if (userDoc.exists) {
+        const data = userDoc.data();
+        document.getElementById('availBalance').textContent = '₹' + (data.wallet || 0);
     }
-
-    currentUser = user;
-
-    const snap = await getDoc(doc(db, "users", user.uid));
-
-    if (snap.exists()) {
-
-        const data = snap.data();
-
-        wallet = data.wallet || 0;
-
-        document.getElementById("walletBalance").innerText = wallet;
-
-        if (data.upi) {
-            document.getElementById("upi").value = data.upi;
-        }
-
-    }
-
 });
 
-document.getElementById("withdrawBtn").addEventListener("click", async () => {
-
-    const amount = Number(document.getElementById("amount").value);
-    const upi = document.getElementById("upi").value.trim();
-
-    if (amount < 50 || amount > 1000) {
-        alert("Withdraw amount must be between ₹50 and ₹1000");
+async function submitWithdraw() {
+    const user = firebase.auth().currentUser;
+    if (!user) { alert('Please login'); return; }
+    
+    const upiId = document.getElementById('upiId').value.trim();
+    const amount = parseInt(document.getElementById('withdrawAmount').value);
+    
+    if (!upiId) { alert('Enter UPI ID'); return; }
+    if (!amount || amount < 50) { alert('Minimum withdrawal is ₹50'); return; }
+    
+    const userDoc = await db.collection("users").doc(user.uid).get();
+    const userData = userDoc.data();
+    
+    if (amount > (userData.wallet || 0)) {
+        alert('Insufficient balance');
         return;
     }
-
-    if (amount > wallet) {
-        alert("Insufficient wallet balance");
-        return;
-    }
-
-    if (upi.length < 5) {
-        alert("Enter a valid UPI ID");
-        return;
-    }
-
+    
     try {
-
-        await addDoc(collection(db, "withdrawRequests"), {
-
-            uid: currentUser.uid,
+        await db.collection("withdrawals").add({
+            userId: user.uid,
+            userEmail: user.email,
+            upiId: upiId,
             amount: amount,
-            upi: upi,
-            status: "Pending",
-            createdAt: serverTimestamp()
-
+            status: 'pending',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
-
-        alert("Withdraw request submitted successfully.");
-
-        window.location.href = "home.html";
-
-    } catch (e) {
-
-        console.log(e);
-
-        alert("Something went wrong.");
-
+        
+        await db.collection("users").doc(user.uid).update({
+            wallet: firebase.firestore.FieldValue.increment(-amount)
+        });
+        
+        await db.collection("transactions").add({
+            userId: user.uid,
+            type: 'withdrawal',
+            amount: amount,
+            description: 'Withdrawal to ' + upiId,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        
+        alert('Withdrawal request submitted!');
+        window.location.href = 'wallet.html';
+    } catch (error) {
+        console.error("Error:", error);
+        alert('Error submitting withdrawal');
     }
-
-});
+}
