@@ -1,48 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - BattleG</title>
-    <link rel="stylesheet" href="register.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BattleG Register</title>
+
+<link rel="stylesheet" href="css/register.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <img src="assets/logo.png" alt="BattleG" class="auth-logo">
-                <h1>Create Account</h1>
-                <p>Join the battle arena</p>
-            </div>
-            <form id="registerForm">
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="name" placeholder="Full Name" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" placeholder="Email Address" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" placeholder="Password (min 6 characters)" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-gift"></i>
-                    <input type="text" id="referralCode" placeholder="Referral Code (Optional)">
-                </div>
-                <button type="submit" class="btn-golden">Register</button>
-            </form>
-            <div class="auth-links">
-                <a href="login.html">Already have an account? Login</a>
-            </div>
-        </div>
-    </div>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="register.js"></script>
+
+<div class="registerBox">
+
+<img src="assets/logo.png" class="logo">
+
+<h1>Create Account</h1>
+
+<p class="tagline">
+Join BattleG Today
+</p>
+
+<div class="inputBox">
+
+<i class="fa-solid fa-user"></i>
+
+<input
+type="text"
+id="name"
+placeholder="Full Name">
+
+</div>
+
+<div class="inputBox">
+
+<i class="fa-solid fa-envelope"></i>
+
+<input
+type="email"
+id="email"
+placeholder="Email Address">
+
+</div>
+
+<div class="inputBox">
+
+<i class="fa-solid fa-lock"></i>
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<i
+class="fa-solid fa-eye"
+id="togglePassword">
+</i>
+
+</div>
+
+<div class="inputBox">
+
+<i class="fa-solid fa-gift"></i>
+
+<input
+type="text"
+id="referral"
+placeholder="Referral Code (Optional)">
+
+</div>
+
+<button id="registerBtn">
+CREATE ACCOUNT
+</button>
+
+<a
+href="login.html"
+class="loginLink">
+Already have an account? Login
+</a>
+
+</div>
+
+<script
+type="module"
+src="js/register.js">
+</script>
+
 </body>
+
 </html>
