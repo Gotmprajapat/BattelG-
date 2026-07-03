@@ -1,87 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Wallet | BattelG</title>
-
-<link rel="stylesheet" href="css/wallet.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet - BattleG</title>
+    <link rel="stylesheet" href="wallet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
+    <div class="app-container">
+        <header class="page-header">
+            <button onclick="history.back()" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h2>My Wallet</h2>
+        </header>
 
-<header>
+        <div class="balance-card">
+            <p class="balance-label">Available Balance</p>
+            <h1 class="balance-amount" id="balanceAmount">₹0</h1>
+            <div class="balance-actions">
+                <button class="action-btn deposit-btn" onclick="window.location.href='deposit.html'">
+                    <i class="fas fa-plus-circle"></i> Deposit
+                </button>
+                <button class="action-btn withdraw-btn" onclick="window.location.href='withdraw.html'">
+                    <i class="fas fa-minus-circle"></i> Withdraw
+                </button>
+            </div>
+        </div>
 
-<h2>💰 My Wallet</h2>
+        <div class="promo-section">
+            <div class="promo-input-group">
+                <input type="text" id="promoCode" placeholder="Enter Promo Code">
+                <button onclick="applyPromoCode()">Apply</button>
+            </div>
+        </div>
 
-</header>
+        <section class="transactions-section">
+            <h3 class="section-title">Transaction History</h3>
+            <div id="transactionsList" class="transactions-list">
+                <!-- Filled via JS -->
+            </div>
+        </section>
+    </div>
 
-<div class="wallet-card">
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-chart-bar"></i>
+            <span>Leaderboard</span>
+        </a>
+        <a href="wallet.html" class="nav-item active">
+            <i class="fas fa-wallet"></i>
+            <span>Wallet</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
 
-<p>Available Balance</p>
-
-<h1 id="balance">₹0.00</h1>
-
-</div>
-
-<div class="action-buttons">
-
-<a href="deposit.html" class="deposit">
-<i class="fa-solid fa-plus"></i>
-Deposit
-</a>
-
-<a href="withdraw.html" class="withdraw">
-<i class="fa-solid fa-money-bill-transfer"></i>
-Withdraw
-</a>
-
-</div>
-
-<div class="menu">
-
-<a href="#">
-🎁 Promo Code
-</a>
-
-<a href="#">
-👥 Referral Bonus
-</a>
-
-<a href="transactions.html">
-📜 Transaction History
-</a>
-
-</div>
-
-<nav>
-
-<a href="home.html">
-🏠
-</a>
-
-<a href="#">
-🏆
-</a>
-
-<a href="wallet.html">
-💰
-</a>
-
-<a href="#">
-👤
-</a>
-
-</nav>
-
-<script type="module" src="js/wallet.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="wallet.js"></script>
 </body>
 </html>
