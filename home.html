@@ -1,121 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - BattleG</title>
-    <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BattleG - Home</title>
+
+<link rel="stylesheet" href="css/home.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-left">
-                <img src="assets/logo.png" alt="BattleG" class="header-logo">
-                <div>
-                    <span class="welcome-text">Welcome,</span>
-                    <span class="user-name" id="displayName">Player</span>
-                </div>
-            </div>
-            <div class="wallet-badge" id="walletBadge" onclick="window.location.href='wallet.html'">
-                <i class="fas fa-wallet"></i>
-                <span id="walletBalance">₹0</span>
-            </div>
-        </header>
 
-        <!-- Banner Slider -->
-        <div class="banner-slider" id="bannerSlider">
-            <div class="banner active">
-                <div class="banner-content">
-                    <span class="banner-tag">MEGA EVENT</span>
-                    <h2>Grand Tournament</h2>
-                    <p>Win upto ₹10,000</p>
-                </div>
-            </div>
-            <div class="banner">
-                <div class="banner-content">
-                    <span class="banner-tag">NEW GAME</span>
-                    <h2>Aim Challenge</h2>
-                    <p>Test your precision</p>
-                </div>
-            </div>
-            <div class="banner">
-                <div class="banner-content">
-                    <span class="banner-tag">FESTIVAL</span>
-                    <h2>Diwali Special</h2>
-                    <p>Double rewards inside</p>
-                </div>
-            </div>
-            <div class="banner-dots">
-                <span class="dot active" onclick="changeBanner(0)"></span>
-                <span class="dot" onclick="changeBanner(1)"></span>
-                <span class="dot" onclick="changeBanner(2)"></span>
-            </div>
-        </div>
+<header class="header">
 
-        <!-- Quick Menu -->
-        <div class="quick-menu">
-            <div class="quick-item" onclick="window.location.href='referral.html'">
-                <div class="quick-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <span>Referral</span>
-            </div>
-            <div class="quick-item" onclick="window.location.href='my-tournaments.html'">
-                <div class="quick-icon">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <span>My Tournaments</span>
-            </div>
-        </div>
+<div class="headerLeft">
 
-        <!-- Games Section -->
-        <section class="games-section">
-            <h3 class="section-title">
-                <i class="fas fa-gamepad"></i> Games
-            </h3>
-            <div class="games-scroll" id="gamesScroll">
-                <!-- Games added via JS -->
-            </div>
-        </section>
+<img src="assets/logo.png" class="logo">
 
-        <!-- Today's Top Earners -->
-        <section class="top-earners-section">
-            <h3 class="section-title">
-                <i class="fas fa-crown"></i> Top Earners Today
-            </h3>
-            <div class="earners-list" id="earnersList">
-                <!-- Filled via JS -->
-            </div>
-        </section>
-    </div>
+<div>
 
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-chart-bar"></i>
-            <span>Leaderboard</span>
-        </a>
-        <a href="wallet.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>Wallet</span>
-        </a>
-        <a href="profile.html" class="nav-item">
-            <i class="fas fa-user"></i>
-            <span>Profile</span>
-        </a>
-    </nav>
+<h2>BattleG</h2>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="home.js"></script>
+<p id="welcomeText">Welcome Player</p>
+
+</div>
+
+</div>
+
+<a href="wallet.html" class="walletBox">
+
+<i class="fa-solid fa-wallet"></i>
+
+₹ <span id="walletBalance">0</span>
+
+</a>
+
+</header>
+
+<section class="banner">
+
+<h2>Play • Compete • Win</h2>
+
+<p>
+Compete in tournaments and win exciting rewards.
+</p>
+
+</section>
+
+<section class="quickMenu">
+
+<a href="referral.html" class="menuCard">
+
+<i class="fa-solid fa-user-group"></i>
+
+<h3>Referral</h3>
+
+<p>Invite friends & earn rewards</p>
+
+</a>
+
+<a href="my-tournaments.html" class="menuCard">
+
+<i class="fa-solid fa-trophy"></i>
+
+<h3>My Tournaments</h3>
+
+<p>View joined tournaments</p>
+
+</a>
+
+</section>
+
+<section class="gamesSection">
+
+<div class="titleRow">
+
+<h2>Games</h2>
+
+</div>
+
+<div id="gamesContainer">
+
+<div class="emptyBox">
+
+<i class="fa-solid fa-gamepad"></i>
+
+<h3>No Games Available</h3>
+
+<p>
+
+Games will appear here automatically after you add them.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<nav class="bottomNav">
+
+<a href="home.html" class="active">
+
+<i class="fa-solid fa-house"></i>
+
+<span>Home</span>
+
+</a>
+
+<a href="wallet.html">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Wallet</span>
+
+</a>
+
+<a href="leaderboard.html">
+
+<i class="fa-solid fa-ranking-star"></i>
+
+<span>Leaderboard</span>
+
+</a>
+
+<a href="profile.html">
+
+<i class="fa-solid fa-user"></i>
+
+<span>Profile</span>
+
+</a>
+
+</nav>
+
+<script type="module" src="js/home.js"></script>
+
 </body>
+
 </html>
