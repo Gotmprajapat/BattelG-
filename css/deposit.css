@@ -1,90 +1,202 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-background:#0b0b0b;
-color:#fff;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-padding:20px;
+body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container{
-width:100%;
-max-width:420px;
-background:#171717;
-padding:25px;
-border-radius:20px;
-border:1px solid rgba(255,215,0,.25);
-box-shadow:0 0 20px rgba(255,215,0,.15);
-text-align:center;
+.app-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    min-height: 100vh;
 }
 
-.logo{
-width:90px;
-margin-bottom:15px;
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background: #111;
+    border-bottom: 1px solid #222;
 }
 
-h2{
-color:gold;
-margin-bottom:20px;
+.back-btn {
+    background: none;
+    border: none;
+    color: #D4AF37;
+    font-size: 20px;
+    cursor: pointer;
 }
 
-label{
-display:block;
-text-align:left;
-margin:15px 0 8px;
+.page-header h2 { color: #D4AF37; }
+
+.deposit-card {
+    padding: 20px;
 }
 
-input{
-width:100%;
-padding:14px;
-border:none;
-border-radius:10px;
-background:#222;
-color:#fff;
-margin-bottom:15px;
+.amount-selector label {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
 }
 
-button{
-width:100%;
-padding:14px;
-background:gold;
-color:#000;
-font-weight:bold;
-border:none;
-border-radius:10px;
-cursor:pointer;
-font-size:16px;
-transition:.3s;
+.amount-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
-button:hover{
-transform:scale(1.03);
+.amount-btn {
+    padding: 15px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
-.qr{
-width:220px;
-height:220px;
-margin:20px auto;
-display:block;
-background:#fff;
-padding:10px;
-border-radius:15px;
+.amount-btn.selected {
+    border-color: #D4AF37;
+    background: #1a1a1a;
+    color: #D4AF37;
 }
 
-.name{
-margin:10px 0;
-font-size:18px;
+.custom-amount input {
+    width: 100%;
+    padding: 15px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
 }
 
-#paid{
-width:auto;
-margin-right:8px;
+.custom-amount input:focus {
+    border-color: #D4AF37;
+}
+
+.selected-amount {
+    text-align: center;
+    padding: 15px;
+    margin: 15px 0;
+    background: #111;
+    border: 1px solid #D4AF37;
+    border-radius: 12px;
+    font-size: 18px;
+}
+
+.selected-amount span {
+    color: #D4AF37;
+    font-weight: 700;
+}
+
+.qr-section {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.qr-section h4 {
+    color: #D4AF37;
+    margin-bottom: 15px;
+}
+
+.qr-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.qr-note {
+    color: #888;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.utr-section {
+    margin: 20px 0;
+}
+
+.utr-section label {
+    display: block;
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.utr-section input {
+    width: 100%;
+    padding: 15px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+}
+
+.utr-section input:focus {
+    border-color: #D4AF37;
+}
+
+.helper-text {
+    color: #666;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #D4AF37, #B8860B);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.info-box {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.info-box i {
+    color: #D4AF37;
+    font-size: 20px;
+}
+
+.info-box p {
+    color: #888;
+    font-size: 12px;
 }
