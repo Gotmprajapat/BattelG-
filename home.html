@@ -1,174 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BattleG</title>
-
-<link rel="stylesheet" href="css/home.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BattleG</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
-
-<header class="topHeader">
-
-<div class="leftSide">
-
-<img src="assets/logo.png" class="logo">
-
-<div>
-
-<h2>BattleG</h2>
-
-<p>Welcome,
-<b id="userName">Player</b>
-</p>
-
-</div>
-
-</div>
-
-<div class="wallet">
-
-<i class="fa-solid fa-wallet"></i>
-
-₹<span id="walletBalance">0</span>
-
-</div>
-
-</header>
-
-
-<section class="hero">
-
-<h1>Play • Compete • Win</h1>
-
-<p>Join tournaments and win rewards.</p>
-
-</section>
-
-
-<section class="quickMenu">
-
-<a href="referral.html" class="menuCard">
-
-<i class="fa-solid fa-user-group"></i>
-
-<h3>Referral</h3>
-
-<p>Invite friends & earn rewards</p>
-
-</a>
-
-<a href="my-tournaments.html" class="menuCard">
-
-<i class="fa-solid fa-trophy"></i>
-
-<h3>My Tournaments</h3>
-
-<p>Your joined tournaments</p>
-
-</a>
-
-</section>
-
-
-<section class="games">
-
-<div class="title">
-
-<h2>🎮 Games</h2>
-
-<a href="#">View All</a>
-
-</div>
-
-
-<div class="gameGrid">
-
-<a href="tournaments.html?game=aim" class="gameCard">
-
-<img src="assets/games/aim.png">
-
-<span>Aim</span>
-
-</a>
-
-<a href="tournaments.html?game=runner" class="gameCard">
-
-<img src="assets/games/runner.png">
-
-<span>Runner</span>
-
-</a>
-
-<a href="tournaments.html?game=quiz" class="gameCard">
-
-<img src="assets/games/quiz.png">
-
-<span>Quiz</span>
-
-</a>
-
-<a href="tournaments.html?game=racing" class="gameCard">
-
-<img src="assets/games/racing.png">
-
-<span>Racing</span>
-
-</a>
-
-</div>
-
-</section>
-
-
-<nav class="bottomNav">
-
-<a class="active">
-
-<i class="fa-solid fa-house"></i>
-
-<p>Home</p>
-
-</a>
-
-<a href="wallet.html">
-
-<i class="fa-solid fa-wallet"></i>
-
-<p>Wallet</p>
-
-</a>
-
-<a href="deposit.html">
-
-<i class="fa-solid fa-money-bill-transfer"></i>
-
-<p>Deposit</p>
-
-</a>
-
-<a href="profile.html">
-
-<i class="fa-solid fa-user"></i>
-
-<p>Profile</p>
-
-</a>
-
-</nav>
-
-<script type="module" src="js/home.js"></script>
-
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="assets/logo.png" alt="BattleG" class="auth-logo">
+                <h1>Welcome Back</h1>
+                <p>Login to continue your journey</p>
+            </div>
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+                </div>
+                <button type="submit" class="btn-golden">Login</button>
+            </form>
+            <div class="auth-links">
+                <a href="#" onclick="forgotPassword()">Forgot Password?</a>
+                <a href="register.html">Create Account</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="login.js"></script>
 </body>
-
 </html>
