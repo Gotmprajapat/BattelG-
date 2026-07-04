@@ -1,46 +1,102 @@
-import { auth, db } from "../firebase/firebase.js";
+import { onUserData } from "./userService.js";
 
-import {
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+const walletBalance = document.getElementById("walletBalance");
+const userName = document.getElementById("userName");
 
-import {
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+const liveContainer =
+document.getElementById("liveTournamentContainer");
 
-onAuthStateChanged(auth, async (user) => {
+const upcomingContainer =
+document.getElementById("upcomingTournamentContainer");
 
-  if (!user) {
-    window.location.href = "index.html";
-    return;
-  }
+/* USER DATA */
 
-  try {
+onUserData((user)=>{
 
-    const userRef = doc(db, "users", user.uid);
+walletBalance.textContent=
+Number(user.wallet||0).toFixed(2);
 
-    const snap = await getDoc(userRef);
-
-    if (snap.exists()) {
-
-      const data = snap.data();
-
-      document.getElementById("welcomeText").textContent =
-        "Welcome, " + (data.name || "Player");
-
-      document.getElementById("walletBalance").textContent =
-        Number(data.wallet || 0).toFixed(2);
-
-    }
-
-  } catch (error) {
-
-    console.log(error);
-
-  }
+userName.textContent=
+user.name||"Player";
 
 });
 
-// Future Ready
-// Games will be loaded automatically here later.
+/* ===========================
+   LIVE TOURNAMENT
+=========================== */
+
+function loadLiveTournament(){
+
+/*
+
+Future Me
+
+tournamentService.js
+
+Ye function automatically
+Firebase se Live Tournament
+load karega.
+
+*/
+
+liveContainer.innerHTML=`
+
+<div class="empty">
+
+<h3>🔥 No Live Tournament</h3>
+
+<p>
+
+Live Tournament will appear here automatically.
+
+</p>
+
+</div>
+
+`;
+
+}
+
+/* ===========================
+UPCOMING
+=========================== */
+
+function loadUpcomingTournament(){
+
+/*
+
+Future Me
+
+Firebase se
+
+Upcoming Tournament
+
+load honge.
+
+*/
+
+upcomingContainer.innerHTML=`
+
+<div class="empty">
+
+<h3>⏰ Coming Soon</h3>
+
+<p>
+
+Upcoming Tournament will appear here automatically.
+
+</p>
+
+</div>
+
+`;
+
+}
+
+/* ===========================
+INIT
+=========================== */
+
+loadLiveTournament();
+
+loadUpcomingTournament();
