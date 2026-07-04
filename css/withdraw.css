@@ -1,109 +1,139 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
-body {
-    background: #0a0a0a;
-    color: #fff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body{
+background:#0b0b0b;
+color:#fff;
+padding:20px;
+padding-bottom:40px;
 }
 
-.app-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding-bottom: 40px;
-    min-height: 100vh;
+a{
+text-decoration:none;
+color:inherit;
 }
 
-.page-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 20px;
-    background: #111;
-    border-bottom: 1px solid #222;
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
 }
 
-.back-btn {
-    background: none;
-    border: none;
-    color: #D4AF37;
-    font-size: 20px;
-    cursor: pointer;
+.header i{
+font-size:24px;
+color:#FFD700;
 }
 
-.page-header h2 { color: #D4AF37; }
-
-.withdraw-card {
-    padding: 20px;
+.header h2{
+font-size:24px;
+color:#FFD700;
 }
 
-.balance-display {
-    text-align: center;
-    padding: 20px;
-    background: #111;
-    border: 1px solid #D4AF37;
-    border-radius: 16px;
-    margin-bottom: 20px;
+.walletCard{
+background:linear-gradient(135deg,#FFD700,#B8860B);
+color:#111;
+border-radius:22px;
+padding:28px;
+text-align:center;
+margin-bottom:25px;
+box-shadow:0 0 18px rgba(255,215,0,.25);
 }
 
-.balance-display span {
-    color: #888;
-    font-size: 13px;
+.walletCard h3{
+font-size:17px;
+margin-bottom:10px;
 }
 
-.balance-display h3 {
-    color: #D4AF37;
-    font-size: 28px;
-    margin-top: 5px;
+.walletCard h1{
+font-size:38px;
+font-weight:700;
 }
 
-.input-group {
-    margin-bottom: 20px;
+.withdrawForm{
+background:#161616;
+border:1px solid rgba(255,215,0,.15);
+border-radius:20px;
+padding:20px;
+margin-bottom:25px;
 }
 
-.input-group label {
-    display: block;
-    color: #aaa;
-    font-size: 14px;
-    margin-bottom: 10px;
+.withdrawForm label{
+display:block;
+margin-top:15px;
+margin-bottom:8px;
+color:#FFD700;
+font-weight:600;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 15px;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 12px;
-    color: #fff;
-    font-size: 15px;
-    outline: none;
+.withdrawForm input{
+width:100%;
+height:52px;
+background:#222;
+border:1px solid #333;
+border-radius:12px;
+padding:0 15px;
+color:#fff;
+outline:none;
+font-size:15px;
 }
 
-.input-group input:focus {
-    border-color: #D4AF37;
+.withdrawForm input:focus{
+border-color:#FFD700;
 }
 
-.info-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    color: #888;
-    font-size: 13px;
-    border-bottom: 1px solid #1a1a1a;
+#withdrawBtn{
+width:100%;
+height:55px;
+margin-top:25px;
+border:none;
+border-radius:14px;
+background:#FFD700;
+color:#111;
+font-size:17px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
 }
 
-.submit-btn {
-    width: 100%;
-    padding: 15px;
-    background: linear-gradient(135deg, #D4AF37, #B8860B);
-    color: #000;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 20px;
+#withdrawBtn:hover{
+transform:translateY(-2px);
+}
+
+.rules{
+background:#161616;
+border:1px solid rgba(255,215,0,.15);
+border-radius:20px;
+padding:20px;
+}
+
+.rules h3{
+color:#FFD700;
+margin-bottom:12px;
+}
+
+.rules ul{
+padding-left:20px;
+}
+
+.rules li{
+margin-bottom:10px;
+color:#cfcfcf;
+line-height:22px;
+}
+
+@media(max-width:768px){
+
+.walletCard h1{
+font-size:32px;
+}
+
+.header h2{
+font-size:22px;
+}
+
 }
