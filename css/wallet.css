@@ -1,102 +1,81 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#0b0b0b;
-color:#fff;
-padding:20px;
-padding-bottom:40px;
-}
-
-a{
-text-decoration:none;
-color:inherit;
-}
-
 .header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
-.header i{
-font-size:24px;
-color:#FFD700;
-}
-
-.header h2{
-font-size:24px;
-color:#FFD700;
+.header a{
+color:#fff;
+font-size:22px;
+text-decoration:none;
 }
 
 .walletCard{
-background:linear-gradient(135deg,#FFD700,#B8860B);
+background:linear-gradient(135deg,#FFD700,#D4AF37);
+padding:25px;
+border-radius:20px;
 color:#111;
-border-radius:22px;
-padding:30px 20px;
-text-align:center;
-margin-bottom:25px;
-box-shadow:0 0 18px rgba(255,215,0,.25);
+margin-bottom:20px;
+box-shadow:0 10px 25px rgba(255,215,0,.25);
 }
 
 .walletCard h3{
-font-size:17px;
-margin-bottom:12px;
-font-weight:600;
+font-size:16px;
+margin-bottom:10px;
 }
 
 .walletCard h1{
-font-size:38px;
+font-size:36px;
 font-weight:700;
+margin-bottom:8px;
 }
 
-.actionButtons{
+.walletCard p{
+font-size:14px;
+font-weight:600;
+opacity:.8;
+}
+
+.actionGrid{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:repeat(2,1fr);
 gap:15px;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
-.btn{
-height:55px;
-border-radius:15px;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-font-size:17px;
-font-weight:700;
-transition:.3s;
+.actionCard{
+background:#171717;
+border:1px solid rgba(255,215,0,.15);
+border-radius:18px;
+padding:22px;
+text-align:center;
+text-decoration:none;
+color:#fff;
+transition:.25s;
 }
 
-.deposit{
-background:#FFD700;
-color:#111;
-}
-
-.withdraw{
-background:#1c1c1c;
-border:1px solid #FFD700;
-color:#FFD700;
-}
-
-.btn:hover{
+.actionCard:hover{
 transform:translateY(-3px);
+border-color:#FFD700;
 }
 
-.promoSection{
-margin-bottom:25px;
-}
-
-.promoSection h2{
-margin-bottom:12px;
+.actionCard i{
+font-size:28px;
 color:#FFD700;
-font-size:22px;
+margin-bottom:12px;
+}
+
+.actionCard h3{
+font-size:15px;
+}
+
+.promo{
+margin-bottom:20px;
+}
+
+.promo h3{
+margin-bottom:12px;
 }
 
 .promoBox{
@@ -109,60 +88,76 @@ flex:1;
 height:50px;
 border:none;
 outline:none;
-background:#1a1a1a;
-border:1px solid rgba(255,215,0,.2);
-border-radius:12px;
-padding:0 15px;
+background:#171717;
 color:#fff;
+padding:0 15px;
+border-radius:12px;
 }
 
 .promoBox button{
-width:100px;
+width:110px;
 border:none;
-border-radius:12px;
 background:#FFD700;
+color:#111;
 font-weight:700;
+border-radius:12px;
 cursor:pointer;
 }
 
-.history h2{
-font-size:22px;
-color:#FFD700;
+.historyTop{
+display:flex;
+justify-content:space-between;
+align-items:center;
 margin-bottom:15px;
 }
 
-#historyContainer{
-background:#161616;
-border-radius:18px;
-padding:20px;
+.historyTop a{
+color:#FFD700;
+text-decoration:none;
+font-size:14px;
+}
+
+.transactionItem{
+background:#171717;
 border:1px solid rgba(255,215,0,.15);
-min-height:180px;
+padding:15px;
+border-radius:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+}
+
+.transactionItem h4{
+margin-bottom:5px;
+}
+
+.transactionItem small{
+color:#aaa;
+}
+
+.transactionItem strong{
+color:#FFD700;
+font-size:18px;
 }
 
 .empty{
+background:#171717;
+padding:35px;
 text-align:center;
-color:#999;
-padding-top:60px;
-font-size:15px;
+border-radius:15px;
+color:#888;
+border:1px dashed rgba(255,215,0,.15);
 }
 
 @media(max-width:768px){
 
 .walletCard h1{
-font-size:32px;
+font-size:30px;
 }
 
-.actionButtons{
-grid-template-columns:1fr;
-}
-
-.promoBox{
-flex-direction:column;
-}
-
-.promoBox button{
-width:100%;
-height:50px;
+.actionGrid{
+grid-template-columns:repeat(2,1fr);
 }
 
 }
