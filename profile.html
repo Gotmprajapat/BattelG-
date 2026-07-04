@@ -1,76 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - BattleG</title>
-    <link rel="stylesheet" href="profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BattleG - Profile</title>
+
+<link rel="stylesheet" href="css/profile.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
 <body>
-    <div class="app-container">
-        <header class="page-header">
-            <button onclick="history.back()" class="back-btn">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-            <h2>Profile</h2>
-        </header>
 
-        <div class="profile-card">
-            <div class="avatar-section">
-                <div class="avatar" id="avatarInitial">P</div>
-                <h3 id="profileName">Player</h3>
-                <p id="profileEmail">email@example.com</p>
-            </div>
-            
-            <div class="info-section">
-                <div class="info-item">
-                    <span class="info-label">Wallet Balance</span>
-                    <span class="info-value" id="profileWallet">₹0</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Referral Code</span>
-                    <span class="info-value" id="profileRefCode">------</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">UPI ID</span>
-                    <span class="info-value" id="profileUpi">Not Set</span>
-                </div>
-            </div>
+<header class="header">
 
-            <button class="edit-btn" onclick="editProfile()">
-                <i class="fas fa-edit"></i> Edit Profile
-            </button>
-            
-            <button class="logout-btn" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
-        </div>
-    </div>
+<a href="home.html">
+<i class="fa-solid fa-arrow-left"></i>
+</a>
 
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-chart-bar"></i>
-            <span>Leaderboard</span>
-        </a>
-        <a href="wallet.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>Wallet</span>
-        </a>
-        <a href="profile.html" class="nav-item active">
-            <i class="fas fa-user"></i>
-            <span>Profile</span>
-        </a>
-    </nav>
+<h2>Profile</h2>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="profile.js"></script>
+<div></div>
+
+</header>
+
+<section class="profileCard">
+
+<img src="assets/logo.png" class="profileLogo">
+
+<h2 id="userName">Player</h2>
+
+<p id="userEmail">player@email.com</p>
+
+<div class="walletBox">
+
+<i class="fa-solid fa-wallet"></i>
+
+₹ <span id="walletBalance">0.00</span>
+
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="statBox">
+
+<h4>Total Deposit</h4>
+
+<span id="totalDeposit">₹0</span>
+
+</div>
+
+<div class="statBox">
+
+<h4>Total Withdraw</h4>
+
+<span id="totalWithdraw">₹0</span>
+
+</div>
+
+<div class="statBox">
+
+<h4>Total Winning</h4>
+
+<span id="totalWinning">₹0</span>
+
+</div>
+
+<div class="statBox">
+
+<h4>Played</h4>
+
+<span id="totalPlayed">0</span>
+
+</div>
+
+<div class="statBox">
+
+<h4>Won</h4>
+
+<span id="totalWon">0</span>
+
+</div>
+
+</section>
+
+<section class="profileMenu">
+
+<div class="menuItem">
+
+<label>Referral Code</label>
+
+<div class="copyRow">
+
+<input id="referralCode" readonly>
+
+<button id="copyReferral">
+
+Copy
+
+</button>
+
+</div>
+
+</div>
+
+<div class="menuItem">
+
+<label>UPI ID</label>
+
+<input
+id="upi"
+placeholder="Enter UPI ID">
+
+<button id="saveUPI">
+
+Save UPI
+
+</button>
+
+</div>
+
+</section>
+
+<section class="support">
+
+<h3>Customer Support</h3>
+
+<a href="mailto:gotmprajapat00@gmail.com" class="supportBtn">
+
+<i class="fa-solid fa-envelope"></i>
+
+Email Support
+
+</a>
+
+<a href="https://t.me/Gotmprajapat" target="_blank" class="supportBtn">
+
+<i class="fa-brands fa-telegram"></i>
+
+Telegram Support
+
+</a>
+
+</section>
+
+<section class="about">
+
+<a href="privacy.html">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+Privacy Policy
+
+</a>
+
+<a href="terms.html">
+
+<i class="fa-solid fa-file-lines"></i>
+
+Terms & Conditions
+
+</a>
+
+<div class="version">
+
+Version 1.0.0
+
+</div>
+
+</section>
+
+<button id="logoutBtn">
+
+Logout
+
+</button>
+
+<script type="module" src="js/profile.js"></script>
+
 </body>
+
 </html>
