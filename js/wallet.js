@@ -1,118 +1,116 @@
-firebase.auth().onAuthStateChanged(async (user) => {
-    if (!user) { window.location.href = 'login.html'; return; }
-    
-    const userDoc = await db.collection("users").doc(user.uid).get();
-    if (userDoc.exists) {
-        const data = userDoc.data();
-        document.getElementById('balanceAmount').textContent = '₹' + (data.wallet || 0);
+import { auth, db } from "../firebase/firebase.js";
+
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  doc,
+  getDoc,
+  collection,
+  query,
+  where,
+  orderBy,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+onAuthStateChanged(auth, async (user) => {
+
+  if (!user) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  try {
+
+    // Wallet Data
+
+    const userRef = doc(db, "users", user.uid);
+
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+
+      const data = userSnap.data();
+
+      document.getElementById("walletBalance").textContent =
+      Number(data.wallet || 0).toFixed(2);
+
     }
-    
-    loadTransactions(user.uid);
+
+    // Transaction History
+
+    const historyContainer =
+      document.getElementById("historyContainer");
+
+    historyContainer.innerHTML = "";
+
+    const q = query(
+      collection(db, "transactions"),
+      where("uid", "==", user.uid),
+      orderBy("createdAt", "desc")
+    );
+
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+
+      historyContainer.innerHTML =
+      "<p class='empty'>No Transactions Found</p>";
+
+    } else {
+
+      snap.forEach((docu) => {
+
+        const t = docu.data();
+
+        historyContainer.innerHTML += `
+
+        <div class="transactionItem">
+
+            <div>
+
+                <h4>${t.type}</h4>
+
+                <small>${t.status}</small>
+
+            </div>
+
+            <strong>₹${t.amount}</strong>
+
+        </div>
+
+        `;
+
+      });
+
+    }
+
+  } catch (e) {
+
+    console.log(e);
+
+  }
+
 });
 
-async function loadTransactions(userId) {
-    const container = document.getElementById('transactionsList');
-    
-    try {
-        const snapshot = await db.collection("transactions")
-            .where("userId", "==", userId)
-            .orderBy("timestamp", "desc")
-            .limit(50)
-            .get();
-        
-        if (snapshot.empty) {
-            container.innerHTML = '<div style="text-align:center;padding:30px;color:#666;">No transactions yet</div>';
-            return;
-        }
-        
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const t = doc.data();
-            const amountClass = t.type === 'deposit' || t.type === 'prize' || t.type === 'referral' || t.type === 'promo' 
-                ? 'amount-positive' : 'amount-negative';
-            const sign = t.type === 'deposit' || t.type === 'prize' || t.type === 'referral' || t.type === 'promo' ? '+' : '-';
-            
-            const div = document.createElement('div');
-            div.className = 'txn-item';
-            div.innerHTML = `
-                <div>
-                    <span class="txn-type">${t.description || t.type}</span>
-                    <br>
-                    <span class="txn-date">${formatDate(t.timestamp)}</span>
-                </div>
-                <span class="txn-amount ${amountClass}">${sign}₹${t.amount}</span>
-            `;
-            container.appendChild(div);
-        });
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
+// Promo Code
 
-async function applyPromoCode() {
-    const code = document.getElementById('promoCode').value.trim();
-    if (!code) { alert('Enter promo code'); return; }
-    
-    const user = firebase.auth().currentUser;
-    if (!user) return;
-    
-    try {
-        const promosSnapshot = await db.collection("promo_codes")
-            .where("code", "==", code)
-            .where("enabled", "==", true)
-            .get();
-        
-        if (promosSnapshot.empty) {
-            alert('Invalid or expired promo code');
-            return;
-        }
-        
-        const promoDoc = promosSnapshot.docs[0];
-        const promo = promoDoc.data();
-        
-        if (promo.usedBy && promo.usedBy.includes(user.uid)) {
-            alert('You have already used this promo code');
-            return;
-        }
-        
-        if (promo.maxUses && promo.usedCount >= promo.maxUses) {
-            alert('Promo code limit reached');
-            return;
-        }
-        
-        await db.runTransaction(async (transaction) => {
-            const userRef = db.collection("users").doc(user.uid);
-            const userDoc = await transaction.get(userRef);
-            const userData = userDoc.data();
-            
-            transaction.update(userRef, { wallet: (userData.wallet || 0) + promo.reward });
-            
-            const usedBy = promo.usedBy || [];
-            usedBy.push(user.uid);
-            transaction.update(promoDoc.ref, { 
-                usedBy: usedBy,
-                usedCount: (promo.usedCount || 0) + 1
-            });
-            
-            transaction.set(db.collection("transactions").doc(), {
-                userId: user.uid,
-                type: 'promo',
-                amount: promo.reward,
-                description: 'Promo Code: ' + code,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        });
-        
-        alert('Promo code applied! ₹' + promo.reward + ' added to wallet');
-        location.reload();
-    } catch (error) {
-        console.error("Error:", error);
-        alert('Error applying promo code');
-    }
-}
+document.getElementById("applyPromo").onclick = () => {
 
-function formatDate(timestamp) {
-    if (!timestamp) return '';
-    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-    return date.toLocaleDateString('en-IN') + ' ' + date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
-    }
+  const code =
+  document.getElementById("promoCode").value.trim();
+
+  if (code === "") {
+
+    alert("Enter Promo Code");
+
+    return;
+
+  }
+
+  // Promo logic baad me add hoga
+
+  alert("Promo Code System Coming Soon");
+
+};
