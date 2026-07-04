@@ -7,13 +7,14 @@ import {
 import {
   doc,
   getDoc,
+  updateDoc,
   collection,
   addDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 let currentUser = null;
-let wallet = 0;
+let walletBalance = 0;
 
 onAuthStateChanged(auth, async (user) => {
 
@@ -26,25 +27,31 @@ onAuthStateChanged(auth, async (user) => {
 
   try {
 
-    const snap = await getDoc(doc(db, "users", user.uid));
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
 
-    if (snap.exists()) {
+    if (userSnap.exists()) {
 
-      const data = snap.data();
+      const data = userSnap.data();
 
-      wallet = Number(data.wallet || 0);
+      walletBalance = Number(data.wallet ?? 0);
 
       document.getElementById("walletBalance").textContent =
-      wallet.toFixed(2);
+        walletBalance.toFixed(2);
 
       document.getElementById("upi").value =
-      data.upi || "";
+        data.upi ?? "";
+
+    } else {
+
+      alert("User data not found.");
 
     }
 
-  } catch (e) {
+  } catch (error) {
 
-    console.log(e);
+    console.log(error);
+    alert("Failed to load wallet.");
 
   }
 
@@ -52,34 +59,22 @@ onAuthStateChanged(auth, async (user) => {
 
 document.getElementById("withdrawBtn").addEventListener("click", async () => {
 
-  const upi =
-  document.getElementById("upi").value.trim();
-
-  const amount =
-  Number(document.getElementById("amount").value);
+  const upi = document.getElementById("upi").value.trim();
+  const amount = Number(document.getElementById("amount").value);
 
   if (upi === "") {
-
-    alert("Please Enter UPI ID");
-
+    alert("Please enter UPI ID");
     return;
-
   }
 
-  if (!amount || amount < 20) {
-
-    alert("Minimum Withdraw ₹20");
-
+  if (amount <50) {
+    alert("Minimum Withdraw ₹50");
     return;
-
   }
 
-  if (amount > wallet) {
-
+  if (amount > walletBalance) {
     alert("Insufficient Wallet Balance");
-
     return;
-
   }
 
   try {
@@ -87,25 +82,20 @@ document.getElementById("withdrawBtn").addEventListener("click", async () => {
     await addDoc(collection(db, "withdrawRequests"), {
 
       uid: currentUser.uid,
-
       upi: upi,
-
       amount: amount,
-
       status: "Pending",
-
       createdAt: serverTimestamp()
 
     });
 
-    alert("Withdraw Request Submitted Successfully");
+    alert("Withdraw request submitted successfully.");
 
     document.getElementById("amount").value = "";
 
-  } catch (e) {
+  } catch (error) {
 
-    console.log(e);
-
+    console.log(error);
     alert("Something went wrong.");
 
   }
