@@ -8,7 +8,8 @@ font-family:'Poppins',sans-serif;
 body{
 background:#0b0b0b;
 color:#fff;
-padding-bottom:90px;
+padding:18px;
+padding-bottom:95px;
 }
 
 a{
@@ -16,40 +17,19 @@ text-decoration:none;
 color:inherit;
 }
 
-.header{
+/* Header */
+
+.topBar{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:18px;
-background:#151515;
-border-bottom:1px solid rgba(255,215,0,.12);
-position:sticky;
-top:0;
-z-index:100;
-}
-
-.headerLeft{
-display:flex;
-align-items:center;
-gap:12px;
+margin-bottom:20px;
 }
 
 .logo{
-width:52px;
-height:52px;
-border-radius:50%;
-}
-
-.header h2{
-font-size:22px;
-color:#FFD700;
-font-weight:700;
-}
-
-#welcomeText{
-font-size:13px;
-color:#bdbdbd;
-margin-top:3px;
+width:55px;
+height:55px;
+border-radius:14px;
 }
 
 .walletBox{
@@ -61,124 +41,120 @@ font-weight:700;
 display:flex;
 align-items:center;
 gap:8px;
-font-size:15px;
 box-shadow:0 0 15px rgba(255,215,0,.25);
 }
 
+/* Welcome */
+
+.welcomeCard{
+background:#171717;
+border:1px solid rgba(255,215,0,.15);
+border-radius:18px;
+padding:18px;
+margin-bottom:18px;
+}
+
+.welcomeCard h2{
+font-size:22px;
+margin-bottom:6px;
+}
+
+.welcomeCard span{
+color:#FFD700;
+}
+
+.welcomeCard p{
+color:#bbb;
+font-size:14px;
+}
+
+/* Banner */
+
 .banner{
-margin:18px;
-padding:24px;
-border-radius:22px;
 background:linear-gradient(135deg,#FFD700,#B8860B);
+border-radius:20px;
+padding:24px;
 color:#111;
+margin-bottom:22px;
 box-shadow:0 0 18px rgba(255,215,0,.25);
 }
 
 .banner h2{
 font-size:28px;
 font-weight:700;
-margin-bottom:8px;
 }
 
 .banner p{
+margin-top:8px;
 font-size:15px;
 font-weight:500;
-line-height:22px;
 }
+
+/* Section */
+
+.sectionTitle{
+margin:18px 0 12px;
+font-size:20px;
+color:#FFD700;
+}
+
+/* Quick Menu */
 
 .quickMenu{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:repeat(2,1fr);
 gap:15px;
-padding:0 18px;
-margin-top:8px;
+margin-bottom:20px;
 }
 
 .menuCard{
-background:#161616;
+background:#171717;
 border:1px solid rgba(255,215,0,.15);
 border-radius:18px;
-padding:22px 15px;
-text-align:center;
-transition:.3s;
+padding:22px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:12px;
+transition:.25s;
 }
 
 .menuCard:hover{
-transform:translateY(-4px);
+transform:translateY(-3px);
 border-color:#FFD700;
 }
 
 .menuCard i{
-font-size:32px;
+font-size:28px;
 color:#FFD700;
-margin-bottom:12px;
 }
 
-.menuCard h3{
-font-size:17px;
-color:#fff;
-margin-bottom:8px;
+.menuCard{
+font-weight:600;
 }
 
-.menuCard p{
-font-size:13px;
-color:#9d9d9d;
-line-height:18px;
-}
-.gamesSection{
-padding:22px 18px;
-}
+/* Empty Card */
 
-.titleRow{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
-}
-
-.titleRow h2{
-font-size:24px;
-color:#FFD700;
-font-weight:700;
-}
-
-#gamesContainer{
-margin-top:10px;
-}
-
-.emptyBox{
-background:#161616;
-border:2px dashed rgba(255,215,0,.25);
-border-radius:20px;
-padding:45px 20px;
+.emptyCard{
+background:#171717;
+border:1px dashed rgba(255,215,0,.15);
+border-radius:18px;
+padding:30px;
 text-align:center;
+color:#888;
+margin-bottom:20px;
 }
 
-.emptyBox i{
-font-size:55px;
-color:#FFD700;
-margin-bottom:18px;
-}
-
-.emptyBox h3{
-font-size:22px;
-margin-bottom:10px;
-color:#fff;
-}
-
-.emptyBox p{
-color:#9f9f9f;
-font-size:14px;
-line-height:22px;
-}
+/* Bottom Navigation */
 
 .bottomNav{
 position:fixed;
-bottom:0;
 left:0;
 right:0;
-height:70px;
-background:#151515;
+bottom:0;
+height:72px;
+background:#111;
 border-top:1px solid rgba(255,215,0,.15);
 display:flex;
 justify-content:space-around;
@@ -190,23 +166,16 @@ z-index:999;
 display:flex;
 flex-direction:column;
 align-items:center;
-justify-content:center;
-color:#8d8d8d;
 font-size:12px;
-font-weight:500;
-transition:.3s;
+color:#999;
+gap:5px;
 }
 
 .bottomNav a i{
-font-size:22px;
-margin-bottom:4px;
+font-size:20px;
 }
 
 .bottomNav a.active{
-color:#FFD700;
-}
-
-.bottomNav a:hover{
 color:#FFD700;
 }
 
@@ -216,42 +185,13 @@ color:#FFD700;
 font-size:24px;
 }
 
-.walletBox{
-padding:9px 12px;
-font-size:14px;
+.welcomeCard h2{
+font-size:20px;
 }
 
 .logo{
-width:46px;
-height:46px;
-}
-
-.header h2{
-font-size:20px;
-}
-
-.menuCard{
-padding:18px 10px;
-}
-
-.menuCard h3{
-font-size:15px;
-}
-
-.menuCard p{
-font-size:12px;
-}
-
-.emptyBox{
-padding:35px 15px;
-}
-
-.emptyBox i{
-font-size:48px;
-}
-
-.emptyBox h3{
-font-size:20px;
+width:50px;
+height:50px;
 }
 
 }
