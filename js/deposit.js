@@ -1,48 +1,71 @@
-let selectedAmount = 0;
+import { auth, db } from "../firebase/firebase.js";
 
-function selectAmount(amount) {
-    selectedAmount = amount;
-    document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
-    event.target.classList.add('selected');
-    document.getElementById('customAmount').value = '';
-    document.getElementById('selectedAmountDisplay').innerHTML = 'Selected: <span>₹' + amount + '</span>';
-}
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-document.getElementById('customAmount').addEventListener('input', function() {
-    selectedAmount = parseInt(this.value) || 0;
-    document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
-    document.getElementById('selectedAmountDisplay').innerHTML = 'Selected: <span>₹' + selectedAmount + '</span>';
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+let currentUser = null;
+
+onAuthStateChanged(auth, (user) => {
+
+  if (!user) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  currentUser = user;
+
 });
 
-async function submitDeposit() {
-    const user = firebase.auth().currentUser;
-    if (!user) { alert('Please login first'); return; }
-    
-    if (selectedAmount < 10) {
-        alert('Minimum deposit amount is ₹10');
-        return;
-    }
-    
-    const utr = document.getElementById('utrNumber').value.trim();
-    if (!utr) {
-        alert('Please enter UTR number');
-        return;
-    }
-    
-    try {
-        await db.collection("deposits").add({
-            userId: user.uid,
-            userEmail: user.email,
-            amount: selectedAmount,
-            utr: utr,
-            status: 'pending',
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        
-        alert('Deposit request submitted successfully! It will be verified shortly.');
-        window.location.href = 'wallet.html';
-    } catch (error) {
-        console.error("Error:", error);
-        alert('Error submitting deposit request');
-    }
-}
+document.getElementById("submitDeposit").addEventListener("click", async () => {
+
+  const amount = Number(document.getElementById("amount").value);
+
+  const utr = document.getElementById("utr").value.trim();
+
+  if (!amount || amount < 10) {
+    alert("Minimum Deposit ₹10");
+    return;
+  }
+
+  if (utr.length < 8) {
+    alert("Enter Valid UTR Number");
+    return;
+  }
+
+  try {
+
+    await addDoc(collection(db, "depositRequests"), {
+
+      uid: currentUser.uid,
+
+      amount: amount,
+
+      utr: utr,
+
+      status: "Pending",
+
+      createdAt: serverTimestamp()
+
+    });
+
+    alert("Deposit Request Submitted Successfully.");
+
+    document.getElementById("amount").value = "";
+    document.getElementById("utr").value = "";
+
+  } catch (e) {
+
+    alert("Something went wrong.");
+
+    console.log(e);
+
+  }
+
+});
