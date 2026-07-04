@@ -1,73 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Referral - BattleG</title>
-    <link rel="stylesheet" href="referral.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BattleG - Referral</title>
+
+<link rel="stylesheet" href="css/referral.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
 <body>
-    <div class="app-container">
-        <header class="page-header">
-            <button onclick="history.back()" class="back-btn">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-            <h2>Refer & Earn</h2>
-        </header>
 
-        <div class="referral-banner">
-            <div class="reward-box">
-                <span class="reward-amount">₹5</span>
-                <span class="reward-text">Per Referral</span>
-            </div>
-            <p>Share your code. Earn when friends join their first paid tournament!</p>
-        </div>
+<header class="header">
 
-        <div class="code-section">
-            <label>Your Referral Code</label>
-            <div class="code-display">
-                <span id="referralCode">LOADING...</span>
-                <button onclick="copyCode()"><i class="fas fa-copy"></i></button>
-            </div>
-            <button class="share-btn" onclick="shareCode()">
-                <i class="fas fa-share-alt"></i> Share
-            </button>
-        </div>
+<a href="home.html">
+<i class="fa-solid fa-arrow-left"></i>
+</a>
 
-        <div class="stats-section">
-            <div class="stat-card">
-                <span class="stat-number" id="totalReferrals">0</span>
-                <span class="stat-label">Total Referrals</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number" id="referralEarnings">₹0</span>
-                <span class="stat-label">Total Earnings</span>
-            </div>
-        </div>
+<h2>Referral</h2>
 
-        <section class="referrals-list">
-            <h3>Referral History</h3>
-            <div id="referralHistory">
-                <div style="text-align:center;padding:30px;color:#666;">Loading...</div>
-            </div>
-        </section>
+<div></div>
 
-        <div class="rules-box">
-            <h4><i class="fas fa-scroll"></i> Rules</h4>
-            <ul>
-                <li>Share your referral code with friends</li>
-                <li>You earn ₹5 when they join their first paid tournament</li>
-                <li>New user also gets ₹5 bonus</li>
-                <li>No limit on referrals</li>
-            </ul>
-        </div>
-    </div>
+</header>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="referral.js"></script>
+<section class="referralCard">
+
+<h3>Your Referral Code</h3>
+
+<h1 id="referralCode">Loading...</h1>
+
+<div class="btnRow">
+
+<button id="copyBtn">
+
+<i class="fa-solid fa-copy"></i>
+
+Copy
+
+</button>
+
+<button id="shareBtn">
+
+<i class="fa-solid fa-share-nodes"></i>
+
+Share
+
+</button>
+
+</div>
+
+</section>
+
+<section class="rewardBox">
+
+<h3>Referral Reward</h3>
+
+<p>
+
+Invite your friends to BattleG.
+
+When your referred friend plays their <b>first paid tournament</b>:
+
+</p>
+
+<ul>
+
+<li>You get <b>₹5</b></li>
+
+<li>Your friend gets <b>₹5</b></li>
+
+</ul>
+
+</section>
+
+<section>
+
+<h2 class="title">
+
+My Referrals
+
+</h2>
+
+<div id="referralList">
+
+<div class="empty">
+
+No Referrals Yet
+
+</div>
+
+</div>
+
+</section>
+
+<script type="module" src="js/referral.js"></script>
+
 </body>
+
 </html>
