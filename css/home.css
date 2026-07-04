@@ -1,38 +1,33 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#0b0b0b;
-color:#fff;
-padding:18px;
-padding-bottom:95px;
-}
-
-a{
-text-decoration:none;
-color:inherit;
-}
-
-/* Header */
-
-.topBar{
+.header{
 display:flex;
 justify-content:space-between;
 align-items:center;
 margin-bottom:20px;
 }
 
+.logoArea{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
 .logo{
 width:55px;
 height:55px;
-border-radius:14px;
+border-radius:15px;
 }
 
-.walletBox{
+.logoArea h2{
+font-size:22px;
+font-weight:700;
+}
+
+.logoArea p{
+font-size:12px;
+color:#aaa;
+}
+
+.walletCard{
 background:#FFD700;
 color:#111;
 padding:10px 16px;
@@ -44,19 +39,17 @@ gap:8px;
 box-shadow:0 0 15px rgba(255,215,0,.25);
 }
 
-/* Welcome */
-
 .welcomeCard{
+margin-top:18px;
 background:#171717;
 border:1px solid rgba(255,215,0,.15);
 border-radius:18px;
-padding:18px;
-margin-bottom:18px;
+padding:20px;
 }
 
 .welcomeCard h2{
 font-size:22px;
-margin-bottom:6px;
+margin-bottom:8px;
 }
 
 .welcomeCard span{
@@ -65,133 +58,160 @@ color:#FFD700;
 
 .welcomeCard p{
 color:#bbb;
-font-size:14px;
 }
 
-/* Banner */
-
 .banner{
-background:linear-gradient(135deg,#FFD700,#B8860B);
+margin-top:18px;
+padding:22px;
 border-radius:20px;
-padding:24px;
+background:linear-gradient(135deg,#FFD700,#B8860B);
 color:#111;
-margin-bottom:22px;
-box-shadow:0 0 18px rgba(255,215,0,.25);
 }
 
 .banner h2{
-font-size:28px;
-font-weight:700;
+font-size:24px;
+margin-bottom:8px;
 }
 
 .banner p{
-margin-top:8px;
-font-size:15px;
 font-weight:500;
 }
-
-/* Section */
-
-.sectionTitle{
-margin:18px 0 12px;
-font-size:20px;
-color:#FFD700;
-}
-
-/* Quick Menu */
 
 .quickMenu{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:15px;
-margin-bottom:20px;
+margin-top:20px;
 }
 
-.menuCard{
+.quickBox{
 background:#171717;
 border:1px solid rgba(255,215,0,.15);
 border-radius:18px;
-padding:22px;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:12px;
+padding:25px;
+text-align:center;
 transition:.25s;
 }
 
-.menuCard:hover{
-transform:translateY(-3px);
+.quickBox:hover{
 border-color:#FFD700;
+transform:translateY(-3px);
 }
 
-.menuCard i{
-font-size:28px;
+.quickBox i{
+font-size:30px;
+color:#FFD700;
+margin-bottom:12px;
+}
+
+.quickBox h3{
+font-size:16px;
+}
+
+.section{
+margin-top:28px;
+}
+
+.title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+}
+
+.title h2{
+font-size:20px;
 color:#FFD700;
 }
 
-.menuCard{
+.title a{
+color:#FFD700;
+font-size:14px;
 font-weight:600;
 }
 
-/* Empty Card */
-
-.emptyCard{
+.empty{
 background:#171717;
 border:1px dashed rgba(255,215,0,.15);
 border-radius:18px;
-padding:30px;
+padding:35px;
 text-align:center;
 color:#888;
-margin-bottom:20px;
 }
 
-/* Bottom Navigation */
-
-.bottomNav{
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-height:72px;
-background:#111;
-border-top:1px solid rgba(255,215,0,.15);
-display:flex;
-justify-content:space-around;
-align-items:center;
-z-index:999;
+.tournamentCard{
+background:#171717;
+border:1px solid rgba(255,215,0,.15);
+border-radius:18px;
+padding:18px;
+margin-bottom:15px;
 }
 
-.bottomNav a{
+.tournamentTop{
 display:flex;
-flex-direction:column;
+justify-content:space-between;
 align-items:center;
+margin-bottom:12px;
+}
+
+.gameName{
+background:#FFD700;
+color:#111;
+padding:4px 10px;
+border-radius:8px;
 font-size:12px;
+font-weight:700;
+}
+
+.tournamentCard h3{
+margin-bottom:10px;
+}
+
+.tournamentInfo{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+margin-bottom:15px;
+}
+
+.infoBox{
+background:#222;
+padding:12px;
+border-radius:12px;
+text-align:center;
+}
+
+.joinBtn{
+width:100%;
+height:50px;
+background:#FFD700;
+border:none;
+border-radius:14px;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+color:#111;
+}
+
+.joinBtn:disabled{
+background:#444;
 color:#999;
-gap:5px;
-}
-
-.bottomNav a i{
-font-size:20px;
-}
-
-.bottomNav a.active{
-color:#FFD700;
+cursor:not-allowed;
 }
 
 @media(max-width:768px){
-
-.banner h2{
-font-size:24px;
-}
-
-.welcomeCard h2{
-font-size:20px;
-}
 
 .logo{
 width:50px;
 height:50px;
 }
 
+.banner h2{
+font-size:20px;
 }
+
+.welcomeCard h2{
+font-size:20px;
+}
+
+  }
