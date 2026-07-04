@@ -6,16 +6,21 @@ onAuthStateChanged
 
 import {
 doc,
-getDoc,
-collection,
 addDoc,
-serverTimestamp
+collection,
+serverTimestamp,
+onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 let currentUser = null;
 let wallet = 0;
 
-onAuthStateChanged(auth, async (user) => {
+const walletBalance = document.getElementById("walletBalance");
+const upiInput = document.getElementById("upi");
+const amountInput = document.getElementById("amount");
+const withdrawBtn = document.getElementById("withdrawBtn");
+
+onAuthStateChanged(auth, (user) => {
 
     if (!user) {
         window.location.href = "index.html";
@@ -24,65 +29,52 @@ onAuthStateChanged(auth, async (user) => {
 
     currentUser = user;
 
-    try {
+    const userRef = doc(db, "users", user.uid);
 
-        const userDoc = await getDoc(doc(db, "users", user.uid));
+    onSnapshot(userRef, (snap) => {
 
-        if (userDoc.exists()) {
+        if (!snap.exists()) return;
 
-            const data = userDoc.data();
+        const data = snap.data();
 
-            wallet = parseFloat(data.wallet || 0);
+        wallet = Number(data.wallet || 0);
 
-            document.getElementById("walletBalance").innerText =
-                wallet.toFixed(2);
+        walletBalance.textContent = wallet.toFixed(2);
 
-            document.getElementById("upi").value =
-                data.upi || "";
+        upiInput.value = data.upi || "";
 
-        }
-
-    } catch (error) {
+    }, (error) => {
 
         console.log(error);
-        alert("Failed to load wallet.");
 
-    }
+    });
 
 });
 
-document.getElementById("withdrawBtn").addEventListener("click", async () => {
+withdrawBtn.addEventListener("click", async () => {
 
     if (!currentUser) {
         alert("Please wait...");
         return;
     }
 
-    const upi = document.getElementById("upi").value.trim();
+    const amount = Number(amountInput.value);
 
-    const amount = parseFloat(
-        document.getElementById("amount").value
-    );
+    const upi = upiInput.value.trim();
 
     if (upi === "") {
-
-        alert("Enter UPI ID");
+        alert("Please Enter UPI ID");
         return;
-
     }
 
-    if (isNaN(amount) || amount < 50) {
-
+    if (amount < 50) {
         alert("Minimum Withdraw ₹50");
         return;
-
     }
 
     if (amount > wallet) {
-
         alert("Insufficient Wallet Balance");
         return;
-
     }
 
     try {
@@ -99,13 +91,13 @@ document.getElementById("withdrawBtn").addEventListener("click", async () => {
 
         alert("Withdraw Request Submitted Successfully");
 
-        document.getElementById("amount").value = "";
+        amountInput.value = "";
 
-    } catch (error) {
+    } catch (e) {
 
-        console.log(error);
+        console.log(e);
 
-        alert("Something went wrong.");
+        alert("Something Went Wrong");
 
     }
 
