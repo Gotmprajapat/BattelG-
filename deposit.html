@@ -1,70 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deposit - BattleG</title>
-    <link rel="stylesheet" href="deposit.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BattleG - Deposit</title>
+
+<link rel="stylesheet" href="css/deposit.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
 <body>
-    <div class="app-container">
-        <header class="page-header">
-            <button onclick="history.back()" class="back-btn">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-            <h2>Deposit</h2>
-        </header>
 
-        <div class="deposit-card">
-            <div class="amount-selector">
-                <label>Select Amount</label>
-                <div class="amount-grid">
-                    <button class="amount-btn" onclick="selectAmount(50)">₹50</button>
-                    <button class="amount-btn" onclick="selectAmount(100)">₹100</button>
-                    <button class="amount-btn" onclick="selectAmount(200)">₹200</button>
-                    <button class="amount-btn" onclick="selectAmount(500)">₹500</button>
-                    <button class="amount-btn" onclick="selectAmount(1000)">₹1000</button>
-                    <button class="amount-btn" onclick="selectAmount(2000)">₹2000</button>
-                </div>
-                <div class="custom-amount">
-                    <input type="number" id="customAmount" placeholder="Enter Custom Amount" min="10">
-                </div>
-            </div>
+<header class="header">
 
-            <div class="selected-amount" id="selectedAmountDisplay">
-                Selected: <span>₹0</span>
-            </div>
+<a href="wallet.html">
 
-            <div class="qr-section">
-                <h4>Scan QR Code to Pay</h4>
-                <div class="qr-container">
-                    <img src="assets/qr.png" alt="Payment QR" class="qr-image">
-                </div>
-                <p class="qr-note">Scan using any UPI app</p>
-            </div>
+<i class="fa-solid fa-arrow-left"></i>
 
-            <div class="utr-section">
-                <label>Enter UTR / Transaction ID</label>
-                <input type="text" id="utrNumber" placeholder="Enter 12-digit UTR Number">
-                <p class="helper-text">You can find UTR in your payment app's transaction details</p>
-            </div>
+</a>
 
-            <button class="submit-btn" onclick="submitDeposit()">
-                <i class="fas fa-paper-plane"></i> Submit Request
-            </button>
+<h2>Deposit</h2>
 
-            <div class="info-box">
-                <i class="fas fa-info-circle"></i>
-                <p>Deposit will be credited within 5-30 minutes after verification. Contact support if delayed.</p>
-            </div>
-        </div>
-    </div>
+<div></div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="deposit.js"></script>
+</header>
+
+<section class="depositCard">
+
+<h3>Scan QR & Pay</h3>
+
+<img src="assets/qr.png" class="qrImage">
+
+<p>
+Scan this QR code and complete your payment.
+</p>
+
+</section>
+
+<section class="depositForm">
+
+<label>Amount (₹)</label>
+
+<input
+type="number"
+id="amount"
+placeholder="Enter Deposit Amount">
+
+<label>UTR / Transaction ID</label>
+
+<input
+type="text"
+id="utr"
+placeholder="Enter UTR Number">
+
+<button id="submitDeposit">
+
+Submit Deposit Request
+
+</button>
+
+</section>
+
+<section class="notice">
+
+<h3>Important</h3>
+
+<ul>
+
+<li>Minimum Deposit ₹10</li>
+
+<li>Enter correct UTR Number.</li>
+
+<li>Wallet updates only after admin approval.</li>
+
+<li>Wrong UTR may lead to rejection.</li>
+
+</ul>
+
+</section>
+
+<script type="module" src="js/deposit.js"></script>
+
 </body>
+
 </html>
