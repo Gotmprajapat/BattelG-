@@ -4,10 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>BattleG Wallet</title>
 
+<link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/wallet.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,41 +29,71 @@
 
 <h2>Wallet</h2>
 
-<div></div>
+<a href="notifications.html">
+
+<i class="fa-solid fa-bell"></i>
+
+</a>
 
 </header>
 
 <section class="walletCard">
 
-<h3>Total Wallet Balance</h3>
+<h3>Available Balance</h3>
 
-<h1>₹ <span id="walletBalance">0.00</span></h1>
+<h1>
 
-</section>
+₹ <span id="walletBalance">0.00</span>
 
-<section class="actionButtons">
+</h1>
 
-<a href="deposit.html" class="btn deposit">
+<p id="walletStatus">
 
-<i class="fa-solid fa-plus"></i>
+Realtime Wallet
 
-Deposit
-
-</a>
-
-<a href="withdraw.html" class="btn withdraw">
-
-<i class="fa-solid fa-money-bill-transfer"></i>
-
-Withdraw
-
-</a>
+</p>
 
 </section>
 
-<section class="promoSection">
+<section class="actionGrid">
 
-<h2>Promo Code</h2>
+<a href="deposit.html" class="actionCard">
+
+<i class="fa-solid fa-money-bill-wave"></i>
+
+<h3>Deposit</h3>
+
+</a>
+
+<a href="withdraw.html" class="actionCard">
+
+<i class="fa-solid fa-wallet"></i>
+
+<h3>Withdraw</h3>
+
+</a>
+
+<a href="referral.html" class="actionCard">
+
+<i class="fa-solid fa-user-group"></i>
+
+<h3>Referral</h3>
+
+</a>
+
+<a href="leaderboard.html" class="actionCard">
+
+<i class="fa-solid fa-ranking-star"></i>
+
+<h3>Leaderboard</h3>
+
+</a>
+
+</section>
+
+<section class="promo">
+
+<h3>Promo Code</h3>
 
 <div class="promoBox">
 
@@ -83,22 +114,74 @@ Apply
 
 <section class="history">
 
-<h2>Transaction History</h2>
+<div class="historyTop">
+
+<h3>
+
+Transactions
+
+</h3>
+
+<a href="#">
+
+View All
+
+</a>
+
+</div>
 
 <div id="historyContainer">
 
-<p class="empty">
+<div class="empty">
 
-No Transactions Found
+No Transaction Found
 
-</p>
+</div>
 
 </div>
 
 </section>
 
+<nav class="bottomNav">
+
+<a href="home.html">
+
+<i class="fa-solid fa-house"></i>
+
+<span>Home</span>
+
+</a>
+
+<a href="wallet.html" class="active">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Wallet</span>
+
+</a>
+
+<a href="leaderboard.html">
+
+<i class="fa-solid fa-ranking-star"></i>
+
+<span>Leaderboard</span>
+
+</a>
+
+<a href="profile.html">
+
+<i class="fa-solid fa-user"></i>
+
+<span>Profile</span>
+
+</a>
+
+</nav>
+
+<script src="js/navbar.js"></script>
+
 <script type="module" src="js/wallet.js"></script>
 
 </body>
 
-</html>
+  </html>
