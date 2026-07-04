@@ -4,9 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>BattleG - Home</title>
+<title>BattleG</title>
 
 <link rel="stylesheet" href="css/home.css">
 
@@ -18,41 +18,81 @@
 
 <body>
 
-<header class="header">
+<!-- Header -->
 
-<div class="headerLeft">
-
-<img src="assets/logo.png" class="logo">
+<header class="topBar">
 
 <div>
 
-<h2>BattleG</h2>
-
-<p id="welcomeText">Welcome Player</p>
+<img src="assets/logo.png" class="logo">
 
 </div>
 
-</div>
-
-<a href="wallet.html" class="walletBox">
+<div class="walletBox">
 
 <i class="fa-solid fa-wallet"></i>
 
-₹ <span id="walletBalance">0</span>
+₹ <span id="walletBalance">0.00</span>
 
-</a>
+</div>
 
 </header>
 
-<section class="banner">
+<!-- Welcome -->
 
-<h2>Play • Compete • Win</h2>
+<section class="welcomeCard">
+
+<h2>
+
+Welcome,
+
+<span id="userName">
+
+Player
+
+</span>
+
+👋
+
+</h2>
 
 <p>
-Compete in tournaments and win exciting rewards.
+
+Play • Win • Earn
+
 </p>
 
 </section>
+
+<!-- Banner -->
+
+<section class="banner">
+
+<div>
+
+<h2>
+
+BattleG
+
+</h2>
+
+<p>
+
+India's Tournament Platform
+
+</p>
+
+</div>
+
+</section>
+
+<!-- Quick Menu -->
+
+<h3 class="sectionTitle">
+
+Quick Menu
+
+</h3>
 
 <section class="quickMenu">
 
@@ -60,9 +100,7 @@ Compete in tournaments and win exciting rewards.
 
 <i class="fa-solid fa-user-group"></i>
 
-<h3>Referral</h3>
-
-<p>Invite friends & earn rewards</p>
+Referral
 
 </a>
 
@@ -70,41 +108,49 @@ Compete in tournaments and win exciting rewards.
 
 <i class="fa-solid fa-trophy"></i>
 
-<h3>My Tournaments</h3>
-
-<p>View joined tournaments</p>
+My Tournaments
 
 </a>
 
 </section>
 
-<section class="gamesSection">
+<!-- Games -->
 
-<div class="titleRow">
+<h3 class="sectionTitle">
 
-<h2>Games</h2>
+Games
 
-</div>
+</h3>
 
-<div id="gamesContainer">
+<section id="gamesContainer">
 
-<div class="emptyBox">
+<div class="emptyCard">
 
-<i class="fa-solid fa-gamepad"></i>
-
-<h3>No Games Available</h3>
-
-<p>
-
-Games will appear here automatically after you add them.
-
-</p>
-
-</div>
+Games will appear here.
 
 </div>
 
 </section>
+
+<!-- Tournaments -->
+
+<h3 class="sectionTitle">
+
+Latest Tournaments
+
+</h3>
+
+<section id="tournamentContainer">
+
+<div class="emptyCard">
+
+No Tournament Available
+
+</div>
+
+</section>
+
+<!-- Bottom Navigation -->
 
 <nav class="bottomNav">
 
