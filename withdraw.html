@@ -1,56 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Withdraw - BattleG</title>
-    <link rel="stylesheet" href="withdraw.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BattleG - Withdraw</title>
+
+<link rel="stylesheet" href="css/withdraw.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
 <body>
-    <div class="app-container">
-        <header class="page-header">
-            <button onclick="history.back()" class="back-btn">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-            <h2>Withdraw</h2>
-        </header>
 
-        <div class="withdraw-card">
-            <div class="balance-display">
-                <span>Available Balance</span>
-                <h3 id="availBalance">₹0</h3>
-            </div>
+<header class="header">
 
-            <div class="input-group">
-                <label>UPI ID</label>
-                <input type="text" id="upiId" placeholder="example@upi">
-            </div>
+<a href="wallet.html">
+<i class="fa-solid fa-arrow-left"></i>
+</a>
 
-            <div class="input-group">
-                <label>Amount</label>
-                <input type="number" id="withdrawAmount" placeholder="Enter amount" min="50">
-            </div>
+<h2>Withdraw</h2>
 
-            <div class="info-row">
-                <span>Minimum Withdrawal:</span>
-                <span>₹50</span>
-            </div>
-            <div class="info-row">
-                <span>Processing Time:</span>
-                <span>24-48 Hours</span>
-            </div>
+<div></div>
 
-            <button class="submit-btn" onclick="submitWithdraw()">
-                <i class="fas fa-paper-plane"></i> Submit Withdrawal
-            </button>
-        </div>
-    </div>
+</header>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="withdraw.js"></script>
+<section class="walletCard">
+
+<h3>Available Balance</h3>
+
+<h1>₹ <span id="walletBalance">0.00</span></h1>
+
+</section>
+
+<section class="withdrawForm">
+
+<label>UPI ID</label>
+
+<input
+type="text"
+id="upi"
+placeholder="Enter UPI ID">
+
+<label>Withdraw Amount (₹)</label>
+
+<input
+type="number"
+id="amount"
+placeholder="Enter Amount">
+
+<button id="withdrawBtn">
+
+Submit Withdraw Request
+
+</button>
+
+</section>
+
+<section class="rules">
+
+<h3>Withdraw Rules</h3>
+
+<ul>
+
+<li>Minimum Withdraw ₹20</li>
+
+<li>Wallet balance should be sufficient.</li>
+
+<li>Payment will be sent after admin approval.</li>
+
+<li>Wrong UPI ID may cause payment failure.</li>
+
+</ul>
+
+</section>
+
+<script type="module" src="js/withdraw.js"></script>
+
 </body>
+
 </html>
