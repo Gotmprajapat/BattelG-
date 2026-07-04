@@ -1,89 +1,152 @@
-firebase.auth().onAuthStateChanged(async (user) => {
-    if (!user) { window.location.href = 'login.html'; return; }
-    
-    const userDoc = await db.collection("users").doc(user.uid).get();
-    if (userDoc.exists) {
-        const data = userDoc.data();
-        document.getElementById('referralCode').textContent = data.referralCode || 'N/A';
-    }
-    
-    loadReferralStats(user.uid);
-    loadReferralHistory(user.uid);
+import { auth, db } from "../firebase/firebase.js";
+
+import {
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+doc,
+getDoc,
+collection,
+query,
+where,
+getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+let currentUser = null;
+let referralCode = "";
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(!user){
+
+window.location.href="index.html";
+return;
+
+}
+
+currentUser = user;
+
+try{
+
+const userSnap = await getDoc(doc(db,"users",user.uid));
+
+if(userSnap.exists()){
+
+const data = userSnap.data();
+
+referralCode = data.referralCode || "";
+
+document.getElementById("referralCode").textContent = referralCode;
+
+}
+
+loadReferrals();
+
+}catch(e){
+
+console.log(e);
+
+}
+
 });
 
-async function loadReferralStats(userId) {
-    try {
-        const referralsSnapshot = await db.collection("referrals")
-            .where("referrerId", "==", userId)
-            .get();
-        
-        document.getElementById('totalReferrals').textContent = referralsSnapshot.size;
-        
-        let totalEarnings = 0;
-        referralsSnapshot.forEach(doc => {
-            if (doc.data().rewardGiven) {
-                totalEarnings += 5;
-            }
-        });
-        document.getElementById('referralEarnings').textContent = '₹' + totalEarnings;
-    } catch (error) {
-        console.error("Error:", error);
-    }
+async function loadReferrals(){
+
+const list = document.getElementById("referralList");
+
+list.innerHTML="";
+
+const q = query(
+
+collection(db,"users"),
+
+where("referredBy","==",referralCode)
+
+);
+
+const snap = await getDocs(q);
+
+if(snap.empty){
+
+list.innerHTML="<div class='empty'>No Referrals Yet</div>";
+
+return;
+
 }
 
-async function loadReferralHistory(userId) {
-    const container = document.getElementById('referralHistory');
-    
-    try {
-        const snapshot = await db.collection("referrals")
-            .where("referrerId", "==", userId)
-            .orderBy("timestamp", "desc")
-            .get();
-        
-        if (snapshot.empty) {
-            container.innerHTML = '<div style="text-align:center;padding:30px;color:#666;">No referrals yet</div>';
-            return;
-        }
-        
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const r = doc.data();
-            const div = document.createElement('div');
-            div.className = 'ref-item';
-            div.innerHTML = `
-                <span class="ref-name">${maskName(r.referredName)}</span>
-                <span class="ref-status ${r.rewardGiven ? 'status-paid' : 'status-joined'}">
-                    ${r.rewardGiven ? '₹5 Earned' : 'Joined'}
-                </span>
-            `;
-            container.appendChild(div);
-        });
-    } catch (error) {
-        console.error("Error:", error);
-    }
+snap.forEach(docu=>{
+
+const data = docu.data();
+
+const status = data.firstPaidMatch ? "Success" : "Pending";
+
+const className = data.firstPaidMatch ? "success" : "pending";
+
+list.innerHTML += `
+
+<div class="referralItem">
+
+<div>
+
+<div class="referralName">
+
+${data.name}
+
+</div>
+
+<small>${data.email}</small>
+
+</div>
+
+<div class="status ${className}">
+
+${status}
+
+</div>
+
+</div>
+
+`;
+
+});
+
 }
 
-function copyCode() {
-    const code = document.getElementById('referralCode').textContent;
-    navigator.clipboard.writeText(code).then(() => {
-        alert('Referral code copied!');
-    });
+document.getElementById("copyBtn").onclick=()=>{
+
+navigator.clipboard.writeText(referralCode);
+
+alert("Referral Code Copied");
+
+};
+
+document.getElementById("shareBtn").onclick=()=>{
+
+const text =
+
+`Join BattleG and earn rewards!
+
+Use my referral code:
+
+${referralCode}`;
+
+if(navigator.share){
+
+navigator.share({
+
+title:"BattleG",
+
+text:text
+
+});
+
+}else{
+
+navigator.clipboard.writeText(text);
+
+alert("Referral Message Copied");
+
 }
 
-function shareCode() {
-    const code = document.getElementById('referralCode').textContent;
-    if (navigator.share) {
-        navigator.share({
-            title: 'Join BattleG',
-            text: `Join BattleG and win real money! Use my referral code: ${code}`,
-        });
-    } else {
-        copyCode();
-    }
-}
-
-function maskName(name) {
-    if (!name) return "***";
-    if (name.length <= 2) return name[0] + "***";
-    return name.substring(0, 3) + "***";
-}
+};
