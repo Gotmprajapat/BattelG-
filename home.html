@@ -4,10 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>BattleG</title>
 
+<link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/home.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,15 +21,23 @@
 
 <!-- Header -->
 
-<header class="topBar">
+<header class="header">
 
-<div>
+<div class="logoArea">
 
 <img src="assets/logo.png" class="logo">
 
+<div>
+
+<h2>BattleG</h2>
+
+<p>Play • Compete • Win</p>
+
 </div>
 
-<div class="walletBox">
+</div>
+
+<div class="walletCard">
 
 <i class="fa-solid fa-wallet"></i>
 
@@ -58,7 +67,7 @@ Player
 
 <p>
 
-Play • Compete • Win
+Ready to win today's tournaments?
 
 </p>
 
@@ -68,83 +77,87 @@ Play • Compete • Win
 
 <section class="banner">
 
-<div>
-
 <h2>
 
-BattleG
+🔥 Daily Cash Tournaments
 
 </h2>
 
 <p>
 
-India's Tournament Platform
+Join • Play • Win Real Rewards
 
 </p>
-
-</div>
 
 </section>
 
 <!-- Quick Menu -->
 
-<h3 class="sectionTitle">
-
-Quick Menu
-
-</h3>
-
 <section class="quickMenu">
 
-<a href="referral.html" class="menuCard">
+<a href="referral.html" class="quickBox">
 
 <i class="fa-solid fa-user-group"></i>
 
-Referral
+<h3>Referral</h3>
 
 </a>
 
-<a href="my-tournaments.html" class="menuCard">
+<a href="my-tournaments.html" class="quickBox">
 
 <i class="fa-solid fa-trophy"></i>
 
-My Tournaments
+<h3>My Tournaments</h3>
 
 </a>
 
 </section>
 
-<!-- Games -->
+<!-- Live Tournament -->
 
-<h3 class="sectionTitle">
+<section class="section">
 
-Games
+<div class="title">
 
-</h3>
+<h2>🔥 Live Tournament</h2>
 
-<section id="gamesContainer">
+<a href="tournaments.html">
 
-<div class="emptyCard">
+View All
 
-Games will appear here.
+</a>
+
+</div>
+
+<div id="liveTournamentContainer">
+
+<div class="empty">
+
+No Live Tournament Available
+
+</div>
 
 </div>
 
 </section>
 
-<!-- Tournaments -->
+<!-- Upcoming Tournament -->
 
-<h3 class="sectionTitle">
+<section class="section">
 
-Latest Tournaments
+<div class="title">
 
-</h3>
+<h2>⏰ Upcoming Tournament</h2>
 
-<section id="tournamentContainer">
+</div>
 
-<div class="emptyCard">
+<div id="upcomingTournamentContainer">
 
-No Tournament Available
+<div class="empty">
+
+Upcoming Tournament Coming Soon
+
+</div>
 
 </div>
 
@@ -154,7 +167,7 @@ No Tournament Available
 
 <nav class="bottomNav">
 
-<a href="home.html" class="active">
+<a href="home.html">
 
 <i class="fa-solid fa-house"></i>
 
@@ -187,6 +200,8 @@ No Tournament Available
 </a>
 
 </nav>
+
+<script src="js/navbar.js"></script>
 
 <script type="module" src="js/home.js"></script>
 
