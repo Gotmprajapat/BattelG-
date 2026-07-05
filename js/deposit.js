@@ -49,7 +49,7 @@ document.getElementById("submitDeposit").addEventListener("click", async () => {
 
       utr: utr,
 
-      status: "Pending",
+      status: "pending",
 
       createdAt: serverTimestamp()
 
