@@ -215,3 +215,45 @@ font-size:20px;
 }
 
   }
+
+.tournamentSection{
+margin:20px;
+}
+
+#tournamentContainer{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.tournamentCard{
+background:#1b1b1b;
+border-radius:15px;
+padding:15px;
+color:#fff;
+}
+
+.tournamentCard h3{
+margin-bottom:10px;
+}
+
+.joinBtn{
+width:100%;
+height:45px;
+border:none;
+border-radius:10px;
+background:#FFD700;
+font-weight:700;
+cursor:pointer;
+margin-top:10px;
+}
+
+.liveBadge{
+color:#00ff66;
+font-weight:bold;
+}
+
+.upcomingBadge{
+color:#ffb400;
+font-weight:bold;
+  }
