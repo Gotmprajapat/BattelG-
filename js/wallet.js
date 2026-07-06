@@ -1,116 +1,157 @@
 import { auth, db } from "../firebase/firebase.js";
 
 import {
-  onAuthStateChanged
+onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
-  doc,
-  getDoc,
-  collection,
-  query,
-  where,
-  orderBy,
-  getDocs
+doc,
+collection,
+query,
+where,
+orderBy,
+limit,
+onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-onAuthStateChanged(auth, async (user) => {
+const walletBalance=document.getElementById("walletBalance");
+const totalWinning=document.getElementById("totalWinning");
+const totalWithdraw=document.getElementById("totalWithdraw");
+const pendingWithdraw=document.getElementById("pendingWithdraw");
+const transactionList=document.getElementById("transactionList");
 
-  if (!user) {
-    window.location.href = "index.html";
-    return;
-  }
+let currentUser=null;
 
-  try {
+/* ==========================
+LOGIN
+========================== */
 
-    // Wallet Data
+onAuthStateChanged(auth,(user)=>{
 
-    const userRef = doc(db, "users", user.uid);
+if(!user){
 
-    const userSnap = await getDoc(userRef);
+window.location.href="login.html";
 
-    if (userSnap.exists()) {
+return;
 
-      const data = userSnap.data();
+}
 
-      document.getElementById("walletBalance").textContent =
-      Number(data.wallet || 0).toFixed(2);
+currentUser=user;
 
-    }
+loadWallet();
 
-    // Transaction History
-
-    const historyContainer =
-      document.getElementById("historyContainer");
-
-    historyContainer.innerHTML = "";
-
-    const q = query(
-      collection(db, "transactions"),
-      where("uid", "==", user.uid),
-      orderBy("createdAt", "desc")
-    );
-
-    const snap = await getDocs(q);
-
-    if (snap.empty) {
-
-      historyContainer.innerHTML =
-      "<p class='empty'>No Transactions Found</p>";
-
-    } else {
-
-      snap.forEach((docu) => {
-
-        const t = docu.data();
-
-        historyContainer.innerHTML += `
-
-        <div class="transactionItem">
-
-            <div>
-
-                <h4>${t.type}</h4>
-
-                <small>${t.status}</small>
-
-            </div>
-
-            <strong>₹${t.amount}</strong>
-
-        </div>
-
-        `;
-
-      });
-
-    }
-
-  } catch (e) {
-
-    console.log(e);
-
-  }
+loadTransactions();
 
 });
 
-// Promo Code
+/* ==========================
+WALLET
+========================== */
 
-document.getElementById("applyPromo").onclick = () => {
+function loadWallet(){
 
-  const code =
-  document.getElementById("promoCode").value.trim();
+const ref=doc(db,"users",currentUser.uid);
 
-  if (code === "") {
+onSnapshot(ref,(snap)=>{
 
-    alert("Enter Promo Code");
+if(!snap.exists()) return;
 
-    return;
+const data=snap.data();
 
-  }
+walletBalance.textContent=data.wallet||0;
 
-  // Promo logic baad me add hoga
+totalWinning.textContent="₹"+(data.totalWinning||0);
 
-  alert("Promo Code System Coming Soon");
+totalWithdraw.textContent="₹"+(data.totalWithdraw||0);
 
-};
+pendingWithdraw.textContent="₹"+(data.pendingWithdraw||0);
+
+});
+
+}
+/* ==========================
+TRANSACTIONS
+========================== */
+
+function loadTransactions(){
+
+const q=query(
+
+collection(db,"transactions"),
+
+where("uid","==",currentUser.uid),
+
+orderBy("createdAt","desc"),
+
+limit(10)
+
+);
+
+onSnapshot(q,(snapshot)=>{
+
+transactionList.innerHTML="";
+
+if(snapshot.empty){
+
+transactionList.innerHTML=`
+
+<div class="transactionCard">
+
+<h3>No Transactions Found</h3>
+
+<p>Your transaction history will appear here.</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+snapshot.forEach((docSnap)=>{
+
+const item=docSnap.data();
+
+let color="#ffb400";
+
+if(item.type==="Deposit") color="#00d26a";
+
+if(item.type==="Withdraw") color="#ff5252";
+
+if(item.type==="Tournament Win") color="#00bfff";
+
+transactionList.innerHTML+=`
+
+<div class="transactionCard"
+style="border-left:5px solid ${color};">
+
+<h3>${item.type}</h3>
+
+<p>Amount : ₹${item.amount}</p>
+
+<p>Status : ${item.status||"Success"}</p>
+
+<p>Date : ${item.date||"--/--/----"}</p>
+
+</div>
+
+`;
+
+});
+
+});
+
+}
+
+/* ==========================
+ERROR HANDLING
+========================== */
+
+window.addEventListener("error",(e)=>{
+
+console.log("Wallet Error :",e.error);
+
+});
+
+console.log("BattleG Wallet Loaded Successfully");
