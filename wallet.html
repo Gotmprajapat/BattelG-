@@ -4,11 +4,10 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>BattleG Wallet</title>
 
-<link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/wallet.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,126 +20,83 @@
 
 <header class="header">
 
-<a href="home.html">
+<h2>💰 Wallet</h2>
 
-<i class="fa-solid fa-arrow-left"></i>
+<div class="walletBalance">
 
-</a>
+₹ <span id="walletBalance">0</span>
 
-<h2>Wallet</h2>
-
-<a href="notifications.html">
-
-<i class="fa-solid fa-bell"></i>
-
-</a>
+</div>
 
 </header>
 
-<section class="walletCard">
+<div class="cards">
 
-<h3>Available Balance</h3>
+<div class="card">
 
-<h1>
+<h3>Total Winnings</h3>
 
-₹ <span id="walletBalance">0.00</span>
+<h1 id="totalWinning">₹0</h1>
 
-</h1>
+</div>
 
-<p id="walletStatus">
+<div class="card">
 
-Realtime Wallet
+<h3>Total Withdraw</h3>
 
-</p>
+<h1 id="totalWithdraw">₹0</h1>
 
-</section>
+</div>
 
-<section class="actionGrid">
+<div class="card">
 
-<a href="deposit.html" class="actionCard">
+<h3>Pending Withdraw</h3>
 
-<i class="fa-solid fa-money-bill-wave"></i>
+<h1 id="pendingWithdraw">₹0</h1>
 
-<h3>Deposit</h3>
+</div>
 
-</a>
+</div>
 
-<a href="withdraw.html" class="actionCard">
+<div class="actionGrid">
 
-<i class="fa-solid fa-wallet"></i>
+<button onclick="location.href='deposit.html'">
 
-<h3>Withdraw</h3>
+💳 Deposit
 
-</a>
+</button>
 
-<a href="referral.html" class="actionCard">
+<button onclick="location.href='withdraw.html'">
 
-<i class="fa-solid fa-user-group"></i>
+💸 Withdraw
 
-<h3>Referral</h3>
+</button>
 
-</a>
+<button onclick="location.href='promocode.html'">
 
-<a href="leaderboard.html" class="actionCard">
+🎁 Promo Code
 
-<i class="fa-solid fa-ranking-star"></i>
+</button>
 
-<h3>Leaderboard</h3>
+<button onclick="location.href='history.html'">
 
-</a>
-
-</section>
-
-<section class="promo">
-
-<h3>Promo Code</h3>
-
-<div class="promoBox">
-
-<input
-type="text"
-id="promoCode"
-placeholder="Enter Promo Code">
-
-<button id="applyPromo">
-
-Apply
+📜 Transactions
 
 </button>
 
 </div>
 
-</section>
+<h2 class="title">
 
-<section class="history">
+Recent Transactions
 
-<div class="historyTop">
+</h2>
 
-<h3>
+<div id="transactionList">
 
-Transactions
-
-</h3>
-
-<a href="#">
-
-View All
-
-</a>
+Loading...
 
 </div>
-
-<div id="historyContainer">
-
-<div class="empty">
-
-No Transaction Found
-
-</div>
-
-</div>
-
-</section>
 
 <nav class="bottomNav">
 
@@ -178,10 +134,8 @@ No Transaction Found
 
 </nav>
 
-<script src="js/navbar.js"></script>
-
 <script type="module" src="js/wallet.js"></script>
 
 </body>
 
-  </html>
+</html>
