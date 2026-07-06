@@ -1,163 +1,147 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#0f1115;
+color:#fff;
+padding:18px;
+padding-bottom:90px;
+}
+
 .header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
-.header a{
-color:#fff;
-font-size:22px;
-text-decoration:none;
+.header h2{
+font-size:26px;
 }
 
-.walletCard{
-background:linear-gradient(135deg,#FFD700,#D4AF37);
-padding:25px;
-border-radius:20px;
+.walletBalance{
+background:#ffb400;
 color:#111;
-margin-bottom:20px;
-box-shadow:0 10px 25px rgba(255,215,0,.25);
+padding:12px 18px;
+border-radius:12px;
+font-size:20px;
+font-weight:700;
 }
 
-.walletCard h3{
-font-size:16px;
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+margin-bottom:25px;
+}
+
+.card{
+background:#1b1f28;
+padding:20px;
+border-radius:15px;
+text-align:center;
+border:1px solid #2a2f3b;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
+.card h3{
+font-size:15px;
+color:#bdbdbd;
 margin-bottom:10px;
 }
 
-.walletCard h1{
-font-size:36px;
-font-weight:700;
-margin-bottom:8px;
-}
-
-.walletCard p{
-font-size:14px;
-font-weight:600;
-opacity:.8;
+.card h1{
+color:#ffb400;
+font-size:28px;
 }
 
 .actionGrid{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:15px;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
-.actionCard{
-background:#171717;
-border:1px solid rgba(255,215,0,.15);
-border-radius:18px;
-padding:22px;
-text-align:center;
-text-decoration:none;
-color:#fff;
-transition:.25s;
-}
-
-.actionCard:hover{
-transform:translateY(-3px);
-border-color:#FFD700;
-}
-
-.actionCard i{
-font-size:28px;
-color:#FFD700;
-margin-bottom:12px;
-}
-
-.actionCard h3{
-font-size:15px;
-}
-
-.promo{
-margin-bottom:20px;
-}
-
-.promo h3{
-margin-bottom:12px;
-}
-
-.promoBox{
-display:flex;
-gap:10px;
-}
-
-.promoBox input{
-flex:1;
-height:50px;
-border:none;
-outline:none;
-background:#171717;
-color:#fff;
-padding:0 15px;
-border-radius:12px;
-}
-
-.promoBox button{
-width:110px;
-border:none;
-background:#FFD700;
+.actionGrid button{
+background:#ffb400;
 color:#111;
+border:none;
+padding:18px;
+border-radius:15px;
+font-size:17px;
 font-weight:700;
-border-radius:12px;
 cursor:pointer;
+transition:.3s;
 }
 
-.historyTop{
-display:flex;
-justify-content:space-between;
-align-items:center;
+.actionGrid button:hover{
+transform:scale(1.03);
+}
+
+.title{
 margin-bottom:15px;
+font-size:22px;
 }
 
-.historyTop a{
-color:#FFD700;
-text-decoration:none;
-font-size:14px;
+#transactionList{
+display:flex;
+flex-direction:column;
+gap:12px;
 }
 
-.transactionItem{
-background:#171717;
-border:1px solid rgba(255,215,0,.15);
+.transactionCard{
+background:#1b1f28;
 padding:15px;
 border-radius:15px;
+border-left:5px solid #ffb400;
+}
+
+.transactionCard h3{
+margin-bottom:8px;
+font-size:17px;
+}
+
+.transactionCard p{
+color:#ccc;
+font-size:14px;
+margin:3px 0;
+}
+
+.bottomNav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:70px;
+background:#171a21;
 display:flex;
-justify-content:space-between;
+justify-content:space-around;
 align-items:center;
-margin-bottom:12px;
+border-top:1px solid #333;
 }
 
-.transactionItem h4{
-margin-bottom:5px;
-}
-
-.transactionItem small{
+.bottomNav a{
+display:flex;
+flex-direction:column;
+align-items:center;
+text-decoration:none;
 color:#aaa;
+font-size:13px;
 }
 
-.transactionItem strong{
-color:#FFD700;
-font-size:18px;
+.bottomNav a.active{
+color:#ffb400;
 }
 
-.empty{
-background:#171717;
-padding:35px;
-text-align:center;
-border-radius:15px;
-color:#888;
-border:1px dashed rgba(255,215,0,.15);
-}
-
-@media(max-width:768px){
-
-.walletCard h1{
-font-size:30px;
-}
-
-.actionGrid{
-grid-template-columns:repeat(2,1fr);
-}
-
+.bottomNav i{
+font-size:22px;
+margin-bottom:4px;
 }
