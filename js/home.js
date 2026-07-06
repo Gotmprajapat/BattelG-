@@ -1,144 +1,116 @@
-import { onUserData } from "./userService.js";
-
-const walletBalance = document.getElementById("walletBalance");
-const userName = document.getElementById("userName");
-
-const liveContainer =
-document.getElementById("liveTournamentContainer");
-
-const upcomingContainer =
-document.getElementById("upcomingTournamentContainer");
-
-/* USER DATA */
-
-onUserData((user)=>{
-
-walletBalance.textContent=
-Number(user.wallet||0).toFixed(2);
-
-userName.textContent=
-user.name||"Player";
-
-});
-
-/* ===========================
-   LIVE TOURNAMENT
-=========================== */
-
-function loadLiveTournament(){
-
-/*
-
-Future Me
-
-tournamentService.js
-
-Ye function automatically
-Firebase se Live Tournament
-load karega.
-
-*/
-
-liveContainer.innerHTML=`
-
-<div class="empty">
-
-<h3>🔥 No Live Tournament</h3>
-
-<p>
-
-Live Tournament will appear here automatically.
-
-</p>
-
-</div>
-
-`;
-
-}
-
-/* ===========================
-UPCOMING
-=========================== */
-
-function loadUpcomingTournament(){
-
-/*
-
-Future Me
-
-Firebase se
-
-Upcoming Tournament
-
-load honge.
-
-*/
-
-upcomingContainer.innerHTML=`
-
-<div class="empty">
-
-<h3>⏰ Coming Soon</h3>
-
-<p>
-
-Upcoming Tournament will appear here automatically.
-
-</p>
-
-</div>
-
-`;
-
-}
-
-/* ===========================
-INIT
-=========================== */
-
-loadLiveTournament();
-
-loadUpcomingTournament();
-
-/* ===================================
-   BattleG Home Tournament System
-   Part 1
-=================================== */
+import { auth, db } from "../firebase/firebase.js";
 
 import {
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+doc,
 collection,
 query,
 where,
 onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-import { db } from "../firebase/firebase.js";
+const userName=document.getElementById("userName");
+const wallet=document.getElementById("wallet");
+const notice=document.getElementById("notice");
+const liveTournament=document.getElementById("liveTournament");
 
-const tournamentContainer =
-document.getElementById("tournamentContainer");
+let currentUser=null;
 
-function loadTournaments(){
+/* ==========================
+LOGIN CHECK
+========================== */
 
-const q = query(
+onAuthStateChanged(auth,(user)=>{
 
-collection(db,"tournaments"),
+if(!user){
 
-where("status","in",["live","upcoming"])
+window.location.href="login.html";
+return;
 
-);
+}
 
-onSnapshot(q,(snapshot)=>{
+currentUser=user;
 
-tournamentContainer.innerHTML="";
+loadUser();
 
-if(snapshot.empty){
+loadSettings();
 
-tournamentContainer.innerHTML=`
+loadLiveTournament();
 
-<div class="noTournament">
+});
 
-No Tournament Available
+/* ==========================
+USER DATA
+========================== */
+
+function loadUser(){
+
+const ref=doc(db,"users",currentUser.uid);
+
+onSnapshot(ref,(snap)=>{
+
+if(!snap.exists()) return;
+
+const data=snap.data();
+
+userName.textContent=data.name||"Player";
+
+wallet.textContent=data.wallet||0;
+
+});
+
+}
+
+/* ==========================
+APP SETTINGS
+========================== */
+
+function loadSettings(){
+
+const ref=doc(db,"settings","app");
+
+onSnapshot(ref,(snap)=>{
+
+if(!snap.exists()) return;
+
+const data=snap.data();
+
+notice.textContent=data.notice||"Welcome To BattleG";
+
+/* Maintenance */
+
+if(data.maintenance===true){
+
+document.body.innerHTML=`
+
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#111;
+color:#fff;
+font-family:Poppins;
+text-align:center;
+padding:20px;
+">
+
+<div>
+
+<h1>🚧 Maintenance</h1>
+
+<p>
+
+BattleG is under maintenance.
+
+Please try again later.
+
+</p>
+
+</div>
 
 </div>
 
@@ -148,43 +120,94 @@ return;
 
 }
 
-snapshot.forEach((doc)=>{
+});
 
-const t = doc.data();
+}
 
-const badge =
-t.status==="live"
-? "🟢 LIVE"
-: "🟡 UPCOMING";
+/* ==========================
+LIVE TOURNAMENT
+========================== */
 
-const disabled =
-t.joinClosed ? "disabled" : "";
+function loadLiveTournament(){
 
-const text =
-t.joinClosed ? "FULL" : "JOIN";
+const q=query(
 
-tournamentContainer.innerHTML += `
+collection(db,"tournaments"),
+
+where("status","==","live")
+
+);
+
+onSnapshot(q,(snapshot)=>{
+
+let list=[];
+
+snapshot.forEach((docu)=>{
+
+list.push({
+
+id:docu.id,
+
+...docu.data()
+
+});
+
+});
+
+list.sort((a,b)=>{
+
+const aTime=a.createdAt?.seconds||0;
+
+const bTime=b.createdAt?.seconds||0;
+
+return bTime-aTime;
+
+});
+
+liveTournament.innerHTML="";
+
+if(list.length===0){
+
+liveTournament.innerHTML=`
+
+<h3 style="text-align:center;">
+
+No Live Tournament
+
+</h3>
+
+`;
+
+return;
+
+      }
+
+list.forEach((item)=>{
+
+liveTournament.innerHTML+=`
 
 <div class="tournamentCard">
 
-<h3>${t.title}</h3>
+<h3>${item.title || "Tournament"}</h3>
 
-<p>${badge}</p>
+<p><b>Game :</b> ${item.game || "Free Fire"}</p>
 
-<p>🎮 ${t.game}</p>
+<p><b>Entry :</b> ₹${item.entryFee || 0}</p>
 
-<p>💰 Entry ₹${t.entryFee}</p>
+<p><b>Prize :</b> ₹${item.prize || 0}</p>
 
-<p>🏆 Prize ₹${t.prizePool}</p>
+<p><b>Slots :</b> ${item.joinedSlots || 0}/${item.totalSlots || item.slots || 0}</p>
 
-<p>👥 ${t.joined}/${t.slots}</p>
+<p><b>Room Time :</b> ${item.roomTime || "--:--"}</p>
 
 <button
 class="joinBtn"
-${disabled}
-onclick="joinTournament('${doc.id}')">
+${(item.joinedSlots || 0) >= (item.totalSlots || item.slots || 0) ? "disabled" : ""}
+onclick="joinTournament('${item.id}')">
 
-${text}
+${(item.joinedSlots || 0) >= (item.totalSlots || item.slots || 0)
+? "Tournament Full"
+: "Join Now"}
 
 </button>
 
@@ -198,92 +221,24 @@ ${text}
 
 }
 
-loadTournaments();
+/* ==========================
+JOIN TOURNAMENT
+========================== */
 
-import { auth, db } from "../firebase/firebase.js";
+window.joinTournament=(id)=>{
 
-import {
-collection,
-doc,
-getDoc,
-setDoc,
-addDoc,
-updateDoc,
-serverTimestamp,
-increment
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-window.joinTournament = async (tournamentId) => {
-
-const user = auth.currentUser;
-
-if (!user) {
-alert("Please Login");
-return;
-}
-
-const userRef = doc(db,"users",user.uid);
-const userSnap = await getDoc(userRef);
-
-if(!userSnap.exists()){
-alert("User Not Found");
-return;
-}
-
-const userData = userSnap.data();
-
-const tournamentRef = doc(db,"tournaments",tournamentId);
-const tournamentSnap = await getDoc(tournamentRef);
-
-if(!tournamentSnap.exists()){
-alert("Tournament Not Found");
-return;
-}
-
-const tournament = tournamentSnap.data();
-
-const joinRef = doc(db,"joinedTournaments",user.uid+"_"+tournamentId);
-
-const alreadyJoined = await getDoc(joinRef);
-
-if(alreadyJoined.exists()){
-alert("Already Joined");
-return;
-}
-
-if(tournament.joined>=tournament.slots){
-alert("Tournament Full");
-return;
-}
-
-if(userData.wallet<tournament.entryFee){
-alert("Insufficient Wallet Balance");
-return;
-}
-
-await updateDoc(userRef,{
-wallet:userData.wallet-tournament.entryFee
-});
-
-await updateDoc(tournamentRef,{
-joined:increment(1)
-});
-
-await setDoc(joinRef,{
-uid:user.uid,
-tournamentId:tournamentId,
-joinedAt:serverTimestamp(),
-status:"joined"
-});
-
-await addDoc(collection(db,"transactions"),{
-uid:user.uid,
-type:"Tournament Join",
-amount:tournament.entryFee,
-status:"Success",
-createdAt:serverTimestamp()
-});
-
-alert("Tournament Joined Successfully");
+window.location.href=`tournament.html?id=${id}`;
 
 };
+
+/* ==========================
+ERROR HANDLING
+========================== */
+
+window.addEventListener("error",(e)=>{
+
+console.log(e.error);
+
+});
+
+console.log("BattleG Home Loaded");
