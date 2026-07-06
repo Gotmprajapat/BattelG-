@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -8,7 +7,6 @@
 
 <title>BattleG</title>
 
-<link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/home.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,119 +17,79 @@
 
 <body>
 
-<!-- Header -->
-
 <header class="header">
-
-<div class="logoArea">
-
-<img src="assets/logo.png" class="logo">
 
 <div>
 
-<h2>BattleG</h2>
+<h2 id="userName">Loading...</h2>
 
-<p>Play • Compete • Win</p>
-
-</div>
+<p>Welcome Back 👋</p>
 
 </div>
 
-<div class="walletCard">
+<div class="wallet">
 
 <i class="fa-solid fa-wallet"></i>
 
-₹ <span id="walletBalance">0.00</span>
+₹<span id="wallet">0</span>
 
 </div>
 
 </header>
 
-<!-- Welcome -->
+<div class="notice">
 
-<section class="welcomeCard">
+<i class="fa-solid fa-bullhorn"></i>
 
-<h2>
-
-Welcome,
-
-<span id="userName">
-
-Player
-
+<span id="notice">
+Loading Notice...
 </span>
 
-👋
+</div>
 
-</h2>
+<div class="banner">
 
-<p>
+<h2>PLAY • WIN • EARN</h2>
 
-Ready to win today's tournaments?
+<p>Join tournaments and win real cash.</p>
 
-</p>
+</div>
 
-</section>
+<div class="homeMenu">
 
-<!-- Banner -->
-
-<section class="banner">
-
-<h2>
-
-🔥 Daily Cash Tournaments
-
-</h2>
-
-<p>
-
-Join • Play • Win Real Rewards
-
-</p>
-
-</section>
-
-<!-- Quick Menu -->
-
-<section class="quickMenu">
-
-<a href="referral.html" class="quickBox">
+<div class="menuCard" onclick="location.href='referral.html'">
 
 <i class="fa-solid fa-user-group"></i>
 
 <h3>Referral</h3>
 
-</a>
+</div>
 
-<a href="my-tournaments.html" class="quickBox">
+<div class="menuCard" onclick="location.href='mytournaments.html'">
 
 <i class="fa-solid fa-trophy"></i>
 
 <h3>My Tournaments</h3>
 
-</a>
-
-</section>
-
-<!-- Live Tournament -->
-
-<section class="tournamentSection">
-
-<h2>Live Tournaments</h2>
-
-<div id="tournamentContainer">
-
-<p>Loading...</p>
+</div>
 
 </div>
 
-</section>
+<h2 class="title">
 
-<!-- Bottom Navigation -->
+🔥 Live Tournaments
+
+</h2>
+
+<div id="liveTournament">
+
+Loading...
+
+</div>
 
 <nav class="bottomNav">
 
-<a href="home.html">
+<a href="home.html" class="active">
 
 <i class="fa-solid fa-house"></i>
 
@@ -165,10 +123,7 @@ Join • Play • Win Real Rewards
 
 </nav>
 
-<script src="js/navbar.js"></script>
-
 <script type="module" src="js/home.js"></script>
 
 </body>
-
 </html>
