@@ -6,149 +6,152 @@ onAuthStateChanged
 
 import {
 doc,
-getDoc,
-updateDoc,
 collection,
-addDoc,
 query,
 where,
-getDocs,
-serverTimestamp
+orderBy,
+limit,
+onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const walletBalance=document.getElementById("walletBalance");
-const amount=document.getElementById("amount");
-const upi=document.getElementById("upi");
-const withdrawBtn=document.getElementById("withdrawBtn");
+const totalWinning=document.getElementById("totalWinning");
+const totalWithdraw=document.getElementById("totalWithdraw");
+const pendingWithdraw=document.getElementById("pendingWithdraw");
+const transactionList=document.getElementById("transactionList");
 
-let currentUser;
-let userData;
+let currentUser=null;
 
-onAuthStateChanged(auth,async(user)=>{
+/* ==========================
+LOGIN
+========================== */
+
+onAuthStateChanged(auth,(user)=>{
 
 if(!user){
 
 window.location.href="login.html";
+
 return;
 
 }
 
 currentUser=user;
 
-const userRef=doc(db,"users",user.uid);
+loadWallet();
 
-const userSnap=await getDoc(userRef);
-
-userData=userSnap.data();
-
-walletBalance.textContent=userData.wallet||0;
-
-if(userData.upiId){
-
-upi.value=userData.upiId;
-
-}
+loadTransactions();
 
 });
-withdrawBtn.onclick=async()=>{
 
-try{
+/* ==========================
+WALLET
+========================== */
 
-const withdrawAmount=Number(amount.value);
+function loadWallet(){
 
-const upiId=upi.value.trim();
+const ref=doc(db,"users",currentUser.uid);
 
-if(withdrawAmount<50){
+onSnapshot(ref,(snap)=>{
 
-alert("Minimum Withdraw ₹50");
+if(!snap.exists()) return;
 
-return;
+const data=snap.data();
 
-}
+walletBalance.textContent=data.wallet||0;
 
-if(withdrawAmount>(userData.wallet||0)){
+totalWinning.textContent="₹"+(data.totalWinning||0);
 
-alert("Insufficient Wallet Balance");
+totalWithdraw.textContent="₹"+(data.totalWithdraw||0);
 
-return;
+pendingWithdraw.textContent="₹"+(data.pendingWithdraw||0);
 
-}
-
-if(!upiId){
-
-alert("Enter UPI ID");
-
-return;
+});
 
 }
+/* ==========================
+TRANSACTIONS
+========================== */
 
-/* Check Pending Withdraw */
+function loadTransactions(){
 
-const pendingQuery=query(
+const q=query(
 
-collection(db,"withdraws"),
+collection(db,"transactions"),
 
 where("uid","==",currentUser.uid),
 
-where("status","==","pending")
+orderBy("createdAt","desc"),
+
+limit(10)
 
 );
 
-const pendingSnap=await getDocs(pendingQuery);
+onSnapshot(q,(snapshot)=>{
 
-if(!pendingSnap.empty){
+transactionList.innerHTML="";
 
-alert("You already have a pending withdraw request.");
+if(snapshot.empty){
+
+transactionList.innerHTML=`
+
+<div class="transactionCard">
+
+<h3>No Transactions Found</h3>
+
+<p>Your transaction history will appear here.</p>
+
+</div>
+
+`;
 
 return;
 
 }
 
-withdrawBtn.disabled=true;
-withdrawBtn.innerText="Submitting...";
+snapshot.forEach((docSnap)=>{
 
-/* Save UPI */
+const item=docSnap.data();
 
-await updateDoc(doc(db,"users",currentUser.uid),{
+let color="#ffb400";
 
-upiId:upiId
+if(item.type==="Deposit") color="#00d26a";
+
+if(item.type==="Withdraw") color="#ff5252";
+
+if(item.type==="Tournament Win") color="#00bfff";
+
+transactionList.innerHTML+=`
+
+<div class="transactionCard"
+style="border-left:5px solid ${color};">
+
+<h3>${item.type}</h3>
+
+<p>Amount : ₹${item.amount}</p>
+
+<p>Status : ${item.status||"Success"}</p>
+
+<p>Date : ${item.date||"--/--/----"}</p>
+
+</div>
+
+`;
 
 });
 
-/* Save Withdraw Request */
-
-await addDoc(collection(db,"withdraws"),{
-
-uid:currentUser.uid,
-
-name:userData.name||"Player",
-
-amount:withdrawAmount,
-
-upiId:upiId,
-
-status:"pending",
-
-createdAt:serverTimestamp()
-
 });
-
-alert("Withdraw Request Submitted Successfully");
-
-amount.value="";
-
-withdrawBtn.disabled=false;
-withdrawBtn.innerText="Request Withdraw";
-
-}catch(error){
-
-console.log(error);
-
-alert(error.message);
-
-withdrawBtn.disabled=false;
-withdrawBtn.innerText="Request Withdraw";
 
 }
 
-};
+/* ==========================
+ERROR HANDLING
+========================== */
+
+window.addEventListener("error",(e)=>{
+
+console.log("Wallet Error :",e.error);
+
+});
+
+console.log("BattleG Wallet Loaded Successfully");
