@@ -2,138 +2,120 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family:Poppins,sans-serif;
 }
 
 body{
-background:#0b0b0b;
+background:#0f1115;
 color:#fff;
-padding:20px;
-padding-bottom:40px;
-}
-
-a{
-text-decoration:none;
-color:inherit;
+padding:18px;
+padding-bottom:90px;
 }
 
 .header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
-}
-
-.header i{
-font-size:24px;
-color:#FFD700;
+text-align:center;
+margin-bottom:20px;
 }
 
 .header h2{
-font-size:24px;
-color:#FFD700;
+font-size:28px;
+color:#ffb400;
+}
+
+.walletCard,
+.withdrawCard{
+background:#1b1f28;
+border-radius:18px;
+padding:18px;
+margin-bottom:20px;
+border:1px solid #2b313d;
 }
 
 .walletCard{
-background:linear-gradient(135deg,#FFD700,#B8860B);
-color:#111;
-border-radius:22px;
-padding:28px;
 text-align:center;
-margin-bottom:25px;
-box-shadow:0 0 18px rgba(255,215,0,.25);
 }
 
 .walletCard h3{
-font-size:17px;
+color:#aaa;
 margin-bottom:10px;
 }
 
 .walletCard h1{
-font-size:38px;
-font-weight:700;
+font-size:36px;
+color:#ffb400;
 }
 
-.withdrawForm{
-background:#161616;
-border:1px solid rgba(255,215,0,.15);
-border-radius:20px;
-padding:20px;
-margin-bottom:25px;
-}
-
-.withdrawForm label{
+.withdrawCard label{
 display:block;
 margin-top:15px;
 margin-bottom:8px;
-color:#FFD700;
 font-weight:600;
 }
 
-.withdrawForm input{
+.withdrawCard input{
 width:100%;
-height:52px;
-background:#222;
-border:1px solid #333;
-border-radius:12px;
-padding:0 15px;
-color:#fff;
+padding:14px;
+border:none;
 outline:none;
+border-radius:12px;
+background:#2b313d;
+color:#fff;
 font-size:15px;
 }
 
-.withdrawForm input:focus{
-border-color:#FFD700;
+.note{
+margin-top:15px;
+font-size:14px;
+color:#aaa;
+text-align:center;
+line-height:1.6;
 }
 
 #withdrawBtn{
 width:100%;
-height:55px;
-margin-top:25px;
+margin-top:20px;
+padding:15px;
 border:none;
 border-radius:14px;
-background:#FFD700;
+background:#ffb400;
 color:#111;
-font-size:17px;
+font-size:18px;
 font-weight:700;
 cursor:pointer;
 transition:.3s;
 }
 
 #withdrawBtn:hover{
-transform:translateY(-2px);
+transform:scale(1.02);
 }
 
-.rules{
-background:#161616;
-border:1px solid rgba(255,215,0,.15);
-border-radius:20px;
-padding:20px;
+.bottomNav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:70px;
+background:#171a21;
+display:flex;
+justify-content:space-around;
+align-items:center;
+border-top:1px solid #333;
 }
 
-.rules h3{
-color:#FFD700;
-margin-bottom:12px;
+.bottomNav a{
+display:flex;
+flex-direction:column;
+align-items:center;
+text-decoration:none;
+color:#999;
+font-size:13px;
 }
 
-.rules ul{
-padding-left:20px;
+.bottomNav a.active{
+color:#ffb400;
 }
 
-.rules li{
-margin-bottom:10px;
-color:#cfcfcf;
-line-height:22px;
-}
-
-@media(max-width:768px){
-
-.walletCard h1{
-font-size:32px;
-}
-
-.header h2{
+.bottomNav i{
 font-size:22px;
-}
-
+margin-bottom:4px;
 }
