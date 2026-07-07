@@ -6,99 +6,149 @@ onAuthStateChanged
 
 import {
 doc,
-addDoc,
+getDoc,
+updateDoc,
 collection,
-serverTimestamp,
-onSnapshot
+addDoc,
+query,
+where,
+getDocs,
+serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-let currentUser = null;
-let wallet = 0;
+const walletBalance=document.getElementById("walletBalance");
+const amount=document.getElementById("amount");
+const upi=document.getElementById("upi");
+const withdrawBtn=document.getElementById("withdrawBtn");
 
-const walletBalance = document.getElementById("walletBalance");
-const upiInput = document.getElementById("upi");
-const amountInput = document.getElementById("amount");
-const withdrawBtn = document.getElementById("withdrawBtn");
+let currentUser;
+let userData;
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth,async(user)=>{
 
-    if (!user) {
-        window.location.href = "index.html";
-        return;
-    }
+if(!user){
 
-    currentUser = user;
+window.location.href="login.html";
+return;
 
-    const userRef = doc(db, "users", user.uid);
+}
 
-    onSnapshot(userRef, (snap) => {
+currentUser=user;
 
-        if (!snap.exists()) return;
+const userRef=doc(db,"users",user.uid);
 
-        const data = snap.data();
+const userSnap=await getDoc(userRef);
 
-        wallet = Number(data.wallet || 0);
+userData=userSnap.data();
 
-        walletBalance.textContent = wallet.toFixed(2);
+walletBalance.textContent=userData.wallet||0;
 
-        upiInput.value = data.upi || "";
+if(userData.upiId){
 
-    }, (error) => {
+upi.value=userData.upiId;
 
-        console.log(error);
+}
 
-    });
+});
+withdrawBtn.onclick=async()=>{
+
+try{
+
+const withdrawAmount=Number(amount.value);
+
+const upiId=upi.value.trim();
+
+if(withdrawAmount<50){
+
+alert("Minimum Withdraw ₹50");
+
+return;
+
+}
+
+if(withdrawAmount>(userData.wallet||0)){
+
+alert("Insufficient Wallet Balance");
+
+return;
+
+}
+
+if(!upiId){
+
+alert("Enter UPI ID");
+
+return;
+
+}
+
+/* Check Pending Withdraw */
+
+const pendingQuery=query(
+
+collection(db,"withdraws"),
+
+where("uid","==",currentUser.uid),
+
+where("status","==","pending")
+
+);
+
+const pendingSnap=await getDocs(pendingQuery);
+
+if(!pendingSnap.empty){
+
+alert("You already have a pending withdraw request.");
+
+return;
+
+}
+
+withdrawBtn.disabled=true;
+withdrawBtn.innerText="Submitting...";
+
+/* Save UPI */
+
+await updateDoc(doc(db,"users",currentUser.uid),{
+
+upiId:upiId
 
 });
 
-withdrawBtn.addEventListener("click", async () => {
+/* Save Withdraw Request */
 
-    if (!currentUser) {
-        alert("Please wait...");
-        return;
-    }
+await addDoc(collection(db,"withdraws"),{
 
-    const amount = Number(amountInput.value);
+uid:currentUser.uid,
 
-    const upi = upiInput.value.trim();
+name:userData.name||"Player",
 
-    if (upi === "") {
-        alert("Please Enter UPI ID");
-        return;
-    }
+amount:withdrawAmount,
 
-    if (amount < 50) {
-        alert("Minimum Withdraw ₹50");
-        return;
-    }
+upiId:upiId,
 
-    if (amount > wallet) {
-        alert("Insufficient Wallet Balance");
-        return;
-    }
+status:"pending",
 
-    try {
-
-        await addDoc(collection(db, "withdrawRequests"), {
-
-            uid: currentUser.uid,
-            amount: amount,
-            upi: upi,
-            status: "Pending",
-            createdAt: serverTimestamp()
-
-        });
-
-        alert("Withdraw Request Submitted Successfully");
-
-        amountInput.value = "";
-
-    } catch (e) {
-
-        console.log(e);
-
-        alert("Something Went Wrong");
-
-    }
+createdAt:serverTimestamp()
 
 });
+
+alert("Withdraw Request Submitted Successfully");
+
+amount.value="";
+
+withdrawBtn.disabled=false;
+withdrawBtn.innerText="Request Withdraw";
+
+}catch(error){
+
+console.log(error);
+
+alert(error.message);
+
+withdrawBtn.disabled=false;
+withdrawBtn.innerText="Request Withdraw";
+
+}
+
+};
