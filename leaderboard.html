@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BattleG - Leaderboard</title>
+<title>BattleG Leaderboard</title>
 
 <link rel="stylesheet" href="css/leaderboard.css">
 
@@ -20,35 +20,91 @@
 
 <header class="header">
 
-<a href="home.html">
-<i class="fa-solid fa-arrow-left"></i>
-</a>
-
-<h2>Leaderboard</h2>
-
-<div></div>
+<h2>🏆 Leaderboard</h2>
 
 </header>
 
-<section class="topCard">
+<div class="top3">
 
-<h3>🏆 Top 30 Players</h3>
+<div class="topCard second">
 
-<p>Ranked by Total Earnings</p>
+<h3>🥈</h3>
 
-</section>
+<h4 id="secondName">Loading...</h4>
 
-<section id="leaderboardList">
-
-<div class="loading">
-
-<i class="fa-solid fa-spinner fa-spin"></i>
-
-<p>Loading Leaderboard...</p>
+<p id="secondAmount">₹0</p>
 
 </div>
 
-</section>
+<div class="topCard first">
+
+<h3>🥇</h3>
+
+<h4 id="firstName">Loading...</h4>
+
+<p id="firstAmount">₹0</p>
+
+</div>
+
+<div class="topCard third">
+
+<h3>🥉</h3>
+
+<h4 id="thirdName">Loading...</h4>
+
+<p id="thirdAmount">₹0</p>
+
+</div>
+
+</div>
+
+<h3 class="title">
+
+Top Players
+
+</h3>
+
+<div id="leaderboardList">
+
+Loading...
+
+</div>
+
+<nav class="bottomNav">
+
+<a href="home.html">
+
+<i class="fa-solid fa-house"></i>
+
+<span>Home</span>
+
+</a>
+
+<a href="wallet.html">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Wallet</span>
+
+</a>
+
+<a href="leaderboard.html" class="active">
+
+<i class="fa-solid fa-ranking-star"></i>
+
+<span>Leaderboard</span>
+
+</a>
+
+<a href="profile.html">
+
+<i class="fa-solid fa-user"></i>
+
+<span>Profile</span>
+
+</a>
+
+</nav>
 
 <script type="module" src="js/leaderboard.js"></script>
 
