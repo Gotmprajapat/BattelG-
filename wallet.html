@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BattleG Withdraw</title>
+<title>BattleG Wallet</title>
 
-<link rel="stylesheet" href="css/withdraw.css">
+<link rel="stylesheet" href="css/wallet.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -18,79 +18,123 @@
 
 <body>
 
-<div class="header">
+<header class="header">
 
-<h2>💸 Withdraw Money</h2>
+<h2>💰 Wallet</h2>
 
-</div>
+<div class="walletBalance">
 
-<div class="walletCard">
-
-<h3>Available Balance</h3>
-
-<h1>₹<span id="walletBalance">0</span></h1>
+₹ <span id="walletBalance">0</span>
 
 </div>
 
-<div class="withdrawCard">
+</header>
 
-<label>Withdraw Amount</label>
+<div class="cards">
 
-<input
-type="number"
-id="amount"
-placeholder="Enter Amount">
+<div class="card">
 
-<label>UPI ID</label>
+<h3>Total Winnings</h3>
 
-<input
-type="text"
-id="upi"
-placeholder="example@upi">
+<h1 id="totalWinning">₹0</h1>
 
-<p class="note">
+</div>
 
-Minimum Withdraw ₹50
+<div class="card">
 
-<br>
+<h3>Total Withdraw</h3>
 
-Approval Time 5-30 Minutes
+<h1 id="totalWithdraw">₹0</h1>
 
-</p>
+</div>
 
-<button id="withdrawBtn">
+<div class="card">
 
-Request Withdraw
+<h3>Pending Withdraw</h3>
+
+<h1 id="pendingWithdraw">₹0</h1>
+
+</div>
+
+</div>
+
+<div class="actionGrid">
+
+<button onclick="location.href='deposit.html'">
+
+💳 Deposit
 
 </button>
+
+<button onclick="location.href='withdraw.html'">
+
+💸 Withdraw
+
+</button>
+
+<button onclick="location.href='promocode.html'">
+
+🎁 Promo Code
+
+</button>
+
+<button onclick="location.href='history.html'">
+
+📜 Transactions
+
+</button>
+
+</div>
+
+<h2 class="title">
+
+Recent Transactions
+
+</h2>
+
+<div id="transactionList">
+
+Loading...
 
 </div>
 
 <nav class="bottomNav">
 
 <a href="home.html">
+
 <i class="fa-solid fa-house"></i>
+
 <span>Home</span>
+
 </a>
 
-<a href="wallet.html">
+<a href="wallet.html" class="active">
+
 <i class="fa-solid fa-wallet"></i>
+
 <span>Wallet</span>
+
 </a>
 
 <a href="leaderboard.html">
+
 <i class="fa-solid fa-ranking-star"></i>
+
 <span>Leaderboard</span>
+
 </a>
 
 <a href="profile.html">
+
 <i class="fa-solid fa-user"></i>
+
 <span>Profile</span>
+
 </a>
 
 </nav>
 
-<script type="module" src="js/withdraw.js"></script>
+<script type="module" src="js/wallet.js"></script>
 
 </body>
 
