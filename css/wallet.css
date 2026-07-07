@@ -13,106 +13,80 @@ padding-bottom:90px;
 }
 
 .header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
+text-align:center;
+margin-bottom:20px;
 }
 
 .header h2{
-font-size:26px;
+font-size:28px;
+color:#ffb400;
 }
 
-.walletBalance{
-background:#ffb400;
-color:#111;
-padding:12px 18px;
-border-radius:12px;
-font-size:20px;
-font-weight:700;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-gap:15px;
-margin-bottom:25px;
-}
-
-.card{
+.walletCard,
+.withdrawCard{
 background:#1b1f28;
-padding:20px;
-border-radius:15px;
+border-radius:18px;
+padding:18px;
+margin-bottom:20px;
+border:1px solid #2b313d;
+}
+
+.walletCard{
 text-align:center;
-border:1px solid #2a2f3b;
-transition:.3s;
 }
 
-.card:hover{
-transform:translateY(-4px);
-}
-
-.card h3{
-font-size:15px;
-color:#bdbdbd;
+.walletCard h3{
+color:#aaa;
 margin-bottom:10px;
 }
 
-.card h1{
+.walletCard h1{
+font-size:36px;
 color:#ffb400;
-font-size:28px;
 }
 
-.actionGrid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px;
-margin-bottom:25px;
+.withdrawCard label{
+display:block;
+margin-top:15px;
+margin-bottom:8px;
+font-weight:600;
 }
 
-.actionGrid button{
+.withdrawCard input{
+width:100%;
+padding:14px;
+border:none;
+outline:none;
+border-radius:12px;
+background:#2b313d;
+color:#fff;
+font-size:15px;
+}
+
+.note{
+margin-top:15px;
+font-size:14px;
+color:#aaa;
+text-align:center;
+line-height:1.6;
+}
+
+#withdrawBtn{
+width:100%;
+margin-top:20px;
+padding:15px;
+border:none;
+border-radius:14px;
 background:#ffb400;
 color:#111;
-border:none;
-padding:18px;
-border-radius:15px;
-font-size:17px;
+font-size:18px;
 font-weight:700;
 cursor:pointer;
 transition:.3s;
 }
 
-.actionGrid button:hover{
-transform:scale(1.03);
-}
-
-.title{
-margin-bottom:15px;
-font-size:22px;
-}
-
-#transactionList{
-display:flex;
-flex-direction:column;
-gap:12px;
-}
-
-.transactionCard{
-background:#1b1f28;
-padding:15px;
-border-radius:15px;
-border-left:5px solid #ffb400;
-}
-
-.transactionCard h3{
-margin-bottom:8px;
-font-size:17px;
-}
-
-.transactionCard p{
-color:#ccc;
-font-size:14px;
-margin:3px 0;
+#withdrawBtn:hover{
+transform:scale(1.02);
 }
 
 .bottomNav{
@@ -133,7 +107,7 @@ display:flex;
 flex-direction:column;
 align-items:center;
 text-decoration:none;
-color:#aaa;
+color:#999;
 font-size:13px;
 }
 
