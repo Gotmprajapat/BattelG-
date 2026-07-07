@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BattleG - Withdraw</title>
+<title>BattleG Withdraw</title>
 
 <link rel="stylesheet" href="css/withdraw.css">
 
@@ -18,67 +18,77 @@
 
 <body>
 
-<header class="header">
+<div class="header">
 
-<a href="wallet.html">
-<i class="fa-solid fa-arrow-left"></i>
-</a>
+<h2>💸 Withdraw Money</h2>
 
-<h2>Withdraw</h2>
+</div>
 
-<div></div>
-
-</header>
-
-<section class="walletCard">
+<div class="walletCard">
 
 <h3>Available Balance</h3>
 
-<h1>₹ <span id="walletBalance">0.00</span></h1>
+<h1>₹<span id="walletBalance">0</span></h1>
 
-</section>
+</div>
 
-<section class="withdrawForm">
+<div class="withdrawCard">
 
-<label>UPI ID</label>
-
-<input
-type="text"
-id="upi"
-placeholder="Enter UPI ID">
-
-<label>Withdraw Amount (₹)</label>
+<label>Withdraw Amount</label>
 
 <input
 type="number"
 id="amount"
 placeholder="Enter Amount">
 
+<label>UPI ID</label>
+
+<input
+type="text"
+id="upi"
+placeholder="example@upi">
+
+<p class="note">
+
+Minimum Withdraw ₹50
+
+<br>
+
+Approval Time 5-30 Minutes
+
+</p>
+
 <button id="withdrawBtn">
 
-Submit Withdraw Request
+Request Withdraw
 
 </button>
 
-</section>
+</div>
 
-<section class="rules">
+<nav class="bottomNav">
 
-<h3>Withdraw Rules</h3>
+<a href="home.html">
+<i class="fa-solid fa-house"></i>
+<span>Home</span>
+</a>
 
-<ul>
+<a href="wallet.html">
+<i class="fa-solid fa-wallet"></i>
+<span>Wallet</span>
+</a>
 
-<li>Minimum Withdraw ₹50</li>
+<a href="leaderboard.html">
+<i class="fa-solid fa-ranking-star"></i>
+<span>Leaderboard</span>
+</a>
 
-<li>Wallet balance should be sufficient.</li>
+<a href="profile.html">
+<i class="fa-solid fa-user"></i>
+<span>Profile</span>
+</a>
 
-<li>Payment will be sent after admin approval.</li>
-
-<li>Wrong UPI ID may cause payment failure.</li>
-
-</ul>
-
-</section>
+</nav>
 
 <script type="module" src="js/withdraw.js"></script>
 
