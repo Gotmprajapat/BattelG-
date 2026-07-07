@@ -1,139 +1,113 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+<!DOCTYPE html>
+<html lang="en">
 
-body{
-background:#0b0b0b;
-color:#fff;
-padding:20px;
-padding-bottom:30px;
-}
+<head>
 
-a{
-text-decoration:none;
-color:inherit;
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
-}
+<title>BattleG Leaderboard</title>
 
-.header i{
-font-size:24px;
-color:#FFD700;
-}
+<link rel="stylesheet" href="css/leaderboard.css">
 
-.header h2{
-font-size:24px;
-color:#FFD700;
-font-weight:700;
-}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-.topCard{
-background:linear-gradient(135deg,#FFD700,#B8860B);
-color:#111;
-padding:25px;
-border-radius:20px;
-text-align:center;
-margin-bottom:25px;
-box-shadow:0 0 20px rgba(255,215,0,.25);
-}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-.topCard h3{
-font-size:26px;
-margin-bottom:8px;
-}
+</head>
 
-.topCard p{
-font-size:15px;
-font-weight:500;
-}
+<body>
 
-#leaderboardList{
-display:flex;
-flex-direction:column;
-gap:12px;
-}
+<header class="header">
 
-.playerCard{
-background:#171717;
-border:1px solid rgba(255,215,0,.15);
-border-radius:16px;
-padding:16px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-transition:.3s;
-}
+<h2>🏆 Leaderboard</h2>
 
-.playerCard:hover{
-border-color:#FFD700;
-transform:translateY(-2px);
-}
+</header>
 
-.playerLeft{
-display:flex;
-align-items:center;
-gap:14px;
-}
+<div class="top3">
 
-.rank{
-width:42px;
-height:42px;
-border-radius:50%;
-background:#FFD700;
-color:#111;
-display:flex;
-justify-content:center;
-align-items:center;
-font-weight:700;
-font-size:17px;
-}
+<div class="topCard second">
 
-.playerName{
-font-size:17px;
-font-weight:600;
-color:#fff;
-}
+<h3>🥈</h3>
 
-.playerEarn{
-font-size:18px;
-font-weight:700;
-color:#FFD700;
-}
+<h4 id="secondName">Loading...</h4>
 
-.loading{
-text-align:center;
-padding:60px 20px;
-color:#999;
-}
+<p id="secondAmount">₹0</p>
 
-.loading i{
-font-size:40px;
-color:#FFD700;
-margin-bottom:15px;
-}
+</div>
 
-@media(max-width:768px){
+<div class="topCard first">
 
-.playerName{
-font-size:15px;
-}
+<h3>🥇</h3>
 
-.playerEarn{
-font-size:16px;
-}
+<h4 id="firstName">Loading...</h4>
 
-.rank{
-width:38px;
-height:38px;
-font-size:15px;
-}
+<p id="firstAmount">₹0</p>
 
-}
+</div>
+
+<div class="topCard third">
+
+<h3>🥉</h3>
+
+<h4 id="thirdName">Loading...</h4>
+
+<p id="thirdAmount">₹0</p>
+
+</div>
+
+</div>
+
+<h3 class="title">
+
+Top Players
+
+</h3>
+
+<div id="leaderboardList">
+
+Loading...
+
+</div>
+
+<nav class="bottomNav">
+
+<a href="home.html">
+
+<i class="fa-solid fa-house"></i>
+
+<span>Home</span>
+
+</a>
+
+<a href="wallet.html">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Wallet</span>
+
+</a>
+
+<a href="leaderboard.html" class="active">
+
+<i class="fa-solid fa-ranking-star"></i>
+
+<span>Leaderboard</span>
+
+</a>
+
+<a href="profile.html">
+
+<i class="fa-solid fa-user"></i>
+
+<span>Profile</span>
+
+</a>
+
+</nav>
+
+<script type="module" src="js/leaderboard.js"></script>
+
+</body>
+
+</html>
