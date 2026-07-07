@@ -1,68 +1,367 @@
-const urlParams = new URLSearchParams(window.location.search);
-const gameName = urlParams.get('game') || 'Aim Challenge';
+import { auth, db } from "../firebase/firebase.js";
 
-const gameData = {
-    'Aim Challenge': { icon: '🎯', desc: 'Test your aiming skills. Hit targets to score points.' },
-    'Runner': { icon: '🏃', desc: 'Run as far as you can. Avoid obstacles.' },
-    'Quiz': { icon: '🧠', desc: 'Answer questions correctly. Fast and accurate wins.' }
-};
+import {
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('gameTitle').textContent = gameName + ' Tournaments';
-    document.getElementById('gameIcon').textContent = gameData[gameName]?.icon || '🎮';
-    document.getElementById('gameName').textContent = gameName;
-    document.getElementById('gameDesc').textContent = gameData[gameName]?.desc || '';
-    loadTournaments();
-});
+import {
+doc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-async function loadTournaments() {
-    const container = document.getElementById('tournamentsList');
-    
-    try {
-        const snapshot = await db.collection("tournaments")
-            .where("game", "==", gameName)
-            .where("status", "==", "upcoming")
-            .orderBy("startTime")
-            .get();
-        
-        if (snapshot.empty) {
-            container.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">No tournaments available right now</div>';
-            return;
-        }
-        
-        container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const t = doc.data();
-            const card = document.createElement('div');
-            card.className = 'tournament-card';
-            card.onclick = () => window.location.href = `tournament-details.html?id=${doc.id}`;
-            
-            const filledPercent = (t.playersJoined / t.maxPlayers) * 100;
-            
-            card.innerHTML = `
-                <div class="tournament-header">
-                    <span class="tournament-entry">₹${t.entryFee} ENTRY</span>
-                    <span class="tournament-prize">₹${t.prizePool}</span>
-                </div>
-                <div class="tournament-info">
-                    <span><i class="fas fa-users"></i> ${t.playersJoined}/${t.maxPlayers}</span>
-                    <span><i class="fas fa-clock"></i> ${formatTime(t.startTime)}</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width:${filledPercent}%"></div>
-                </div>
-                <button class="join-btn">JOIN NOW</button>
-            `;
-            container.appendChild(card);
-        });
-    } catch (error) {
-        console.error("Error loading tournaments:", error);
-        container.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">Error loading tournaments</div>';
-    }
+const tournamentBox = document.getElementById("tournamentBox");
+
+const params = new URLSearchParams(window.location.search);
+
+const tournamentId = params.get("id");
+
+let currentUser = null;
+
+let currentTournament = null;
+
+/* ===========================
+LOGIN CHECK
+=========================== */
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+return;
+
 }
 
-function formatTime(timestamp) {
-    if (!timestamp) return 'TBA';
-    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-    return date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+currentUser=user;
+
+loadTournament();
+
+});
+
+/* ===========================
+LOAD TOURNAMENT
+=========================== */
+
+async function loadTournament(){
+
+try{
+
+const tournamentRef=doc(db,"tournaments",tournamentId);
+
+const tournamentSnap=await getDoc(tournamentRef);
+
+if(!tournamentSnap.exists()){
+
+tournamentBox.innerHTML="<h2>Tournament Not Found</h2>";
+
+return;
+
+}
+
+currentTournament=tournamentSnap.data();
+
+showTournament();
+
+}catch(error){
+
+console.log(error);
+
+tournamentBox.innerHTML="<h2>Something Went Wrong</h2>";
+
+}
+
+}
+/* ===========================
+SHOW TOURNAMENT
+=========================== */
+
+function showTournament(){
+
+tournamentBox.innerHTML=`
+
+<img
+class="banner"
+src="${currentTournament.banner || 'assets/tournament.jpg'}">
+
+<div class="card">
+
+<div class="title">
+
+${currentTournament.title}
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+🎮 Game
+
+</span>
+
+<span class="value">
+
+${currentTournament.game}
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+💰 Entry Fee
+
+</span>
+
+<span class="value">
+
+₹${currentTournament.entryFee}
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+🏆 Prize Pool
+
+</span>
+
+<span class="value">
+
+₹${currentTournament.prizePool}
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+👥 Slots
+
+</span>
+
+<span class="value">
+
+${currentTournament.joinedPlayers || 0}/${currentTournament.slots}
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+📅 Date
+
+</span>
+
+<span class="value">
+
+${currentTournament.startDate}
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+🕒 Time
+
+</span>
+
+<span class="value">
+
+${currentTournament.startTime}
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+Status
+
+</span>
+
+<span class="status ${currentTournament.status}">
+
+${currentTournament.status.toUpperCase()}
+
+</span>
+
+</div>
+
+<div class="rules">
+
+${currentTournament.rules}
+
+</div>
+
+<button
+class="joinBtn"
+id="joinBtn">
+
+Join Tournament
+
+</button>
+
+</div>
+
+`;
+
+document
+.getElementById("joinBtn")
+.addEventListener("click",joinTournament);
+
+}
+/* ===========================
+JOIN TOURNAMENT
+=========================== */
+
+import {
+collection,
+query,
+where,
+getDocs,
+addDoc,
+updateDoc,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+async function joinTournament(){
+
+try{
+
+const userRef=doc(db,"users",currentUser.uid);
+
+const userSnap=await getDoc(userRef);
+
+const userData=userSnap.data();
+
+/* Wallet Check */
+
+if((userData.wallet||0)<currentTournament.entryFee){
+
+alert("Insufficient Wallet Balance");
+
+return;
+
+}
+
+/* Already Joined */
+
+const joinQuery=query(
+
+collection(db,"joinedTournaments"),
+
+where("uid","==",currentUser.uid),
+
+where("tournamentId","==",tournamentId)
+
+);
+
+const joinSnap=await getDocs(joinQuery);
+
+if(!joinSnap.empty){
+
+alert("You Already Joined This Tournament");
+
+return;
+
+}
+
+/* Tournament Full */
+
+if((currentTournament.joinedPlayers||0)>=currentTournament.slots){
+
+alert("Tournament Full");
+
+return;
+
+}
+
+/* Deduct Wallet */
+
+await updateDoc(userRef,{
+
+wallet:userData.wallet-currentTournament.entryFee
+
+});
+
+/* Add Joined Tournament */
+
+await addDoc(collection(db,"joinedTournaments"),{
+
+uid:currentUser.uid,
+
+tournamentId:tournamentId,
+
+playerName:userData.name||"Player",
+
+status:"Joined",
+
+score:0,
+
+rank:0,
+
+winning:0,
+
+joinedAt:serverTimestamp()
+
+});
+
+/* Update Tournament */
+
+await updateDoc(
+
+doc(db,"tournaments",tournamentId),
+
+{
+
+joinedPlayers:(currentTournament.joinedPlayers||0)+1
+
+}
+
+);
+
+/* Transaction */
+
+await addDoc(collection(db,"transactions"),{
+
+uid:currentUser.uid,
+
+type:"Tournament Join",
+
+amount:currentTournament.entryFee,
+
+status:"Success",
+
+createdAt:serverTimestamp()
+
+});
+
+alert("Tournament Joined Successfully");
+
+location.href="mytournaments.html";
+
+}catch(error){
+
+console.log(error);
+
+alert(error.message);
+
+}
+
 }
