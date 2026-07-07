@@ -5,100 +5,138 @@ collection,
 query,
 orderBy,
 limit,
-getDocs
+onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const leaderboardList = document.getElementById("leaderboardList");
+const firstName=document.getElementById("firstName");
+const firstAmount=document.getElementById("firstAmount");
 
-async function loadLeaderboard() {
+const secondName=document.getElementById("secondName");
+const secondAmount=document.getElementById("secondAmount");
 
-leaderboardList.innerHTML = `
-<div class="loading">
-<i class="fa-solid fa-spinner fa-spin"></i>
-<p>Loading Leaderboard...</p>
-</div>
-`;
+const thirdName=document.getElementById("thirdName");
+const thirdAmount=document.getElementById("thirdAmount");
 
-try {
+const leaderboardList=document.getElementById("leaderboardList");
 
-const q = query(
-collection(db, "users"),
-orderBy("totalEarning", "desc"),
-limit(30)
+/* ==========================
+LOAD LEADERBOARD
+========================== */
+
+const q=query(
+
+collection(db,"users"),
+
+orderBy("totalWinning","desc"),
+
+limit(100)
+
 );
 
-const snap = await getDocs(q);
+onSnapshot(q,(snapshot)=>{
 
-leaderboardList.innerHTML = "";
+let players=[];
 
-if (snap.empty) {
+snapshot.forEach((doc)=>{
 
-leaderboardList.innerHTML = `
-<div class="loading">
-<p>No Players Found</p>
+players.push(doc.data());
+
+});
+
+/* TOP 3 */
+
+if(players.length>0){
+
+firstName.textContent=players[0].name||"---";
+
+firstAmount.textContent="₹"+(players[0].totalWinning||0);
+
+}
+
+if(players.length>1){
+
+secondName.textContent=players[1].name||"---";
+
+secondAmount.textContent="₹"+(players[1].totalWinning||0);
+
+}
+
+if(players.length>2){
+
+thirdName.textContent=players[2].name||"---";
+
+thirdAmount.textContent="₹"+(players[2].totalWinning||0);
+
+}
+
+/* LIST */
+
+leaderboardList.innerHTML="";
+
+if(players.length===0){
+
+leaderboardList.innerHTML=`
+
+<div class="playerCard">
+
+<h3 style="width:100%;text-align:center;">
+
+No Players Found
+
+</h3>
+
 </div>
+
 `;
 
 return;
 
 }
 
-let rank = 1;
+players.forEach((item,index)=>{
 
-snap.forEach((doc) => {
-
-const user = doc.data();
-
-leaderboardList.innerHTML += `
+leaderboardList.innerHTML+=`
 
 <div class="playerCard">
 
-<div class="playerLeft">
+<div class="left">
 
 <div class="rank">
-${rank}
-</div>
 
-<div>
-
-<div class="playerName">
-${user.name || "Player"}
-</div>
-
-<small>
-₹${Number(user.totalEarning || 0).toFixed(2)} Earned
-</small>
+${index+1}
 
 </div>
 
+<div class="playerInfo">
+
+<h3>${item.name||"Player"}</h3>
+
+<p>
+
+Wins : ${item.totalWins||0}
+
+&nbsp;&nbsp;|&nbsp;&nbsp;
+
+Matches : ${item.totalMatches||0}
+
+</p>
+
 </div>
 
-<div class="playerEarn">
+</div>
 
-₹${Number(user.totalEarning || 0).toFixed(2)}
+<div class="amount">
+
+₹${item.totalWinning||0}
 
 </div>
 
 </div>
 
 `;
-
-rank++;
 
 });
 
-} catch (error) {
+});
 
-console.log(error);
-
-leaderboardList.innerHTML = `
-<div class="loading">
-<p>Failed to Load Leaderboard</p>
-</div>
-`;
-
-}
-
-}
-
-loadLeaderboard();
+console.log("BattleG Leaderboard Loaded");
