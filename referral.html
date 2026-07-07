@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BattleG - Referral</title>
+<title>BattleG Referral</title>
 
 <link rel="stylesheet" href="css/referral.css">
 
@@ -18,87 +18,88 @@
 
 <body>
 
-<header class="header">
+<div class="header">
+<h2>👥 Refer & Earn</h2>
+</div>
 
-<a href="home.html">
-<i class="fa-solid fa-arrow-left"></i>
-</a>
-
-<h2>Referral</h2>
-
-<div></div>
-
-</header>
-
-<section class="referralCard">
+<div class="card">
 
 <h3>Your Referral Code</h3>
 
-<h1 id="referralCode">Loading...</h1>
+<div class="codeBox">
 
-<div class="btnRow">
+<input
+type="text"
+id="referralCode"
+readonly>
 
-<button id="copyBtn">
-
-<i class="fa-solid fa-copy"></i>
+<button id="copyCode">
 
 Copy
 
 </button>
 
+</div>
+
 <button id="shareBtn">
 
-<i class="fa-solid fa-share-nodes"></i>
-
-Share
+Share Referral
 
 </button>
 
 </div>
 
-</section>
+<div class="card">
 
-<section class="rewardBox">
+<h3>Total Referrals</h3>
 
-<h3>Referral Reward</h3>
+<h1 id="totalReferrals">
 
-<p>
+0
 
-Invite your friends to BattleG.
-
-When your referred friend plays their <b>first paid tournament</b>:
-
-</p>
-
-<ul>
-
-<li>You get <b>₹5</b></li>
-
-<li>Your friend gets <b>₹5</b></li>
-
-</ul>
-
-</section>
-
-<section>
-
-<h2 class="title">
-
-My Referrals
-
-</h2>
-
-<div id="referralList">
-
-<div class="empty">
-
-No Referrals Yet
+</h1>
 
 </div>
 
+<div class="card">
+
+<h3>Referral Earnings</h3>
+
+<h1>
+
+₹<span id="referralEarning">
+
+0
+
+</span>
+
+</h1>
+
 </div>
 
-</section>
+<nav class="bottomNav">
+
+<a href="home.html">
+<i class="fa-solid fa-house"></i>
+<span>Home</span>
+</a>
+
+<a href="wallet.html">
+<i class="fa-solid fa-wallet"></i>
+<span>Wallet</span>
+</a>
+
+<a href="leaderboard.html">
+<i class="fa-solid fa-ranking-star"></i>
+<span>Leaderboard</span>
+</a>
+
+<a href="profile.html">
+<i class="fa-solid fa-user"></i>
+<span>Profile</span>
+</a>
+
+</nav>
 
 <script type="module" src="js/referral.js"></script>
 
