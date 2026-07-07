@@ -6,152 +6,149 @@ onAuthStateChanged
 
 import {
 doc,
+getDoc,
+updateDoc,
 collection,
+addDoc,
 query,
 where,
-orderBy,
-limit,
-onSnapshot
+getDocs,
+serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const walletBalance=document.getElementById("walletBalance");
-const totalWinning=document.getElementById("totalWinning");
-const totalWithdraw=document.getElementById("totalWithdraw");
-const pendingWithdraw=document.getElementById("pendingWithdraw");
-const transactionList=document.getElementById("transactionList");
+const amount=document.getElementById("amount");
+const upi=document.getElementById("upi");
+const withdrawBtn=document.getElementById("withdrawBtn");
 
-let currentUser=null;
+let currentUser;
+let userData;
 
-/* ==========================
-LOGIN
-========================== */
-
-onAuthStateChanged(auth,(user)=>{
+onAuthStateChanged(auth,async(user)=>{
 
 if(!user){
 
 window.location.href="login.html";
-
 return;
 
 }
 
 currentUser=user;
 
-loadWallet();
+const userRef=doc(db,"users",user.uid);
 
-loadTransactions();
+const userSnap=await getDoc(userRef);
 
-});
+userData=userSnap.data();
 
-/* ==========================
-WALLET
-========================== */
+walletBalance.textContent=userData.wallet||0;
 
-function loadWallet(){
+if(userData.upiId){
 
-const ref=doc(db,"users",currentUser.uid);
-
-onSnapshot(ref,(snap)=>{
-
-if(!snap.exists()) return;
-
-const data=snap.data();
-
-walletBalance.textContent=data.wallet||0;
-
-totalWinning.textContent="₹"+(data.totalWinning||0);
-
-totalWithdraw.textContent="₹"+(data.totalWithdraw||0);
-
-pendingWithdraw.textContent="₹"+(data.pendingWithdraw||0);
-
-});
+upi.value=userData.upiId;
 
 }
-/* ==========================
-TRANSACTIONS
-========================== */
 
-function loadTransactions(){
+});
+withdrawBtn.onclick=async()=>{
 
-const q=query(
+try{
 
-collection(db,"transactions"),
+const withdrawAmount=Number(amount.value);
 
-where("uid","==",currentUser.uid),
+const upiId=upi.value.trim();
 
-orderBy("createdAt","desc"),
+if(withdrawAmount<50){
 
-limit(10)
-
-);
-
-onSnapshot(q,(snapshot)=>{
-
-transactionList.innerHTML="";
-
-if(snapshot.empty){
-
-transactionList.innerHTML=`
-
-<div class="transactionCard">
-
-<h3>No Transactions Found</h3>
-
-<p>Your transaction history will appear here.</p>
-
-</div>
-
-`;
+alert("Minimum Withdraw ₹50");
 
 return;
 
 }
 
-snapshot.forEach((docSnap)=>{
+if(withdrawAmount>(userData.wallet||0)){
 
-const item=docSnap.data();
+alert("Insufficient Wallet Balance");
 
-let color="#ffb400";
-
-if(item.type==="Deposit") color="#00d26a";
-
-if(item.type==="Withdraw") color="#ff5252";
-
-if(item.type==="Tournament Win") color="#00bfff";
-
-transactionList.innerHTML+=`
-
-<div class="transactionCard"
-style="border-left:5px solid ${color};">
-
-<h3>${item.type}</h3>
-
-<p>Amount : ₹${item.amount}</p>
-
-<p>Status : ${item.status||"Success"}</p>
-
-<p>Date : ${item.date||"--/--/----"}</p>
-
-</div>
-
-`;
-
-});
-
-});
+return;
 
 }
 
-/* ==========================
-ERROR HANDLING
-========================== */
+if(!upiId){
 
-window.addEventListener("error",(e)=>{
+alert("Enter UPI ID");
 
-console.log("Wallet Error :",e.error);
+return;
+
+}
+
+/* Check Pending Withdraw */
+
+const pendingQuery=query(
+
+collection(db,"withdraws"),
+
+where("uid","==",currentUser.uid),
+
+where("status","==","pending")
+
+);
+
+const pendingSnap=await getDocs(pendingQuery);
+
+if(!pendingSnap.empty){
+
+alert("You already have a pending withdraw request.");
+
+return;
+
+}
+
+withdrawBtn.disabled=true;
+withdrawBtn.innerText="Submitting...";
+
+/* Save UPI */
+
+await updateDoc(doc(db,"users",currentUser.uid),{
+
+upiId:upiId
 
 });
 
-console.log("BattleG Wallet Loaded Successfully");
+/* Save Withdraw Request */
+
+await addDoc(collection(db,"withdraws"),{
+
+uid:currentUser.uid,
+
+name:userData.name||"Player",
+
+amount:withdrawAmount,
+
+upiId:upiId,
+
+status:"pending",
+
+createdAt:serverTimestamp()
+
+});
+
+alert("Withdraw Request Submitted Successfully");
+
+amount.value="";
+
+withdrawBtn.disabled=false;
+withdrawBtn.innerText="Request Withdraw";
+
+}catch(error){
+
+console.log(error);
+
+alert(error.message);
+
+withdrawBtn.disabled=false;
+withdrawBtn.innerText="Request Withdraw";
+
+}
+
+};
