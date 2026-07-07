@@ -1,187 +1,155 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
 }
 
-body {
-    background: #0a0a0a;
-    color: #fff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body{
+background:#0f1115;
+color:#fff;
+padding:18px;
+padding-bottom:90px;
 }
 
-.app-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding-bottom: 80px;
-    min-height: 100vh;
+#tournamentBox{
+display:flex;
+flex-direction:column;
+gap:18px;
 }
 
-.page-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 20px;
-    background: #111;
-    border-bottom: 1px solid #222;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+.banner{
+width:100%;
+height:210px;
+object-fit:cover;
+border-radius:18px;
 }
 
-.back-btn {
-    background: none;
-    border: none;
-    color: #D4AF37;
-    font-size: 20px;
-    cursor: pointer;
+.card{
+background:#1b1f28;
+padding:18px;
+border-radius:18px;
+border:1px solid #2b313d;
 }
 
-.page-header h2 {
-    color: #D4AF37;
+.title{
+font-size:24px;
+font-weight:700;
+margin-bottom:15px;
+color:#ffb400;
 }
 
-.game-info-card {
-    margin: 20px;
-    padding: 25px;
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 16px;
-    text-align: center;
+.row{
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+font-size:16px;
 }
 
-.game-icon-large {
-    font-size: 60px;
-    margin-bottom: 10px;
+.label{
+color:#aaa;
 }
 
-.game-info-card h3 {
-    color: #D4AF37;
-    font-size: 22px;
-    margin-bottom: 5px;
+.value{
+font-weight:600;
 }
 
-.game-info-card p {
-    color: #888;
-    font-size: 14px;
+.rules{
+margin-top:15px;
+padding:15px;
+background:#15181f;
+border-radius:12px;
+line-height:1.7;
+font-size:15px;
+color:#ddd;
 }
 
-.tournaments-list {
-    padding: 0 20px;
+.joinBtn{
+
+width:100%;
+margin-top:20px;
+padding:16px;
+background:#ffb400;
+border:none;
+border-radius:14px;
+font-size:18px;
+font-weight:700;
+color:#111;
+cursor:pointer;
+transition:.3s;
+
 }
 
-.tournament-card {
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 15px;
-    transition: all 0.3s;
+.joinBtn:hover{
+
+transform:scale(1.02);
+
 }
 
-.tournament-card:active {
-    border-color: #D4AF37;
+.joinBtn:disabled{
+
+background:#555;
+color:#bbb;
+cursor:not-allowed;
+
 }
 
-.tournament-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+.status{
+
+display:inline-block;
+padding:8px 16px;
+border-radius:20px;
+font-size:14px;
+font-weight:700;
+
 }
 
-.tournament-entry {
-    background: #D4AF37;
-    color: #000;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 13px;
+.upcoming{
+
+background:#2196f3;
+
 }
 
-.tournament-prize {
-    color: #D4AF37;
-    font-size: 20px;
-    font-weight: 700;
+.live{
+
+background:#00c853;
+
 }
 
-.tournament-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-size: 13px;
-    color: #aaa;
+.completed{
+
+background:#ff9800;
+
 }
 
-.tournament-info span {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+.bottomNav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:70px;
+background:#171a21;
+display:flex;
+justify-content:space-around;
+align-items:center;
+border-top:1px solid #333;
+z-index:999;
 }
 
-.join-btn {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #D4AF37, #B8860B);
-    color: #000;
-    border: none;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.3s;
+.bottomNav a{
+display:flex;
+flex-direction:column;
+align-items:center;
+text-decoration:none;
+color:#999;
+font-size:13px;
 }
 
-.join-btn:hover {
-    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+.bottomNav a.active{
+color:#ffb400;
 }
 
-.join-btn:disabled {
-    background: #333;
-    color: #666;
-    cursor: not-allowed;
+.bottomNav i{
+font-size:22px;
+margin-bottom:4px;
 }
-
-.progress-bar {
-    width: 100%;
-    height: 6px;
-    background: #222;
-    border-radius: 3px;
-    margin: 10px 0;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: #D4AF37;
-    border-radius: 3px;
-    transition: width 0.3s;
-}
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 500px;
-    background: #111;
-    border-top: 1px solid #222;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-}
-
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    color: #666;
-    text-decoration: none;
-    font-size: 11px;
-}
-
-.nav-item i {
-    font-size: 20px;
-  }
