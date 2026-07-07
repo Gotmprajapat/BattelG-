@@ -1,113 +1,159 @@
-<!DOCTYPE html>
-<html lang="en">
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
 
-<head>
+body{
+background:#0f1115;
+color:#fff;
+padding:18px;
+padding-bottom:90px;
+}
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+.header{
+text-align:center;
+margin-bottom:20px;
+}
 
-<title>BattleG Leaderboard</title>
+.header h2{
+font-size:28px;
+color:#ffb400;
+}
 
-<link rel="stylesheet" href="css/leaderboard.css">
+.top3{
+display:flex;
+align-items:flex-end;
+justify-content:center;
+gap:12px;
+margin-bottom:30px;
+}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+.topCard{
+background:#1b1f28;
+border-radius:18px;
+padding:18px;
+text-align:center;
+flex:1;
+border:1px solid #2b313d;
+transition:.3s;
+}
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+.topCard h3{
+font-size:32px;
+margin-bottom:10px;
+}
 
-</head>
+.topCard h4{
+font-size:16px;
+margin-bottom:8px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
 
-<body>
+.topCard p{
+color:#ffb400;
+font-size:18px;
+font-weight:700;
+}
 
-<header class="header">
+.first{
+height:180px;
+border:2px solid gold;
+}
 
-<h2>🏆 Leaderboard</h2>
+.second{
+height:150px;
+}
 
-</header>
+.third{
+height:135px;
+}
 
-<div class="top3">
+.title{
+margin-bottom:15px;
+font-size:22px;
+}
 
-<div class="topCard second">
+#leaderboardList{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
 
-<h3>🥈</h3>
+.playerCard{
+background:#1b1f28;
+border-radius:15px;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-left:5px solid #ffb400;
+}
 
-<h4 id="secondName">Loading...</h4>
+.left{
+display:flex;
+align-items:center;
+gap:15px;
+}
 
-<p id="secondAmount">₹0</p>
+.rank{
+width:40px;
+height:40px;
+background:#ffb400;
+color:#111;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:700;
+}
 
-</div>
+.playerInfo h3{
+font-size:17px;
+margin-bottom:4px;
+}
 
-<div class="topCard first">
+.playerInfo p{
+font-size:13px;
+color:#bbb;
+}
 
-<h3>🥇</h3>
+.amount{
+color:#ffb400;
+font-size:18px;
+font-weight:700;
+}
 
-<h4 id="firstName">Loading...</h4>
+.bottomNav{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+height:70px;
+background:#171a21;
+display:flex;
+justify-content:space-around;
+align-items:center;
+border-top:1px solid #333;
+}
 
-<p id="firstAmount">₹0</p>
+.bottomNav a{
+display:flex;
+flex-direction:column;
+align-items:center;
+text-decoration:none;
+color:#999;
+font-size:13px;
+}
 
-</div>
+.bottomNav a.active{
+color:#ffb400;
+}
 
-<div class="topCard third">
-
-<h3>🥉</h3>
-
-<h4 id="thirdName">Loading...</h4>
-
-<p id="thirdAmount">₹0</p>
-
-</div>
-
-</div>
-
-<h3 class="title">
-
-Top Players
-
-</h3>
-
-<div id="leaderboardList">
-
-Loading...
-
-</div>
-
-<nav class="bottomNav">
-
-<a href="home.html">
-
-<i class="fa-solid fa-house"></i>
-
-<span>Home</span>
-
-</a>
-
-<a href="wallet.html">
-
-<i class="fa-solid fa-wallet"></i>
-
-<span>Wallet</span>
-
-</a>
-
-<a href="leaderboard.html" class="active">
-
-<i class="fa-solid fa-ranking-star"></i>
-
-<span>Leaderboard</span>
-
-</a>
-
-<a href="profile.html">
-
-<i class="fa-solid fa-user"></i>
-
-<span>Profile</span>
-
-</a>
-
-</nav>
-
-<script type="module" src="js/leaderboard.js"></script>
-
-</body>
-
-</html>
+.bottomNav i{
+font-size:22px;
+margin-bottom:4px;
+}
