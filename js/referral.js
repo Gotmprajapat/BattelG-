@@ -13,123 +13,88 @@ where,
 getDocs
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-let currentUser = null;
-let referralCode = "";
+const referralCode=document.getElementById("referralCode");
+const totalReferrals=document.getElementById("totalReferrals");
+const referralEarning=document.getElementById("referralEarning");
+const copyCode=document.getElementById("copyCode");
+const shareBtn=document.getElementById("shareBtn");
 
-onAuthStateChanged(auth, async(user)=>{
+let currentUser;
+let userData;
+
+onAuthStateChanged(auth,async(user)=>{
 
 if(!user){
 
-window.location.href="index.html";
+window.location.href="login.html";
 return;
 
 }
 
-currentUser = user;
+currentUser=user;
 
-try{
+const userRef=doc(db,"users",user.uid);
 
-const userSnap = await getDoc(doc(db,"users",user.uid));
+const userSnap=await getDoc(userRef);
 
-if(userSnap.exists()){
+userData=userSnap.data();
 
-const data = userSnap.data();
+referralCode.value=userData.referralCode||"";
 
-referralCode = data.referralCode || "";
-
-document.getElementById("referralCode").textContent = referralCode;
-
-}
-
-loadReferrals();
-
-}catch(e){
-
-console.log(e);
-
-}
+loadReferralData();
 
 });
+async function loadReferralData(){
 
-async function loadReferrals(){
-
-const list = document.getElementById("referralList");
-
-list.innerHTML="";
-
-const q = query(
+const refQuery=query(
 
 collection(db,"users"),
 
-where("referredBy","==",referralCode)
+where("referredBy","==",userData.referralCode)
 
 );
 
-const snap = await getDocs(q);
+const refSnap=await getDocs(refQuery);
 
-if(snap.empty){
+totalReferrals.textContent=refSnap.size;
 
-list.innerHTML="<div class='empty'>No Referrals Yet</div>";
+let total=0;
 
-return;
+refSnap.forEach((doc)=>{
 
-}
+const data=doc.data();
 
-snap.forEach(docu=>{
-
-const data = docu.data();
-
-const status = data.firstPaidMatch ? "Success" : "Pending";
-
-const className = data.firstPaidMatch ? "success" : "pending";
-
-list.innerHTML += `
-
-<div class="referralItem">
-
-<div>
-
-<div class="referralName">
-
-${data.name}
-
-</div>
-
-<small>${data.email}</small>
-
-</div>
-
-<div class="status ${className}">
-
-${status}
-
-</div>
-
-</div>
-
-`;
+total+=(data.referralBonus||0);
 
 });
 
+referralEarning.textContent=total;
+
 }
 
-document.getElementById("copyBtn").onclick=()=>{
+/* Copy */
 
-navigator.clipboard.writeText(referralCode);
+copyCode.onclick=()=>{
+
+navigator.clipboard.writeText(referralCode.value);
 
 alert("Referral Code Copied");
 
 };
 
-document.getElementById("shareBtn").onclick=()=>{
+/* Share */
 
-const text =
+shareBtn.onclick=()=>{
 
-`Join BattleG and earn rewards!
+const text=
 
-Use my referral code:
+`🎮 Join BattleG & Earn Daily!
 
-${referralCode}`;
+Use My Referral Code:
+
+${referralCode.value}
+
+Download Now!`;
 
 if(navigator.share){
 
