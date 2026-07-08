@@ -6,9 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BattleG - Notifications</title>
+<title>BattleG Notifications</title>
 
-<link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/notifications.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,35 +18,21 @@
 
 <body>
 
-<header class="header">
+<div class="header">
 
-<a href="home.html">
-
-<i class="fa-solid fa-arrow-left"></i>
-
-</a>
-
-<h2>Notifications</h2>
-
-<div style="width:24px"></div>
-
-</header>
-
-<section id="notificationContainer">
-
-<div class="empty">
-
-<i class="fa-solid fa-bell"></i>
-
-<h3>No Notifications</h3>
-
-<p>
-You'll receive tournament updates, wallet updates and rewards here.
-</p>
+<h2>🔔 Notifications</h2>
 
 </div>
 
-</section>
+<div id="notificationList">
+
+<div class="loading">
+
+Loading...
+
+</div>
+
+</div>
 
 <nav class="bottomNav">
 
@@ -84,8 +69,6 @@ You'll receive tournament updates, wallet updates and rewards here.
 </a>
 
 </nav>
-
-<script src="js/navbar.js"></script>
 
 <script type="module" src="js/notifications.js"></script>
 
