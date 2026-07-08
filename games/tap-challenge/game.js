@@ -212,3 +212,152 @@ tapButton.addEventListener("click", () => {
     }
 
 });
+// ===============================
+// BattleG Tap Challenge Game
+// File: games/tap-challenge/game.js
+// Part 3 (Firebase Realtime)
+// ===============================
+
+import { auth, rtdb } from "../../firebase/firebase.js";
+
+import {
+ref,
+set,
+onValue,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+const tournamentId =
+new URLSearchParams(location.search).get("id") || "demoTournament";
+
+// -------------------------------
+// Save Score
+// -------------------------------
+
+async function syncScore(){
+
+const user = auth.currentUser;
+
+if(!user) return;
+
+await set(
+
+ref(
+
+rtdb,
+
+`gameScores/${tournamentId}/${user.uid}`
+
+),
+
+{
+
+uid:user.uid,
+
+score:score,
+
+taps:taps,
+
+updatedAt:Date.now(),
+
+status:"playing"
+
+}
+
+);
+
+}
+
+// -------------------------------
+// Sync Every 3 Seconds
+// -------------------------------
+
+setInterval(()=>{
+
+if(gameRunning){
+
+syncScore();
+
+}
+
+},3000);
+
+// -------------------------------
+// Live Leaderboard
+// -------------------------------
+
+const leaderboardRef = ref(
+
+rtdb,
+
+`gameScores/${tournamentId}`
+
+);
+
+onValue(leaderboardRef,(snapshot)=>{
+
+const data=snapshot.val();
+
+if(!data) return;
+
+const players=Object.values(data);
+
+players.sort((a,b)=>b.score-a.score);
+
+const board=document.getElementById("leaderboardList");
+
+board.innerHTML="";
+
+players.forEach((player,index)=>{
+
+board.innerHTML+=`
+
+<p>
+
+#${index+1}
+
+&nbsp;
+
+${player.score}
+
+</p>
+
+`;
+
+const user=auth.currentUser;
+
+if(user && player.uid===user.uid){
+
+rankText.innerHTML="#"+(index+1);
+
+}
+
+});
+
+});
+
+// -------------------------------
+// Tournament Finish
+// -------------------------------
+
+async function finishTournament(){
+
+gameRunning=false;
+
+tapButton.disabled=true;
+
+tapButton.innerHTML="FINISHED";
+
+await syncScore();
+
+localStorage.removeItem("bg_score");
+
+localStorage.removeItem("bg_taps");
+
+localStorage.removeItem("bg_time");
+
+alert("Tournament Finished");
+
+}
+
+console.log("BattleG Firebase Sync Ready");
