@@ -1,3 +1,4 @@
+import { validateTap, checkTPS } from "./antiCheat.js";
 // ===============================
 // BattleG Tap Challenge Game
 // File: games/tap-challenge/game.js
@@ -56,6 +57,8 @@ tapButton.addEventListener("click",()=>{
 
 if(!gameRunning) return;
 
+validateTap();
+    
 score++;
 
 taps++;
@@ -122,6 +125,8 @@ setInterval(() => {
     tps = secondTapCount;
 
     tpsText.innerHTML = tps;
+
+    checkTPS(tps);
 
     secondTapCount = 0;
 
