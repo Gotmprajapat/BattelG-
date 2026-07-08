@@ -1,3 +1,9 @@
+import {
+saveScore,
+finishScore,
+loadLeaderboard,
+getRank
+} from "./firebase.js";
 import { validateTap, checkTPS } from "./antiCheat.js";
 // ===============================
 // BattleG Tap Challenge Game
