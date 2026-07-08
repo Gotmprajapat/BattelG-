@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BattleG - Tap Challenge</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="topBar">
+
+<div class="timerBox">
+<i class="fa-solid fa-clock"></i>
+<span id="timeLeft">15:00</span>
+</div>
+
+<div class="rankBox">
+🏆 Rank
+<span id="rank">#1</span>
+</div>
+
+</div>
+
+<div class="scoreCard">
+
+<p>Your Score</p>
+
+<h1 id="score">0</h1>
+
+</div>
+
+<div class="tapArea">
+
+<button id="tapButton">
+
+TAP
+
+</button>
+
+</div>
+
+<div class="playerInfo">
+
+<div>
+👆 Taps
+<h2 id="tapCount">0</h2>
+</div>
+
+<div>
+⚡ TPS
+<h2 id="tps">0</h2>
+</div>
+
+</div>
+
+<div class="leaderboard">
+
+<h3>🔥 Live Top Players</h3>
+
+<div id="leaderboardList">
+
+<p>Loading...</p>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="module" src="game.js"></script>
+
+</body>
+
+</html>
