@@ -1,30 +1,62 @@
+import { auth, db } from "../firebase/firebase.js";
+
 import {
-notificationListener
-} from "./services/notificationService.js";
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-const container =
-document.getElementById("notificationContainer");
+import {
+collection,
+query,
+where,
+orderBy,
+onSnapshot,
+doc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-notificationListener((list)=>{
+const notificationList=document.getElementById("notificationList");
 
-container.innerHTML="";
+onAuthStateChanged(auth,(user)=>{
 
-if(list.length===0){
+if(!user){
 
-container.innerHTML=`
+location.href="login.html";
 
-<div class="empty">
+return;
 
-<i class="fa-solid fa-bell"></i>
+}
 
-<h3>No Notifications</h3>
+loadNotifications(user.uid);
 
-<p>
+});
 
-You'll receive tournament updates,
-wallet updates and rewards here.
+/* ==========================
+LOAD NOTIFICATIONS
+========================== */
 
-</p>
+function loadNotifications(uid){
+
+const q=query(
+
+collection(db,"notifications"),
+
+where("uid","==",uid),
+
+orderBy("createdAt","desc")
+
+);
+
+onSnapshot(q,async(snapshot)=>{
+
+notificationList.innerHTML="";
+
+if(snapshot.empty){
+
+notificationList.innerHTML=`
+
+<div class="loading">
+
+No Notifications
 
 </div>
 
@@ -34,66 +66,58 @@ return;
 
 }
 
-list.forEach(item=>{
+for(const item of snapshot.docs){
 
-let icon="fa-bell";
+const data=item.data();
 
-switch(item.type){
+const date=data.createdAt?
 
-case "deposit":
-icon="fa-money-bill-wave";
-break;
+new Date(
 
-case "withdraw":
-icon="fa-wallet";
-break;
+data.createdAt.seconds*1000
 
-case "reward":
-icon="fa-trophy";
-break;
+).toLocaleString()
 
-case "tournament":
-icon="fa-gamepad";
-break;
+:
 
-case "referral":
-icon="fa-user-group";
-break;
+"Just Now";
 
-}
-
-const time=item.createdAt?.toDate
-?item.createdAt.toDate().toLocaleString()
-:"Just Now";
-
-container.innerHTML+=`
+notificationList.innerHTML+=`
 
 <div class="notificationCard">
 
-<div class="notificationIcon">
+<h3>${data.title}</h3>
 
-<i class="fa-solid ${icon}"></i>
+<p>${data.message}</p>
 
-</div>
-
-<div class="notificationBody">
-
-<h3>${item.title}</h3>
-
-<p>${item.message}</p>
-
-<span class="notificationTime">
-
-${time}
-
-</span>
-
-</div>
+<span>${date}</span>
 
 </div>
 
 `;
 
-});
+/* Mark as Read */
+
+if(data.read!==true){
+
+await updateDoc(
+
+doc(db,"notifications",item.id),
+
+{
+
+read:true
+
+}
+
+);
+
+}
+
+}
 
 });
+
+}
+
+console.log("BattleG Notifications Loaded");
