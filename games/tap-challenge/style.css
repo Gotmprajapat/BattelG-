@@ -1,0 +1,132 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(180deg,#0b1220,#111827);
+color:#fff;
+min-height:100vh;
+padding:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.container{
+width:100%;
+max-width:430px;
+}
+
+.topBar{
+display:flex;
+justify-content:space-between;
+margin-bottom:20px;
+}
+
+.timerBox,
+.rankBox{
+background:#1f2937;
+padding:12px 18px;
+border-radius:14px;
+font-weight:600;
+box-shadow:0 0 12px rgba(0,0,0,.3);
+}
+
+.scoreCard{
+margin:20px 0;
+background:#1f2937;
+border-radius:20px;
+padding:20px;
+text-align:center;
+box-shadow:0 0 20px rgba(255,181,0,.15);
+}
+
+.scoreCard p{
+color:#bbb;
+font-size:16px;
+}
+
+.scoreCard h1{
+font-size:58px;
+color:#ffb400;
+margin-top:10px;
+}
+
+.tapArea{
+display:flex;
+justify-content:center;
+margin:35px 0;
+}
+
+#tapButton{
+width:220px;
+height:220px;
+border:none;
+border-radius:50%;
+background:linear-gradient(135deg,#ffb400,#ff7a00);
+color:#fff;
+font-size:42px;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 0 35px rgba(255,180,0,.6);
+transition:.08s;
+user-select:none;
+}
+
+#tapButton:active{
+transform:scale(.93);
+box-shadow:0 0 50px rgba(255,180,0,.9);
+}
+
+.playerInfo{
+display:flex;
+justify-content:space-between;
+gap:15px;
+margin-bottom:25px;
+}
+
+.playerInfo div{
+flex:1;
+background:#1f2937;
+padding:18px;
+border-radius:15px;
+text-align:center;
+}
+
+.playerInfo h2{
+margin-top:8px;
+color:#00e676;
+}
+
+.leaderboard{
+background:#1f2937;
+padding:18px;
+border-radius:18px;
+}
+
+.leaderboard h3{
+margin-bottom:15px;
+color:#ffb400;
+}
+
+#leaderboardList p{
+padding:10px 0;
+border-bottom:1px solid #333;
+}
+
+@media(max-width:450px){
+
+#tapButton{
+width:190px;
+height:190px;
+font-size:36px;
+}
+
+.scoreCard h1{
+font-size:48px;
+}
+
+  }
