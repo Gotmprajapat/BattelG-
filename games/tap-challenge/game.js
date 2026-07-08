@@ -1,3 +1,4 @@
+import "./leaderboard.js";
 import {
 saveScore,
 finishScore,
